@@ -194,7 +194,6 @@ class Controller {
 
       res.status(200).json(updatedOrCreatedPregnancyData);
     } catch (err) {
-      console.log(err);
       if (
         err.name == "SequelizeUniqueConstraintError" ||
         err.name == "SequelizeValidationError"
