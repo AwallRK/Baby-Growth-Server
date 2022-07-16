@@ -1,4 +1,4 @@
-const { comparePassword } = require("../helpers/bcrypt");
+const { comparePassword, hashPassword } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
 const {
   User,
@@ -98,7 +98,7 @@ class Controller {
         UserId,
         name,
         NIK,
-        password,
+        password: hashPassword(password),
         address,
       });
 
@@ -108,6 +108,74 @@ class Controller {
         NIK: createdMotherProfile.NIK,
         address: createdMotherProfile.address,
       });
+    } catch (err) {
+      if (
+        err.name == "SequelizeUniqueConstraintError" ||
+        err.name == "SequelizeValidationError"
+      ) {
+        res.status(400).json({ message: err.errors[0].message });
+      } else {
+        res.status(500).json(err);
+      }
+    }
+  }
+
+  static async fetchMotherProfiles(req, res) {
+    try {
+      // const UserId = req.query.UserId
+      const UserId = req.user.id;
+
+      let options = {
+        order: ["id"],
+        attributes: {
+          exclude: ["password"],
+        },
+      };
+
+      options.where = { UserId: UserId };
+
+      const motherList = await MotherProfile.findAll(options);
+
+      res.status(200).json(motherList);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  static async createPregnancy(req, res) {
+    try {
+      const { MotherProfileId, name, sudahLahir } = req.body;
+      const createdPregnancy = await Pregnancy.create({
+        MotherProfileId,
+        name,
+        sudahLahir,
+      });
+      res.status(200).json(createdPregnancy);
+    } catch (err) {
+      if (
+        err.name == "SequelizeUniqueConstraintError" ||
+        err.name == "SequelizeValidationError"
+      ) {
+        res.status(400).json({ message: err.errors[0].message });
+      } else {
+        res.status(500).json(err);
+      }
+    }
+  }
+
+  static async createPregnancyData(req, res) {
+    try {
+      const { PregnancyId, beratAwal, beratBulanan } = req.body;
+      const tanggalDicatat = new Date();
+
+      const createdPregnancyData = await PregnancyData.create({
+        PregnancyId,
+        beratAwal,
+        beratBulanan,
+        tanggalDicatat,
+      });
+
+      res.status(200).json(createdPregnancyData);
     } catch (err) {
       if (
         err.name == "SequelizeUniqueConstraintError" ||
