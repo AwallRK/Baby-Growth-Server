@@ -65,7 +65,7 @@ class Controller {
 
       const createdUser = await User.create({
         username,
-        password,
+        password: hashPassword(password),
         email,
         noRT,
         role,
