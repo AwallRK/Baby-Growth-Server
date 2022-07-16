@@ -16,7 +16,7 @@ router.post(
   Controller.registerMotherProfile
 );
 router.post("/registerPregnancy", Controller.createPregnancy);
-router.post("/registerPregnancyData", Controller.createPregnancyData);
+router.post("/addOrUpdatePregnancyData", Controller.addOrUpdatePregnancyData);
 router.get("/motherProfile", Controller.fetchMotherProfiles);
 router.get("/detailpregnancy/:id", Controller.fetchPregnancyData);
 

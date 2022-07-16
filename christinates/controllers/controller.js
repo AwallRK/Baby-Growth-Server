@@ -133,9 +133,8 @@ class Controller {
       };
 
       options.where = { UserId: UserId };
-
       const motherList = await MotherProfile.findAll(options);
-
+      console.log(motherList);
       res.status(200).json(motherList);
     } catch (err) {
       res.status(500).json(err);
@@ -163,7 +162,7 @@ class Controller {
     }
   }
 
-  static async createPregnancyData(req, res) {
+  static async addOrUpdatePregnancyData(req, res) {
     try {
       const { PregnancyId, beratAwal, beratBulanan } = req.body;
       const tanggalDicatat = new Date();
