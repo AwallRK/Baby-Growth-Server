@@ -162,7 +162,7 @@ class Controller {
     }
   }
 
-  static async addOrUpdatePregnancyData(req, res) {
+  static async inputPregnancyData(req, res) {
     try {
       const { PregnancyId, beratAwal, beratBulanan } = req.body;
       const tanggalDicatat = new Date();
@@ -227,6 +227,48 @@ class Controller {
     // }
   }
 
+  static async inputBabyData(req, res) {
+    try {
+      const { PregnancyId, beratAwal, beratBulanan } = req.body;
+      const tanggalDicatat = new Date();
+      let updatedOrCreatedBabyData = {};
+      const foundBaby = await BabyData.findOne({
+        where: {
+          PregnancyId,
+        },
+      });
+      if (foundBaby) {
+        const foundId = foundBaby.id;
+        const updatedData = await BabyData.update(
+          {
+            beratAwal,
+            beratBulanan,
+            tanggalDicatat,
+          },
+          { where: { id: foundId }, returning: true }
+        );
+        updatedOrCreatedBabyData = updatedData[1][0];
+      } else {
+        updatedOrCreatedBabyData = await BabyData.create({
+          PregnancyId,
+          beratAwal,
+          beratBulanan,
+          tanggalDicatat,
+        });
+      }
+
+      res.status(200).json(updatedOrCreatedBabyData);
+    } catch (err) {
+      if (
+        err.name == "SequelizeUniqueConstraintError" ||
+        err.name == "SequelizeValidationError"
+      ) {
+        res.status(400).json({ message: err.errors[0].message });
+      } else {
+        res.status(500).json(err);
+      }
+    }
+  }
   static async fetchPregnancyData(req, res) {
     // res.send("masok");
     try {

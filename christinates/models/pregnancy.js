@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Pregnancy.belongsTo(models.MotherProfile);
       Pregnancy.hasOne(models.PregnancyData);
+      Pregnancy.hasOne(models.BabyData);
     }
   }
   Pregnancy.init(
