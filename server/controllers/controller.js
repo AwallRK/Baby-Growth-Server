@@ -1,5 +1,6 @@
 const { comparePassword, hashPassword } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
+const { selisihCalculator } = require("../helpers/selisihCalculator");
 const {
   User,
   MotherProfile,
@@ -173,7 +174,6 @@ class Controller {
 
       options.where = { UserId: UserId, id: MotherId };
       const motherList = await MotherProfile.findAll(options);
-      // console.log(motherList);
       res.status(200).json(motherList);
     } catch (err) {
       res.status(500).json(err);
@@ -349,57 +349,46 @@ class Controller {
           BabyData,
           { model: MotherProfile, include: [User] },
         ],
-        // MotherProfile,
       });
-
-      let tempSelisihArr = [];
-
-      if (data.PregnancyDatum) {
-        if (data.PregnancyDatum.beratBulanan.length > 0) {
-          const beratBulananArr = data.PregnancyDatum.beratBulanan.split(",");
-
-          tempSelisihArr.push(
-            (beratBulananArr[0] - data.PregnancyDatum.beratAwal) * 1000
-          );
-
-          if (beratBulananArr.length > 1) {
-            for (let i = 0; i < beratBulananArr.length - 1; i++) {
-              tempSelisihArr.push(
-                (beratBulananArr[i + 1] - beratBulananArr[i]) * 1000
-              );
-            }
-          }
-        }
-      }
-
-      let tempSelisihArr1 = [];
-
-      if (data.BabyDatum) {
-        if (data.BabyDatum.beratBulanan.length > 0) {
-          const beratBayiBulananArr = data.BabyDatum.beratBulanan.split(",");
-
-          tempSelisihArr1.push(
-            (beratBayiBulananArr[0] - data.BabyDatum.beratAwal) * 1000
-          );
-
-          if (beratBayiBulananArr.length > 1) {
-            for (let i = 0; i < beratBayiBulananArr.length - 1; i++) {
-              tempSelisihArr1.push(
-                (beratBayiBulananArr[i + 1] - beratBayiBulananArr[i]) * 1000
-              );
-            }
-          }
-        }
-      }
-
+      const [selisihBulananHamil, selisihBulananBayi] = selisihCalculator(data);
       res.status(200).json({
-        selisihBulananHamil: tempSelisihArr,
-        selisihBulananBayi: tempSelisihArr1,
+        selisihBulananHamil,
+        selisihBulananBayi,
         data,
       });
     } catch (err) {
       res.status(500).json(err);
     }
+  }
+
+  static async babyWeightCategories(req, res, next) {
+    let UserId = req.user.id;
+    const result = {
+      kurang: 0,
+      cukup: 0,
+      berlebih: 0,
+    };
+    let options = {
+      order: ["id"],
+      attributes: {
+        exclude: ["password"],
+      },
+      include: [
+        {
+          model: Pregnancy,
+          include: [PregnancyData, BabyData],
+        },
+      ],
+
+      include: [
+        {
+          model: Pregnancy,
+        },
+      ],
+    };
+
+    options.where = { UserId: UserId };
+    const motherList = await MotherProfile.findAll(options);
   }
 }
 
