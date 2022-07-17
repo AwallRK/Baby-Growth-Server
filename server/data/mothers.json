@@ -4,27 +4,35 @@
     "NIK": "222224440000",
     "password": "12345",
     "address": "Jl. Dua Ribu",
-    "UserId": 2
+    "UserId": 2,
+    "latitude": 0,
+    "longitude": 0
   },
   {
     "name": "Sutiyem",
     "NIK": "222224440001",
     "password": "12345",
     "address": "Jl. Empat Ribu",
-    "UserId": 3
+    "UserId": 3,
+    "latitude": 0,
+    "longitude": 0
   },
   {
     "name": "Sutimoon",
     "NIK": "222224440002",
     "password": "12345",
     "address": "Jl. Enam Ribu",
-    "UserId": 2
+    "UserId": 2,
+    "latitude": 0,
+    "longitude": 0
   },
   {
     "name": "Sundamin",
     "NIK": "222224440221",
     "password": "12345",
     "address": "Jl. Sembilan Ribu",
-    "UserId": 3
+    "UserId": 3,
+    "latitude": 0,
+    "longitude": 0
   }
 ]
