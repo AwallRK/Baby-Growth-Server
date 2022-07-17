@@ -14,26 +14,13 @@ module.exports = {
      * }], {});
      */
 
-    let data = [
-      {
-        PregnancyId: 2,
-        beratAwal: 3,
-        beratBulanan: "7,8,10,12",
-        tanggalDicatat: new Date(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        PregnancyId: 1,
-        beratAwal: 4,
-        beratBulanan: "8,10,12,15",
-        tanggalDicatat: new Date(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    ];
+    const babyData = require("../data/babyData.json");
+    babyData.forEach((baby) => {
+      baby.createdAt = baby.tanggalDicatat;
+      baby.updatedAt = new Date();
+    });
 
-    await queryInterface.bulkInsert("BabyData", data, {});
+    await queryInterface.bulkInsert("BabyData", babyData, {});
   },
 
   async down(queryInterface, Sequelize) {

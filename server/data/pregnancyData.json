@@ -1,0 +1,26 @@
+[
+  {
+    "PregnancyId": 1,
+    "beratAwal": 50.5,
+    "beratBulanan": "55.6,58.5,63,69",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 2,
+    "beratAwal": 60,
+    "beratBulanan": "65,69,78,80,89,94",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 3,
+    "beratAwal": 60,
+    "beratBulanan": "60.7,62.1,63.5,64.9",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 4,
+    "beratAwal": 65,
+    "beratBulanan": "65.3,65.9,67.5,70.9",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  }
+]

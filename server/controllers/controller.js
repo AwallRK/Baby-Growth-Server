@@ -1,5 +1,7 @@
+const { babiesWeightConverter } = require("../helpers/babyWeight");
 const { comparePassword, hashPassword } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
+const { selisihCalculator } = require("../helpers/selisihCalculator");
 const {
   User,
   MotherProfile,
@@ -130,11 +132,49 @@ class Controller {
         attributes: {
           exclude: ["password"],
         },
+        // include: [
+        //   {
+        //     model: Pregnancy,
+        //     include: [PregnancyData, BabyData],
+        //   },
+        // ],
+
+        include: [
+          {
+            model: Pregnancy,
+          },
+        ],
       };
 
       options.where = { UserId: UserId };
       const motherList = await MotherProfile.findAll(options);
-      console.log(motherList);
+      // console.log(motherList);
+      res.status(200).json(motherList);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  static async fetchOneMotherProfile(req, res) {
+    try {
+      // const UserId = req.query.UserId
+      const UserId = req.user.id;
+      const MotherId = req.params.id;
+      let options = {
+        order: ["id"],
+        attributes: {
+          exclude: ["password"],
+        },
+        include: [
+          {
+            model: Pregnancy,
+            include: [PregnancyData, BabyData],
+          },
+        ],
+      };
+
+      options.where = { UserId: UserId, id: MotherId };
+      const motherList = await MotherProfile.findAll(options);
       res.status(200).json(motherList);
     } catch (err) {
       res.status(500).json(err);
@@ -308,59 +348,118 @@ class Controller {
         include: [
           PregnancyData,
           BabyData,
-          { model: MotherProfile, include: User },
+          { model: MotherProfile, include: [User] },
         ],
-        // MotherProfile,
       });
-
-      let tempSelisihArr = [];
-
-      if (data.PregnancyDatum) {
-        if (data.PregnancyDatum.beratBulanan.length > 0) {
-          const beratBulananArr = data.PregnancyDatum.beratBulanan.split(",");
-
-          tempSelisihArr.push(
-            (beratBulananArr[0] - data.PregnancyDatum.beratAwal) * 1000
-          );
-
-          if (beratBulananArr.length > 1) {
-            for (let i = 0; i < beratBulananArr.length - 1; i++) {
-              tempSelisihArr.push(
-                (beratBulananArr[i + 1] - beratBulananArr[i]) * 1000
-              );
-            }
-          }
-        }
-      }
-
-      let tempSelisihArr1 = [];
-
-      if (data.BabyDatum) {
-        if (data.BabyDatum.beratBulanan.length > 0) {
-          const beratBayiBulananArr = data.BabyDatum.beratBulanan.split(",");
-
-          tempSelisihArr1.push(
-            (beratBayiBulananArr[0] - data.BabyDatum.beratAwal) * 1000
-          );
-
-          if (beratBayiBulananArr.length > 1) {
-            for (let i = 0; i < beratBayiBulananArr.length - 1; i++) {
-              tempSelisihArr1.push(
-                (beratBayiBulananArr[i + 1] - beratBayiBulananArr[i]) * 1000
-              );
-            }
-          }
-        }
-      }
-
+      const [selisihBulananHamil, selisihBulananBayi] = selisihCalculator(data);
       res.status(200).json({
-        selisihBulananHamil: tempSelisihArr,
-        selisihBulananBayi: tempSelisihArr1,
+        selisihBulananHamil,
+        selisihBulananBayi,
         data,
       });
     } catch (err) {
       res.status(500).json(err);
     }
+  }
+
+  static async babyWeightCategories(req, res, next) {
+    let motherCount = 0;
+    const babiesWeight = [];
+    const categoriesPerRT = [];
+    const giziKurangTerbanyak = { noRT: "", jumlah: 0 };
+    const giziBerlebihTerbanyak = { noRT: "", jumlah: 0 };
+    const giziCukupTerbanyak = { noRT: "", jumlah: 0 };
+    let options = {
+      order: ["id"],
+      attributes: {
+        exclude: ["password"],
+      },
+      include: [
+        {
+          model: MotherProfile,
+          include: { model: Pregnancy, include: [PregnancyData, BabyData] },
+        },
+      ],
+    };
+    const users = await User.findAll(options);
+    users.forEach((user) => {
+      if (user.noRT === 99) {
+        return;
+      }
+      const motherList = user.MotherProfiles;
+      const babiesDalamSatuRTWeight = [];
+      motherList.forEach((mother) => {
+        mother.Pregnancies.forEach((pregnancy) => {
+          if (pregnancy.sudahLahir) {
+            const [_, selisihBulananBayi] = selisihCalculator(pregnancy);
+            babiesWeight.push(selisihBulananBayi);
+            babiesDalamSatuRTWeight.push(selisihBulananBayi);
+          } else {
+            motherCount++;
+          }
+        });
+      });
+      const categoriesDalamRT = babiesWeightConverter(babiesDalamSatuRTWeight);
+      categoriesPerRT.push({ noRT: user.noRT, categories: categoriesDalamRT });
+    });
+
+    categoriesPerRT.forEach((rt) => {
+      if (rt.categories.kurang > giziKurangTerbanyak.jumlah) {
+        giziKurangTerbanyak.noRT = rt.noRT;
+        giziKurangTerbanyak.jumlah = rt.categories.kurang;
+      }
+      if (rt.categories.cukup > giziCukupTerbanyak.jumlah) {
+        giziCukupTerbanyak.noRT = rt.noRT;
+        giziCukupTerbanyak.jumlah = rt.categories.cukup;
+      }
+      if (rt.categories.berlebih > giziBerlebihTerbanyak.jumlah) {
+        giziBerlebihTerbanyak.noRT = rt.noRT;
+        giziBerlebihTerbanyak.jumlah = rt.categories.berlebih;
+      }
+    });
+    const categories = babiesWeightConverter(babiesWeight);
+    res.status(200).json({
+      categories,
+      ibuBelumMelahirkan: motherCount,
+      statistic: {
+        giziKurangTerbanyak,
+        giziBerlebihTerbanyak,
+        giziCukupTerbanyak,
+      },
+    });
+  }
+
+  static async babyWeightCategoriesByRT(req, res, next) {
+    let noRT = req.params.noRT;
+    let motherCount = 0;
+    let options = {
+      order: ["id"],
+      attributes: {
+        exclude: ["password"],
+      },
+      where: { noRT },
+      include: [
+        {
+          model: MotherProfile,
+          include: { model: Pregnancy, include: [PregnancyData, BabyData] },
+        },
+      ],
+    };
+    const user = await User.findOne(options);
+    const motherList = user.MotherProfiles;
+    const babiesWeight = [];
+    motherList.forEach((mother) => {
+      mother.Pregnancies.forEach((pregnancy) => {
+        if (pregnancy.sudahLahir) {
+          const [_, selisihBulananBayi] = selisihCalculator(pregnancy);
+          babiesWeight.push(selisihBulananBayi);
+        } else {
+          motherCount++;
+        }
+      });
+    });
+    const categories = babiesWeightConverter(babiesWeight);
+    res.status(200).json({ categories, ibuBelumMelahirkan: motherCount });
   }
 }
 

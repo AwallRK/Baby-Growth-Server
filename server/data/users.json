@@ -1,0 +1,23 @@
+[
+  {
+    "username": "SuperAdmin",
+    "password": "12345",
+    "email": "superadmin@mail.com",
+    "role": "SuperAdmin",
+    "noRT": 99
+  },
+  {
+    "username": "Pak Karto",
+    "password": "12345",
+    "email": "karto@mail.com",
+    "role": "Admin",
+    "noRT": 1
+  },
+  {
+    "username": "Pak Didin",
+    "password": "12345",
+    "email": "didin@mail.com",
+    "role": "Admin",
+    "noRT": 2
+  }
+]

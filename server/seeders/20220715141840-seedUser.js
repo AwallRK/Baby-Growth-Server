@@ -1,7 +1,7 @@
 "use strict";
 
 const { hashPassword } = require("../helpers/bcrypt");
-
+const users = require("../data/users.json");
 module.exports = {
   async up(queryInterface, Sequelize) {
     /**
@@ -13,38 +13,12 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-
-    let data = [
-      {
-        username: "SuperAdmin",
-        password: hashPassword("12345"),
-        email: "superadmin@mail.com",
-        role: "SuperAdmin",
-        noRT: 99,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        username: "Pak Karto",
-        password: hashPassword("12345"),
-        email: "karto@mail.com",
-        role: "Admin",
-        noRT: 1,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        username: "Pak Didin",
-        password: hashPassword("12345"),
-        email: "didin@mail.com",
-        role: "Admin",
-        noRT: 2,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    ];
-
-    await queryInterface.bulkInsert("Users", data, {});
+    users.forEach((user) => {
+      user.password = hashPassword(user.password);
+      user.createdAt = new Date();
+      user.updatedAt = new Date();
+    });
+    await queryInterface.bulkInsert("Users", users, {});
   },
 
   async down(queryInterface, Sequelize) {
