@@ -2,25 +2,49 @@
   {
     "PregnancyId": 2,
     "beratAwal": 3,
-    "beratBulanan": "7,8,10,12, 13",
+    "beratBulanan": "3.1,3.7,4.2,4.8,5.5",
     "tanggalDicatat": "2022-07-17T07:58:53.037Z"
   },
   {
     "PregnancyId": 1,
-    "beratAwal": 4,
-    "beratBulanan": "8,10,12,12.5",
+    "beratAwal": 2.7,
+    "beratBulanan": "3.4,4.2,4.8,5.5,6",
     "tanggalDicatat": "2022-07-17T07:58:53.037Z"
   },
   {
     "PregnancyId": 3,
     "beratAwal": 3.4,
-    "beratBulanan": "5.7,8.5,9.1,10.9",
+    "beratBulanan": "4.4,5.1,5.6,6.3",
     "tanggalDicatat": "2022-07-17T07:58:53.037Z"
   },
   {
     "PregnancyId": 4,
     "beratAwal": 2,
-    "beratBulanan": "2,2.5,2.6",
+    "beratBulanan": "2.7,3.2,3.6",
     "tanggalDicatat": "2022-07-17T07:58:53.037Z"
+  },
+  {
+    "PregnancyId": 5,
+    "beratAwal": 2.6,
+    "beratBulanan": "2.7,3.2,3.5,4.0",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 6,
+    "beratAwal": 3.1,
+    "beratBulanan": "3.3,3.4,3.5,3.6",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 7,
+    "beratAwal": 3.0,
+    "beratBulanan": "3.5,3.7,4.1,4.6",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 8,
+    "beratAwal": 3.7,
+    "beratBulanan": "3.7,4.1,4.3,4.7",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
   }
 ]

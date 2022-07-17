@@ -14,7 +14,7 @@ function babiesWeightConverter(arr) {
         result.kurang++;
       } else if (lastWeight > 850) {
         result.berlebih++;
-      } else if (750 < lastWeight < 850) {
+      } else {
         result.cukup++;
       }
     } else if (month === 1) {
@@ -22,7 +22,7 @@ function babiesWeightConverter(arr) {
         result.kurang++;
       } else if (lastWeight > 950) {
         result.berlebih++;
-      } else if (850 < lastWeight < 950) {
+      } else {
         result.cukup++;
       }
     } else if (month === 3) {
@@ -30,7 +30,7 @@ function babiesWeightConverter(arr) {
         result.kurang++;
       } else if (lastWeight > 650) {
         result.berlebih++;
-      } else if (550 < lastWeight < 650) {
+      } else {
         result.cukup++;
       }
     } else if (month === 4) {
@@ -38,7 +38,7 @@ function babiesWeightConverter(arr) {
         result.kurang++;
       } else if (lastWeight > 550) {
         result.berlebih++;
-      } else if (450 < lastWeight < 550) {
+      } else {
         result.cukup++;
       }
     } else if (month === 5) {
@@ -46,7 +46,7 @@ function babiesWeightConverter(arr) {
         result.kurang++;
       } else if (lastWeight > 450) {
         result.berlebih++;
-      } else if (350 < lastWeight < 450) {
+      } else {
         result.cukup++;
       }
     } else if (6 <= month <= 16) {
@@ -54,7 +54,7 @@ function babiesWeightConverter(arr) {
         result.kurang++;
       } else if (lastWeight > 350) {
         result.berlebih++;
-      } else if (250 < lastWeight < 350) {
+      } else {
         result.cukup++;
       }
     } else if (17 <= month <= 23) {
@@ -62,7 +62,7 @@ function babiesWeightConverter(arr) {
         result.kurang++;
       } else if (lastWeight > 250) {
         result.berlebih++;
-      } else if (150 < lastWeight < 250) {
+      } else {
         result.cukup++;
       }
     }
