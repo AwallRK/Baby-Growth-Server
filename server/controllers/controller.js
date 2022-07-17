@@ -46,7 +46,7 @@ class Controller {
       console.log(payload);
 
       const access_token = signToken(payload);
-      res.status(200).json({ access_token });
+      res.status(200).json({ access_token, role: foundUser.role });
     } catch (err) {
       if (err.name == "PasswordRequired") {
         res.status(400).json({ message: "Password is required" });
@@ -119,6 +119,39 @@ class Controller {
       } else {
         res.status(500).json(err);
       }
+    }
+  }
+
+  static async fetchUserList(req, res) {
+    try {
+      const listUser = await User.findAll({
+        where: {
+          role: "Admin",
+        },
+        attributes: {
+          exclude: ["password"],
+        },
+        order: ["id"],
+      });
+
+      res.status(200).json(listUser);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  static async fetchMotherProfileList(req, res) {
+    try {
+      const listMother = await MotherProfile.findAll({
+        attributes: {
+          exclude: ["password"],
+        },
+        order: ["id"],
+      });
+
+      res.status(200).json(listMother);
+    } catch (err) {
+      res.status(500).json(err);
     }
   }
 

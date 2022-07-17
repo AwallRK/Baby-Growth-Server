@@ -15,9 +15,31 @@ module.exports = (sequelize, DataTypes) => {
   }
   MotherProfile.init(
     {
-      name: DataTypes.STRING,
-      NIK: DataTypes.STRING,
-      password: DataTypes.STRING,
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: { msg: `Name is required` },
+          notNull: { msg: `Name is required` },
+        },
+      },
+      NIK: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: { msg: "NIK must be unique" },
+        validate: {
+          notEmpty: { msg: "NIK is required" },
+          notNull: { msg: "NIK is required" },
+        },
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: { msg: `Password is required` },
+          notNull: { msg: `Password is required` },
+        },
+      },
       address: DataTypes.STRING,
       UserId: DataTypes.INTEGER,
     },

@@ -15,7 +15,14 @@ module.exports = (sequelize, DataTypes) => {
   BabyData.init(
     {
       PregnancyId: DataTypes.INTEGER,
-      beratAwal: DataTypes.FLOAT,
+      beratAwal: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+        validate: {
+          notEmpty: { msg: `beratAwal is required` },
+          notNull: { msg: `beratAwal is required` },
+        },
+      },
       beratBulanan: DataTypes.STRING,
       tanggalDicatat: DataTypes.DATE,
       createdAt: DataTypes.DATE,
