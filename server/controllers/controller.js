@@ -363,7 +363,6 @@ class Controller {
   }
 
   static async babyWeightCategories(req, res, next) {
-    let UserId = req.user.id;
     let options = {
       order: ["id"],
       attributes: {
@@ -376,10 +375,35 @@ class Controller {
         },
       ],
     };
-    // Ini biar hanya pregnancy yang dihandle admin itu kehitung, querynya dari mother profile
-    // Kalo mau lebih general, hapus kondisi ini
-    options.where = { UserId: UserId };
     const motherList = await MotherProfile.findAll(options);
+    const babiesWeight = [];
+    motherList.forEach((mother) => {
+      mother.Pregnancies.forEach((pregnancy) => {
+        const [_, selisihBulananBayi] = selisihCalculator(pregnancy);
+        babiesWeight.push(selisihBulananBayi);
+      });
+    });
+    const categories = babiesWeightConverter(babiesWeight);
+    res.status(200).json(categories);
+  }
+
+  static async babyWeightCategoriesByRT(req, res, next) {
+    let noRT = req.params.noRT;
+    let options = {
+      order: ["id"],
+      attributes: {
+        exclude: ["password"],
+      },
+      where: { noRT },
+      include: [
+        {
+          model: MotherProfile,
+          include: { model: Pregnancy, include: [PregnancyData, BabyData] },
+        },
+      ],
+    };
+    const user = await User.findOne(options);
+    const motherList = user.MotherProfiles;
     const babiesWeight = [];
     motherList.forEach((mother) => {
       mother.Pregnancies.forEach((pregnancy) => {

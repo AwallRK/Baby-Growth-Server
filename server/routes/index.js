@@ -22,4 +22,5 @@ router.get("/motherProfile/:id", Controller.fetchOneMotherProfile);
 router.get("/detailpregnancy/:id", Controller.fetchPregnancyData);
 router.post("/inputBabyData", Controller.inputBabyData);
 router.get("/babyWeigthCategories", Controller.babyWeightCategories);
+router.get("/babyWeigthCategories/:noRT", Controller.babyWeightCategoriesByRT);
 module.exports = router;
