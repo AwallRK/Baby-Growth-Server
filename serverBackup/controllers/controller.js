@@ -133,9 +133,8 @@ class Controller {
       };
 
       options.where = { UserId: UserId };
-
       const motherList = await MotherProfile.findAll(options);
-
+      console.log(motherList);
       res.status(200).json(motherList);
     } catch (err) {
       res.status(500).json(err);
@@ -188,6 +187,113 @@ class Controller {
     }
   }
 
+  static async inputPregnancyData(req, res) {
+    try {
+      const { PregnancyId, beratAwal, beratBulanan } = req.body;
+      const tanggalDicatat = new Date();
+      let updatedOrCreatedPregnancyData = {};
+      const foundPregnancy = await PregnancyData.findOne({
+        where: {
+          PregnancyId,
+        },
+      });
+      if (foundPregnancy) {
+        const foundId = foundPregnancy.id;
+        const updatedData = await PregnancyData.update(
+          {
+            beratAwal,
+            beratBulanan,
+            tanggalDicatat,
+          },
+          { where: { id: foundId }, returning: true }
+        );
+        updatedOrCreatedPregnancyData = updatedData[1][0];
+      } else {
+        updatedOrCreatedPregnancyData = await PregnancyData.create({
+          PregnancyId,
+          beratAwal,
+          beratBulanan,
+          tanggalDicatat,
+        });
+      }
+
+      res.status(200).json(updatedOrCreatedPregnancyData);
+    } catch (err) {
+      if (
+        err.name == "SequelizeUniqueConstraintError" ||
+        err.name == "SequelizeValidationError"
+      ) {
+        res.status(400).json({ message: err.errors[0].message });
+      } else {
+        res.status(500).json(err);
+      }
+    }
+    // try {
+    //   const { PregnancyId, beratAwal, beratBulanan } = req.body;
+    //   const tanggalDicatat = new Date();
+
+    //   const createdPregnancyData = await PregnancyData.create({
+    //     PregnancyId,
+    //     beratAwal,
+    //     beratBulanan,
+    //     tanggalDicatat,
+    //   });
+
+    //   res.status(200).json(createdPregnancyData);
+    // } catch (err) {
+    //   if (
+    //     err.name == "SequelizeUniqueConstraintError" ||
+    //     err.name == "SequelizeValidationError"
+    //   ) {
+    //     res.status(400).json({ message: err.errors[0].message });
+    //   } else {
+    //     res.status(500).json(err);
+    //   }
+    // }
+  }
+
+  static async inputBabyData(req, res) {
+    try {
+      const { PregnancyId, beratAwal, beratBulanan } = req.body;
+      const tanggalDicatat = new Date();
+      let updatedOrCreatedBabyData = {};
+      const foundBaby = await BabyData.findOne({
+        where: {
+          PregnancyId,
+        },
+      });
+      if (foundBaby) {
+        const foundId = foundBaby.id;
+        const updatedData = await BabyData.update(
+          {
+            beratAwal,
+            beratBulanan,
+            tanggalDicatat,
+          },
+          { where: { id: foundId }, returning: true }
+        );
+        updatedOrCreatedBabyData = updatedData[1][0];
+      } else {
+        updatedOrCreatedBabyData = await BabyData.create({
+          PregnancyId,
+          beratAwal,
+          beratBulanan,
+          tanggalDicatat,
+        });
+      }
+
+      res.status(200).json(updatedOrCreatedBabyData);
+    } catch (err) {
+      if (
+        err.name == "SequelizeUniqueConstraintError" ||
+        err.name == "SequelizeValidationError"
+      ) {
+        res.status(400).json({ message: err.errors[0].message });
+      } else {
+        res.status(500).json(err);
+      }
+    }
+  }
   static async fetchPregnancyData(req, res) {
     // res.send("masok");
     try {
@@ -199,26 +305,59 @@ class Controller {
         where: {
           id,
         },
-        include: [PregnancyData, { model: MotherProfile, include: User }],
+        include: [
+          PregnancyData,
+          BabyData,
+          { model: MotherProfile, include: User },
+        ],
         // MotherProfile,
       });
 
-      //   console.log(data.PregnancyDatum.beratBulanan);
-      const beratBulananArr = data.PregnancyDatum.beratBulanan.split(",");
-      //   console.log(beratBulananArr);
-      const tempSelisihArr = [];
+      let tempSelisihArr = [];
 
-      tempSelisihArr.push(beratBulananArr[0] - data.PregnancyDatum.beratAwal);
+      if (data.PregnancyDatum) {
+        if (data.PregnancyDatum.beratBulanan.length > 0) {
+          const beratBulananArr = data.PregnancyDatum.beratBulanan.split(",");
 
-      for (let i = 0; i < beratBulananArr.length - 1; i++) {
-        tempSelisihArr.push(beratBulananArr[i + 1] - beratBulananArr[i]);
+          tempSelisihArr.push(
+            (beratBulananArr[0] - data.PregnancyDatum.beratAwal) * 1000
+          );
+
+          if (beratBulananArr.length > 1) {
+            for (let i = 0; i < beratBulananArr.length - 1; i++) {
+              tempSelisihArr.push(
+                (beratBulananArr[i + 1] - beratBulananArr[i]) * 1000
+              );
+            }
+          }
+        }
       }
 
-      // console.log(tempSelisihArr);
-      //   data.PregnancyDatum.selisihBulanan = tempSelisihArr;
-      //   console.log(data);
+      let tempSelisihArr1 = [];
 
-      res.status(200).json({ data, selisihBulanan: tempSelisihArr });
+      if (data.BabyDatum) {
+        if (data.BabyDatum.beratBulanan.length > 0) {
+          const beratBayiBulananArr = data.BabyDatum.beratBulanan.split(",");
+
+          tempSelisihArr1.push(
+            (beratBayiBulananArr[0] - data.BabyDatum.beratAwal) * 1000
+          );
+
+          if (beratBayiBulananArr.length > 1) {
+            for (let i = 0; i < beratBayiBulananArr.length - 1; i++) {
+              tempSelisihArr1.push(
+                (beratBayiBulananArr[i + 1] - beratBayiBulananArr[i]) * 1000
+              );
+            }
+          }
+        }
+      }
+
+      res.status(200).json({
+        selisihBulananHamil: tempSelisihArr,
+        selisihBulananBayi: tempSelisihArr1,
+        data,
+      });
     } catch (err) {
       res.status(500).json(err);
     }

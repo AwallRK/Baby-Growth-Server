@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("BabyData", {
+    await queryInterface.createTable("PregnancyData", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -18,7 +18,7 @@ module.exports = {
         onDelete: "cascade",
       },
       beratAwal: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
       },
       beratBulanan: {
         type: Sequelize.STRING,
@@ -37,6 +37,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("BabyData");
+    await queryInterface.dropTable("PregnancyData");
   },
 };

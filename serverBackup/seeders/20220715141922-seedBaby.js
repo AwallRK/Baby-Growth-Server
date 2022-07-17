@@ -1,5 +1,7 @@
 "use strict";
 
+const { hashPassword } = require("../helpers/bcrypt");
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     /**
@@ -14,24 +16,24 @@ module.exports = {
 
     let data = [
       {
-        PregnancyId: 1,
-        beratAwal: 50,
-        beratBulanan: "55,58,63,69",
+        PregnancyId: 2,
+        beratAwal: 3,
+        beratBulanan: "7,8,10,12",
         tanggalDicatat: new Date(),
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        PregnancyId: 2,
-        beratAwal: 60,
-        beratBulanan: "65,69,78,80,89,94",
+        PregnancyId: 1,
+        beratAwal: 4,
+        beratBulanan: "8,10,12,15",
         tanggalDicatat: new Date(),
         createdAt: new Date(),
         updatedAt: new Date(),
       },
     ];
 
-    await queryInterface.bulkInsert("PregnancyData", data, {});
+    await queryInterface.bulkInsert("BabyData", data, {});
   },
 
   async down(queryInterface, Sequelize) {
@@ -41,6 +43,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete("PregnancyData", null, {});
+    await queryInterface.bulkDelete("BabyData", null, {});
   },
 };

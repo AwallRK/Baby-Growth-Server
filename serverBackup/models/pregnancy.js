@@ -11,16 +11,32 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Pregnancy.belongsTo(models.MotherProfile);
       Pregnancy.hasOne(models.PregnancyData);
+      Pregnancy.hasOne(models.BabyData);
     }
   }
   Pregnancy.init(
     {
-      MotherProfileId: DataTypes.INTEGER,
+      MotherProfileId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+          notNull: true,
+        },
+      },
       name: DataTypes.STRING,
       sudahLahir: DataTypes.BOOLEAN,
     },
     {
       sequelize,
+      hooks: {
+        beforeCreate: (pregnancy) => {
+          if (!pregnancy.sudahLahir) {
+            pregnancy.sudahLahir = false;
+          }
+          return pregnancy;
+        },
+      },
       modelName: "Pregnancy",
     }
   );

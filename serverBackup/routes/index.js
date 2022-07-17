@@ -8,7 +8,7 @@ const router = require("express").Router();
 router.post("/login", Controller.loginUser);
 
 router.use(authentication);
-
+//
 router.post("/registerUser", authorizationSuperAdmin, Controller.registerUser);
 router.post(
   "/registerMotherProfile",
@@ -19,5 +19,5 @@ router.post("/registerPregnancy", Controller.createPregnancy);
 router.post("/registerPregnancyData", Controller.createPregnancyData);
 router.get("/motherProfile", Controller.fetchMotherProfiles);
 router.get("/detailpregnancy/:id", Controller.fetchPregnancyData);
-
+router.post("/inputBabyData", Controller.inputBabyData);
 module.exports = router;

@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   PregnancyData.init(
     {
       PregnancyId: DataTypes.INTEGER,
-      beratAwal: DataTypes.INTEGER,
+      beratAwal: DataTypes.FLOAT,
       beratBulanan: DataTypes.STRING,
       tanggalDicatat: DataTypes.DATE,
     },

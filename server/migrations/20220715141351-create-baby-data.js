@@ -18,6 +18,7 @@ module.exports = {
         onDelete: "cascade",
       },
       beratAwal: {
+        allowNull: false,
         type: Sequelize.FLOAT,
       },
       beratBulanan: {
