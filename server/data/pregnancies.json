@@ -1,0 +1,22 @@
+[
+  {
+    "MotherProfileId": 1,
+    "name": "Kehamilan Kedua Bu Sutijah",
+    "sudahLahir": false
+  },
+  {
+    "MotherProfileId": 2,
+    "name": "Kehamilan Pertama Bu Sutiyem",
+    "sudahLahir": false
+  },
+  {
+    "MotherProfileId": 1,
+    "name": "Kehamilan Pertama Bu Sutijah",
+    "sudahLahir": false
+  },
+  {
+    "MotherProfileId": 2,
+    "name": "Kehamilan Kedua Bu Sutiyem",
+    "sudahLahir": false
+  }
+]

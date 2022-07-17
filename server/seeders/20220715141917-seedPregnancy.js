@@ -11,25 +11,13 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
+    const pregnancies = require("../data/pregnancies.json");
+    pregnancies.forEach((pregnancy) => {
+      pregnancy.createdAt = new Date();
+      pregnancy.updatedAt = new Date();
+    });
 
-    let data = [
-      {
-        MotherProfileId: 1,
-        name: "Kehamilan Kedua Bu Sutijah",
-        sudahLahir: false,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        MotherProfileId: 2,
-        name: "Kehamilan Pertama Bu Sutiyem",
-        sudahLahir: false,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    ];
-
-    await queryInterface.bulkInsert("Pregnancies", data, {});
+    await queryInterface.bulkInsert("Pregnancies", pregnancies, {});
   },
 
   async down(queryInterface, Sequelize) {

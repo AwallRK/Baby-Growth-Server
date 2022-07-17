@@ -12,26 +12,13 @@ module.exports = {
      * }], {});
      */
 
-    let data = [
-      {
-        PregnancyId: 1,
-        beratAwal: 50.5,
-        beratBulanan: "55.6,58.5,63,69",
-        tanggalDicatat: new Date(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        PregnancyId: 2,
-        beratAwal: 60,
-        beratBulanan: "65,69,78,80,89,94",
-        tanggalDicatat: new Date(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    ];
+    const pregnancyData = require("../data/pregnancyData.json");
+    pregnancyData.forEach((pregnancy) => {
+      pregnancy.createdAt = pregnancy.tanggalDicatat;
+      pregnancy.updatedAt = new Date();
+    });
 
-    await queryInterface.bulkInsert("PregnancyData", data, {});
+    await queryInterface.bulkInsert("PregnancyData", pregnancyData, {});
   },
 
   async down(queryInterface, Sequelize) {

@@ -1,7 +1,7 @@
 "use strict";
 
 const { hashPassword } = require("../helpers/bcrypt");
-
+const mothers = require("../data/mothers.json");
 module.exports = {
   async up(queryInterface, Sequelize) {
     /**
@@ -13,29 +13,13 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
+    mothers.forEach((mother) => {
+      mother.password = hashPassword(mother.password);
+      mother.createdAt = new Date();
+      mother.updatedAt = new Date();
+    });
 
-    let data = [
-      {
-        name: "Sutijah",
-        NIK: "222224440000",
-        password: hashPassword("12345"),
-        address: "Jl. Dua Ribu",
-        UserId: 2,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        name: "Sutiyem",
-        NIK: "222224440001",
-        password: hashPassword("12345"),
-        address: "Jl. Empat Ribu",
-        UserId: 3,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    ];
-
-    await queryInterface.bulkInsert("MotherProfiles", data, {});
+    await queryInterface.bulkInsert("MotherProfiles", mothers, {});
   },
 
   async down(queryInterface, Sequelize) {
