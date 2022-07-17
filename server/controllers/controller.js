@@ -2,6 +2,7 @@ const { babiesWeightConverter } = require("../helpers/babyWeight");
 const { comparePassword, hashPassword } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
 const { selisihCalculator } = require("../helpers/selisihCalculator");
+const { calculateStatistics } = require("../helpers/statisticCalculator");
 const {
   User,
   MotherProfile,
@@ -403,9 +404,6 @@ class Controller {
     let motherCount = 0;
     const babiesWeight = [];
     const categoriesPerRT = [];
-    const giziKurangTerbanyak = { noRT: "", jumlah: 0 };
-    const giziBerlebihTerbanyak = { noRT: "", jumlah: 0 };
-    const giziCukupTerbanyak = { noRT: "", jumlah: 0 };
     let options = {
       order: ["id"],
       attributes: {
@@ -440,29 +438,12 @@ class Controller {
       categoriesPerRT.push({ noRT: user.noRT, categories: categoriesDalamRT });
     });
 
-    categoriesPerRT.forEach((rt) => {
-      if (rt.categories.kurang > giziKurangTerbanyak.jumlah) {
-        giziKurangTerbanyak.noRT = rt.noRT;
-        giziKurangTerbanyak.jumlah = rt.categories.kurang;
-      }
-      if (rt.categories.cukup > giziCukupTerbanyak.jumlah) {
-        giziCukupTerbanyak.noRT = rt.noRT;
-        giziCukupTerbanyak.jumlah = rt.categories.cukup;
-      }
-      if (rt.categories.berlebih > giziBerlebihTerbanyak.jumlah) {
-        giziBerlebihTerbanyak.noRT = rt.noRT;
-        giziBerlebihTerbanyak.jumlah = rt.categories.berlebih;
-      }
-    });
+    const statistic = calculateStatistics(categoriesPerRT);
     const categories = babiesWeightConverter(babiesWeight);
     res.status(200).json({
       categories,
       ibuBelumMelahirkan: motherCount,
-      statistic: {
-        giziKurangTerbanyak,
-        giziBerlebihTerbanyak,
-        giziCukupTerbanyak,
-      },
+      statistic,
     });
   }
 
@@ -497,6 +478,55 @@ class Controller {
     });
     const categories = babiesWeightConverter(babiesWeight);
     res.status(200).json({ categories, ibuBelumMelahirkan: motherCount });
+  }
+
+  static async getAllRTStatus(req, res, next) {
+    const babiesWeight = [];
+    const categoriesPerRT = [];
+    let options = {
+      order: ["id"],
+      attributes: {
+        exclude: ["password"],
+      },
+      include: [
+        {
+          model: MotherProfile,
+          include: { model: Pregnancy, include: [PregnancyData, BabyData] },
+        },
+      ],
+    };
+    const users = await User.findAll(options);
+    users.forEach((user) => {
+      if (user.noRT === 99) {
+        return;
+      }
+      const motherList = user.MotherProfiles;
+      const babiesDalamSatuRTWeight = [];
+      motherList.forEach((mother) => {
+        mother.Pregnancies.forEach((pregnancy) => {
+          if (pregnancy.sudahLahir) {
+            const [_, selisihBulananBayi] = selisihCalculator(pregnancy);
+            babiesWeight.push(selisihBulananBayi);
+            babiesDalamSatuRTWeight.push(selisihBulananBayi);
+          }
+        });
+      });
+      const categoriesDalamRT = babiesWeightConverter(babiesDalamSatuRTWeight);
+      categoriesPerRT.push({ noRT: user.noRT, categories: categoriesDalamRT });
+    });
+
+    const RTList = [];
+    categoriesPerRT.forEach((rt) => {
+      if (rt.categories.kurang > 0 && rt.categories.kurang <= 5) {
+        rt.status = "Warning";
+        RTList.push({ noRT: rt.noRT, status: rt.status });
+      } else if (rt.categories.kurang > 5) {
+        rt.status = "Critical";
+        RTList.push({ noRT: rt.noRT, status: rt.status });
+      }
+    });
+
+    res.status(200).json(RTList);
   }
 }
 
