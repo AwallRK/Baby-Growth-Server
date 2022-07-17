@@ -348,7 +348,11 @@ class Controller {
         include: [
           PregnancyData,
           BabyData,
-          { model: MotherProfile, include: [User] },
+          {
+            model: MotherProfile,
+            attributes: { exclude: ["password"] },
+            include: { model: User, attributes: { exclude: ["password"] } },
+          },
         ],
       });
       const [selisihBulananHamil, selisihBulananBayi] = selisihCalculator(data);
