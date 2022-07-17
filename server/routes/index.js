@@ -30,4 +30,5 @@ router.get("/babyWeigthCategories/:noRT", Controller.babyWeightCategoriesByRT); 
 router.post("/registerPregnancy", Controller.createPregnancy);
 router.post("/registerPregnancyData", Controller.createPregnancyData);
 router.post("/inputBabyData", Controller.inputBabyData);
+
 module.exports = router;
