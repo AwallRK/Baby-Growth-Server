@@ -18,6 +18,7 @@ router.post(
 router.post("/registerPregnancy", Controller.createPregnancy);
 router.post("/registerPregnancyData", Controller.createPregnancyData);
 router.get("/motherProfile", Controller.fetchMotherProfiles);
+router.get("/motherProfile/:id", Controller.fetchOneMotherProfile);
 router.get("/detailpregnancy/:id", Controller.fetchPregnancyData);
 router.post("/inputBabyData", Controller.inputBabyData);
 module.exports = router;

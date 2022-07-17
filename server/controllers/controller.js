@@ -130,12 +130,50 @@ class Controller {
         attributes: {
           exclude: ["password"],
         },
-        include: [Pregnancy],
+        // include: [
+        //   {
+        //     model: Pregnancy,
+        //     include: [PregnancyData, BabyData],
+        //   },
+        // ],
+
+        include: [
+          {
+            model: Pregnancy,
+          },
+        ],
       };
 
       options.where = { UserId: UserId };
       const motherList = await MotherProfile.findAll(options);
-      console.log(motherList);
+      // console.log(motherList);
+      res.status(200).json(motherList);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  static async fetchOneMotherProfile(req, res) {
+    try {
+      // const UserId = req.query.UserId
+      const UserId = req.user.id;
+      const MotherId = req.params.id;
+      let options = {
+        order: ["id"],
+        attributes: {
+          exclude: ["password"],
+        },
+        include: [
+          {
+            model: Pregnancy,
+            include: [PregnancyData, BabyData],
+          },
+        ],
+      };
+
+      options.where = { UserId: UserId, id: MotherId };
+      const motherList = await MotherProfile.findAll(options);
+      // console.log(motherList);
       res.status(200).json(motherList);
     } catch (err) {
       res.status(500).json(err);
