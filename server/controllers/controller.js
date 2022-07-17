@@ -1,3 +1,4 @@
+const { babiesWeightConverter } = require("../helpers/babyWeight");
 const { comparePassword, hashPassword } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
 const { selisihCalculator } = require("../helpers/selisihCalculator");
@@ -363,11 +364,6 @@ class Controller {
 
   static async babyWeightCategories(req, res, next) {
     let UserId = req.user.id;
-    const result = {
-      kurang: 0,
-      cukup: 0,
-      berlebih: 0,
-    };
     let options = {
       order: ["id"],
       attributes: {
@@ -379,16 +375,20 @@ class Controller {
           include: [PregnancyData, BabyData],
         },
       ],
-
-      include: [
-        {
-          model: Pregnancy,
-        },
-      ],
     };
-
+    // Ini biar hanya pregnancy yang dihandle admin itu kehitung, querynya dari mother profile
+    // Kalo mau lebih general, hapus kondisi ini
     options.where = { UserId: UserId };
     const motherList = await MotherProfile.findAll(options);
+    const babiesWeight = [];
+    motherList.forEach((mother) => {
+      mother.Pregnancies.forEach((pregnancy) => {
+        const [_, selisihBulananBayi] = selisihCalculator(pregnancy);
+        babiesWeight.push(selisihBulananBayi);
+      });
+    });
+    const categories = babiesWeightConverter(babiesWeight);
+    res.status(200).json(categories);
   }
 }
 
