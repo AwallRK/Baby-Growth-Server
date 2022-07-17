@@ -1,0 +1,5 @@
+npx sequelize model:create --name User --attributes username:string,password:string,email:string,role:string,noRT:integer
+npx sequelize model:create --name MotherProfile --attributes name:string,NIK:string,password:string,address:string,UserId:integer
+npx sequelize model:create --name Pregnancy --attributes MotherProfileId:integer,name:string,sudahLahir:boolean
+npx sequelize model:create --name PregnancyData --attributes PregnancyId:integer,beratAwal:integer,beratBulanan:string,tanggalDicatat:date
+npx sequelize model:create --name BabyData --attributes PregnancyId:integer,beratAwal:integer,beratBulanan:string,tanggalDicatat:date
