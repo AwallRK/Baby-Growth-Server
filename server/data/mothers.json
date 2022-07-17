@@ -34,5 +34,77 @@
     "UserId": 3,
     "latitude": 0,
     "longitude": 0
+  },
+  {
+    "name": "Suriri",
+    "NIK": "222723440002",
+    "password": "12345",
+    "address": "Jl. Sepuluh Ribu",
+    "UserId": 4,
+    "latitude": 0,
+    "longitude": 0
+  },
+  {
+    "name": "Susumi",
+    "NIK": "222224440902",
+    "password": "12345",
+    "address": "Jl. Dua Ratus Ribu",
+    "UserId": 5,
+    "latitude": 0,
+    "longitude": 0
+  },
+  {
+    "name": "Sumimi",
+    "NIK": "222224442902",
+    "password": "12345",
+    "address": "Jl. Tiga Ratus Ribu",
+    "UserId": 6,
+    "latitude": 0,
+    "longitude": 0
+  },
+  {
+    "name": "Sumomo",
+    "NIK": "2222234442902",
+    "password": "12345",
+    "address": "Jl. Empat Ratus Ribu",
+    "UserId": 7,
+    "latitude": 0,
+    "longitude": 0
+  },
+  {
+    "name": "Sukiki",
+    "NIK": "22222324429111",
+    "password": "12345",
+    "address": "Jl. Tujuh Ratus Ribu",
+    "UserId": 7,
+    "latitude": 0,
+    "longitude": 0
+  },
+  {
+    "name": "Sunono",
+    "NIK": "23221324129111",
+    "password": "12345",
+    "address": "Jl. Lima Ratus Ribu",
+    "UserId": 8,
+    "latitude": 0,
+    "longitude": 0
+  },
+  {
+    "name": "Sunini",
+    "NIK": "22222324429223",
+    "password": "12345",
+    "address": "Jl. Empat Puluh Ribu",
+    "UserId": 8,
+    "latitude": 0,
+    "longitude": 0
+  },
+  {
+    "name": "Subibi",
+    "NIK": "22222324629223",
+    "password": "12345",
+    "address": "Jl. Enam Puluh Ribu",
+    "UserId": 8,
+    "latitude": 0,
+    "longitude": 0
   }
 ]
