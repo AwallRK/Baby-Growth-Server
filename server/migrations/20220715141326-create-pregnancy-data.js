@@ -14,6 +14,7 @@ module.exports = {
           model: "Pregnancies",
           key: "id",
         },
+        unique: true,
         onUpdate: "cascade",
         onDelete: "cascade",
       },

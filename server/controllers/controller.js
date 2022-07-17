@@ -130,6 +130,7 @@ class Controller {
         attributes: {
           exclude: ["password"],
         },
+        include: [Pregnancy],
       };
 
       options.where = { UserId: UserId };
@@ -308,7 +309,7 @@ class Controller {
         include: [
           PregnancyData,
           BabyData,
-          { model: MotherProfile, include: User },
+          { model: MotherProfile, include: [User] },
         ],
         // MotherProfile,
       });
