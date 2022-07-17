@@ -363,6 +363,12 @@ class Controller {
   }
 
   static async babyWeightCategories(req, res, next) {
+    let motherCount = 0;
+    const babiesWeight = [];
+    const categoriesPerRT = [];
+    const giziKurangTerbanyak = { noRT: "", jumlah: 0 };
+    const giziBerlebihTerbanyak = { noRT: "", jumlah: 0 };
+    const giziCukupTerbanyak = { noRT: "", jumlah: 0 };
     let options = {
       order: ["id"],
       attributes: {
@@ -370,25 +376,62 @@ class Controller {
       },
       include: [
         {
-          model: Pregnancy,
-          include: [PregnancyData, BabyData],
+          model: MotherProfile,
+          include: { model: Pregnancy, include: [PregnancyData, BabyData] },
         },
       ],
     };
-    const motherList = await MotherProfile.findAll(options);
-    const babiesWeight = [];
-    motherList.forEach((mother) => {
-      mother.Pregnancies.forEach((pregnancy) => {
-        const [_, selisihBulananBayi] = selisihCalculator(pregnancy);
-        babiesWeight.push(selisihBulananBayi);
+    const users = await User.findAll(options);
+    users.forEach((user) => {
+      if (user.noRT === 99) {
+        return;
+      }
+      const motherList = user.MotherProfiles;
+      const babiesDalamSatuRTWeight = [];
+      motherList.forEach((mother) => {
+        mother.Pregnancies.forEach((pregnancy) => {
+          if (pregnancy.sudahLahir) {
+            const [_, selisihBulananBayi] = selisihCalculator(pregnancy);
+            babiesWeight.push(selisihBulananBayi);
+            babiesDalamSatuRTWeight.push(selisihBulananBayi);
+          } else {
+            motherCount++;
+          }
+        });
       });
+      const categoriesDalamRT = babiesWeightConverter(babiesDalamSatuRTWeight);
+      categoriesPerRT.push({ noRT: user.noRT, categories: categoriesDalamRT });
+    });
+
+    categoriesPerRT.forEach((rt) => {
+      if (rt.categories.kurang > giziKurangTerbanyak.jumlah) {
+        giziKurangTerbanyak.noRT = rt.noRT;
+        giziKurangTerbanyak.jumlah = rt.categories.kurang;
+      }
+      if (rt.categories.cukup > giziCukupTerbanyak.jumlah) {
+        giziCukupTerbanyak.noRT = rt.noRT;
+        giziCukupTerbanyak.jumlah = rt.categories.cukup;
+      }
+      if (rt.categories.berlebih > giziBerlebihTerbanyak.jumlah) {
+        giziBerlebihTerbanyak.noRT = rt.noRT;
+        giziBerlebihTerbanyak.jumlah = rt.categories.berlebih;
+      }
     });
     const categories = babiesWeightConverter(babiesWeight);
-    res.status(200).json(categories);
+    res.status(200).json({
+      categories,
+      ibuBelumMelahirkan: motherCount,
+      statistic: {
+        giziKurangTerbanyak,
+        giziBerlebihTerbanyak,
+        giziCukupTerbanyak,
+      },
+    });
   }
 
   static async babyWeightCategoriesByRT(req, res, next) {
     let noRT = req.params.noRT;
+    let motherCount = 0;
     let options = {
       order: ["id"],
       attributes: {
@@ -407,12 +450,16 @@ class Controller {
     const babiesWeight = [];
     motherList.forEach((mother) => {
       mother.Pregnancies.forEach((pregnancy) => {
-        const [_, selisihBulananBayi] = selisihCalculator(pregnancy);
-        babiesWeight.push(selisihBulananBayi);
+        if (pregnancy.sudahLahir) {
+          const [_, selisihBulananBayi] = selisihCalculator(pregnancy);
+          babiesWeight.push(selisihBulananBayi);
+        } else {
+          motherCount++;
+        }
       });
     });
     const categories = babiesWeightConverter(babiesWeight);
-    res.status(200).json(categories);
+    res.status(200).json({ categories, ibuBelumMelahirkan: motherCount });
   }
 }
 
