@@ -25,6 +25,7 @@ router.get("/detailpregnancy/:id", Controller.fetchPregnancyData); // data untuk
 
 router.get("/babyWeigthCategories", Controller.babyWeightCategories); // untuk pie chart
 router.get("/babyWeigthCategories/:noRT", Controller.babyWeightCategoriesByRT); // untuk pie chart
+router.get("/RTStatus", Controller.getAllRTStatus); // untuk pie chart
 //
 
 router.post("/registerPregnancy", Controller.createPregnancy);
