@@ -7,7 +7,13 @@ const authorizationSuperAdmin = require("../middlewares/authorizationSuperAdmin"
 const router = require("express").Router();
 
 router.post("/login", Controller.loginUser);
-
+router.get("/category", UserController.fetchCategory);
+router.post("/category", UserController.addCategory);
+router.get("/category/:id/article", UserController.fetchArticleBasedOnCategory);
+router.post("/category/:id/article", UserController.addArticlesBasedOnCategory);
+// router.get("/article/:id", UserController.fetchArticle);
+router.post("/nik", Controller.fetchMotherProfileByNIK);
+router.post("/pregnancy", Controller.fetchMotherPregnancyByNIK);
 router.use(authentication);
 //
 router.post("/registerUser", authorizationSuperAdmin, Controller.registerUser);
@@ -33,14 +39,6 @@ router.post("/registerPregnancy", Controller.createPregnancy);
 router.post("/registerPregnancyData", Controller.createPregnancyData);
 router.post("/inputBabyData", Controller.inputBabyData);
 
-router.get("/category", UserController.fetchCategory);
-router.post("/category", UserController.addCategory);
-router.get("/category/:id/article", UserController.fetchArticleBasedOnCategory);
-router.post("/category/:id/article", UserController.addArticlesBasedOnCategory);
-// router.get("/article/:id", UserController.fetchArticle);
-router.post("/nik", Controller.fetchMotherProfileByNIK);
-router.post("/pregnancy", Controller.fetchMotherPregnancyByNIK);
 
-module.exports = router;
 
 module.exports = router;

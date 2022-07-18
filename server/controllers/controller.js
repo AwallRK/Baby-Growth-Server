@@ -588,7 +588,7 @@ class Controller {
         where: {
           MotherProfileId: data.id,
         },
-        include: [PregnancyData],
+        include: [PregnancyData,BabyData],
       });
 
       res.status(200).json(pregnancy);
