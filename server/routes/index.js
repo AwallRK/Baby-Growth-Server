@@ -19,6 +19,7 @@ router.post(
 // fetch list all
 router.get("/listUser", Controller.fetchUserList); // fetch all user exclude superAdmin
 router.get("/listMotherProfile", Controller.fetchMotherProfileList); // fetch all motherprofile
+router.get("/listMotherProfile/:noRT", Controller.fetchMotherProfileByNoRT);
 //
 router.get("/motherProfile", Controller.fetchMotherProfiles); // fetch all mother profile by rt (dari UserId dari req.user) untuk select dropdown di create pregnancy form
 router.get("/motherProfile/:id", Controller.fetchOneMotherProfile);
