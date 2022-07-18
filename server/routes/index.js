@@ -8,9 +8,7 @@ const motherRouter = require("./routerMother");
 const router = require("express").Router();
 
 router.post("/login", Controller.loginUser);
-
 router.use("/mother", motherRouter);
-
 router.use(authentication);
 //
 router.post("/registerUser", authorizationSuperAdmin, Controller.registerUser);
