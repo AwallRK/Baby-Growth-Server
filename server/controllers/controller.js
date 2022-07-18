@@ -156,6 +156,29 @@ class Controller {
     }
   }
 
+  static async fetchMotherProfileByNoRT(req, res) {
+    try {
+      const { noRT } = req.params;
+      console.log("masok");
+      console.log(noRT);
+
+      const foundUser = await User.findOne({
+        where: { noRT },
+        attributes: { exclude: ["password"] },
+        include: { model: MotherProfile, include: Pregnancy },
+      });
+
+      let data = [];
+      if (foundUser) {
+        data = foundUser.MotherProfiles;
+      }
+
+      res.status(200).json(data);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
   static async fetchMotherProfiles(req, res) {
     try {
       // const UserId = req.query.UserId

@@ -3,17 +3,14 @@ const UserController = require("../controllers/usercontroller");
 const authentication = require("../middlewares/authentication");
 const authorizationAdmin = require("../middlewares/authorizationAdmin");
 const authorizationSuperAdmin = require("../middlewares/authorizationSuperAdmin");
+const motherRouter = require("./routerMother");
 
 const router = require("express").Router();
 
 router.post("/login", Controller.loginUser);
-router.get("/category", UserController.fetchCategory);
-router.post("/category", UserController.addCategory);
-router.get("/category/:id/article", UserController.fetchArticleBasedOnCategory);
-router.post("/category/:id/article", UserController.addArticlesBasedOnCategory);
-// router.get("/article/:id", UserController.fetchArticle);
-router.post("/nik", Controller.fetchMotherProfileByNIK);
-router.post("/pregnancy", Controller.fetchMotherPregnancyByNIK);
+
+router.use("/mother", motherRouter);
+
 router.use(authentication);
 //
 router.post("/registerUser", authorizationSuperAdmin, Controller.registerUser);
@@ -25,6 +22,7 @@ router.post(
 // fetch list all
 router.get("/listUser", Controller.fetchUserList); // fetch all user exclude superAdmin
 router.get("/listMotherProfile", Controller.fetchMotherProfileList); // fetch all motherprofile
+router.get("/listMotherProfile/:noRT", Controller.fetchMotherProfileByNoRT);
 //
 router.get("/motherProfile", Controller.fetchMotherProfiles); // fetch all mother profile by rt (dari UserId dari req.user) untuk select dropdown di create pregnancy form
 router.get("/motherProfile/:id", Controller.fetchOneMotherProfile);
