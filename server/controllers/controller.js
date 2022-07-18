@@ -82,6 +82,7 @@ class Controller {
         noRT: createdUser.noRT,
       });
     } catch (err) {
+      console.log(err)
       if (
         err.name == "SequelizeUniqueConstraintError" ||
         err.name == "SequelizeValidationError"
@@ -115,6 +116,7 @@ class Controller {
         address: createdMotherProfile.address,
       });
     } catch (err) {
+      console.log(err)
       if (
         err.name == "SequelizeUniqueConstraintError" ||
         err.name == "SequelizeValidationError"
