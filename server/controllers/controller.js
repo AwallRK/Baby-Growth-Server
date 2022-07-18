@@ -550,6 +550,49 @@ class Controller {
       res.status(500).json(err);
     }
   }
+  static async fetchMotherProfileByNIK(req, res) {
+    // res.send("masok");
+    try {
+      const { NIK } = req.body;
+
+      const data = await MotherProfile.findOne({
+        where: {
+          NIK: NIK,
+        },
+        include: [Pregnancy],
+      });
+
+      res.status(200).json(data);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  }
+
+  static async fetchMotherPregnancyByNIK(req, res) {
+    // res.send("masok");
+    try {
+      const { nik } = req.body;
+
+      const data = await MotherProfile.findOne({
+        where: {
+          NIK: nik,
+        },
+      });
+
+      const pregnancy = await Pregnancy.findAll({
+        where: {
+          MotherProfileId: data.id,
+        },
+        include: [PregnancyData],
+      });
+
+      res.status(200).json(pregnancy);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  }
 }
 
 module.exports = Controller;
