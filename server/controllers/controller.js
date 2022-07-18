@@ -553,11 +553,13 @@ class Controller {
   static async fetchMotherProfileByNIK(req, res) {
     // res.send("masok");
     try {
-      const { NIK } = req.body;
-
+      const { nik } = req.body;
+      if (!nik) {
+        throw new Error({ message: "NIK is required!" });
+      }
       const data = await MotherProfile.findOne({
         where: {
-          NIK: NIK,
+          NIK: nik,
         },
         include: [Pregnancy],
       });
@@ -573,7 +575,9 @@ class Controller {
     // res.send("masok");
     try {
       const { nik } = req.body;
-
+      if (!nik) {
+        throw new Error({ message: "You must include a NIK" });
+      }
       const data = await MotherProfile.findOne({
         where: {
           NIK: nik,
