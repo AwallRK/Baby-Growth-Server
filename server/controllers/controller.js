@@ -96,14 +96,16 @@ class Controller {
   static async registerMotherProfile(req, res) {
     try {
       const UserId = req.user.id;
-      const { name, NIK, password, address } = req.body;
-
+      const { name, NIK, password, address, latitude, longitude } = req.body;
+      console.log(req.body);
       const createdMotherProfile = await MotherProfile.create({
         UserId,
         name,
         NIK,
         password: hashPassword(password),
         address,
+        latitude,
+        longitude,
       });
 
       res.status(201).json({
