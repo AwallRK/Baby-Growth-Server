@@ -19,5 +19,40 @@
     "email": "didin@mail.com",
     "role": "Admin",
     "noRT": 2
+  },
+  {
+    "username": "Pak Bimi",
+    "password": "12345",
+    "email": "bimi@mail.com",
+    "role": "Admin",
+    "noRT": 3
+  },
+  {
+    "username": "Pak Bomo",
+    "password": "12345",
+    "email": "bomo@mail.com",
+    "role": "Admin",
+    "noRT": 4
+  },
+  {
+    "username": "Pak Bumu",
+    "password": "12345",
+    "email": "bumu@mail.com",
+    "role": "Admin",
+    "noRT": 5
+  },
+  {
+    "username": "Pak Bono",
+    "password": "12345",
+    "email": "bono@mail.com",
+    "role": "Admin",
+    "noRT": 6
+  },
+  {
+    "username": "Pak Buhu",
+    "password": "12345",
+    "email": "buhu@mail.com",
+    "role": "Admin",
+    "noRT": 7
   }
 ]

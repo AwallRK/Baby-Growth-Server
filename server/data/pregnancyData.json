@@ -2,25 +2,145 @@
   {
     "PregnancyId": 1,
     "beratAwal": 50.5,
-    "beratBulanan": "55.6,58.5,63,69",
+    "beratBulanan": "50.6,50.7,50.8,50.9",
     "tanggalDicatat": "2022-07-17T07:56:42.763Z"
   },
   {
     "PregnancyId": 2,
     "beratAwal": 60,
-    "beratBulanan": "65,69,78,80,89,94",
+    "beratBulanan": "60.1,60.2,60.4,60.7,60.9,61.2",
     "tanggalDicatat": "2022-07-17T07:56:42.763Z"
   },
   {
     "PregnancyId": 3,
     "beratAwal": 60,
-    "beratBulanan": "60.7,62.1,63.5,64.9",
+    "beratBulanan": "60.7,61.1,61.5,62.1",
     "tanggalDicatat": "2022-07-17T07:56:42.763Z"
   },
   {
     "PregnancyId": 4,
-    "beratAwal": 65,
-    "beratBulanan": "65.3,65.9,67.5,70.9",
+    "beratAwal": 48,
+    "beratBulanan": "48.3,48.8,50.0,50.3",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 5,
+    "beratAwal": 55,
+    "beratBulanan": "55.3,56.0,56.3.56.7,57.0",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 6,
+    "beratAwal": 52,
+    "beratBulanan": "52.3,52.7,53.1.53.9,54.5",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 7,
+    "beratAwal": 45,
+    "beratBulanan": "45.3,46.0,46.9.47.5,48.0",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 8,
+    "beratAwal": 49,
+    "beratBulanan": "49.5,50.0,50.7.51.5,52.3",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 9,
+    "beratAwal": 49,
+    "beratBulanan": "49.5,50.0,50.7.51.5,52.3",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 10,
+    "beratAwal": 45,
+    "beratBulanan": "45.3,46.0,46.9.47.5,48.0",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 11,
+    "beratAwal": 60,
+    "beratBulanan": "60.7,61.1,61.5,62.1",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 12,
+    "beratAwal": 48,
+    "beratBulanan": "48.3,48.8,50.0,50.3",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 13,
+    "beratAwal": 50.5,
+    "beratBulanan": "50.6,50.7,50.8,50.9",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 14,
+    "beratAwal": 60,
+    "beratBulanan": "60.1,60.2,60.4,60.7,60.9,61.2",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 15,
+    "beratAwal": 60,
+    "beratBulanan": "60.7,61.1,61.5,62.1",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 16,
+    "beratAwal": 60,
+    "beratBulanan": "60.7,61.1,61.5,62.1",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 17,
+    "beratAwal": 48,
+    "beratBulanan": "48.3,48.8,50.0,50.3",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 18,
+    "beratAwal": 50.5,
+    "beratBulanan": "50.6,50.7,50.8,50.9",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 19,
+    "beratAwal": 50.5,
+    "beratBulanan": "50.6,50.7,50.8,50.9",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 20,
+    "beratAwal": 60,
+    "beratBulanan": "60.1,60.2,60.4,60.7,60.9,61.2",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 21,
+    "beratAwal": 60,
+    "beratBulanan": "60.7,61.1,61.5,62.1",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 22,
+    "beratAwal": 60,
+    "beratBulanan": "60.7,61.1,61.5,62.1",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 23,
+    "beratAwal": 48,
+    "beratBulanan": "48.3,48.8,50.0,50.3",
+    "tanggalDicatat": "2022-07-17T07:56:42.763Z"
+  },
+  {
+    "PregnancyId": 24,
+    "beratAwal": 48,
+    "beratBulanan": "48.3,48.8,50.0,50.3",
     "tanggalDicatat": "2022-07-17T07:56:42.763Z"
   }
 ]
