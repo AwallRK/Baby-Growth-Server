@@ -49,6 +49,7 @@ class Controller {
       const access_token = signToken(payload);
       res.status(200).json({ access_token, role: foundUser.role });
     } catch (err) {
+      console.log(err);
       if (err.name == "PasswordRequired") {
         res.status(400).json({ message: "Password is required" });
       } else if (err.name == "EmailRequired") {
