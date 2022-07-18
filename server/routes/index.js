@@ -3,10 +3,13 @@ const UserController = require("../controllers/usercontroller");
 const authentication = require("../middlewares/authentication");
 const authorizationAdmin = require("../middlewares/authorizationAdmin");
 const authorizationSuperAdmin = require("../middlewares/authorizationSuperAdmin");
+const motherRouter = require("./routerMother");
 
 const router = require("express").Router();
 
 router.post("/login", Controller.loginUser);
+
+router.use("/mother", motherRouter);
 
 router.use(authentication);
 //
