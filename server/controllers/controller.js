@@ -164,7 +164,8 @@ class Controller {
 
       const foundUser = await User.findOne({
         where: { noRT },
-        include: MotherProfile,
+        attributes: { exclude: ["password"] },
+        include: { model: MotherProfile, include: Pregnancy },
       });
 
       let data = [];
