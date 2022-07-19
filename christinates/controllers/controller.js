@@ -1,5 +1,8 @@
+const { babiesWeightConverter } = require("../helpers/babyWeight");
 const { comparePassword, hashPassword } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
+const { selisihCalculator } = require("../helpers/selisihCalculator");
+const { calculateStatistics } = require("../helpers/statisticCalculator");
 const {
   User,
   MotherProfile,
@@ -44,7 +47,7 @@ class Controller {
       console.log(payload);
 
       const access_token = signToken(payload);
-      res.status(200).json({ access_token });
+      res.status(200).json({ access_token, role: foundUser.role });
     } catch (err) {
       if (err.name == "PasswordRequired") {
         res.status(400).json({ message: "Password is required" });
@@ -78,6 +81,7 @@ class Controller {
         noRT: createdUser.noRT,
       });
     } catch (err) {
+      console.log(err);
       if (
         err.name == "SequelizeUniqueConstraintError" ||
         err.name == "SequelizeValidationError"
@@ -92,7 +96,8 @@ class Controller {
   static async registerMotherProfile(req, res) {
     try {
       const UserId = req.user.id;
-      const { name, NIK, password, address } = req.body;
+      const { name, NIK, password, address, latitude, longitude } = req.body;
+      console.log(req.body);
 
       const createdMotherProfile = await MotherProfile.create({
         UserId,
@@ -100,6 +105,8 @@ class Controller {
         NIK,
         password: hashPassword(password),
         address,
+        latitude,
+        longitude,
       });
 
       res.status(201).json({
@@ -109,6 +116,7 @@ class Controller {
         address: createdMotherProfile.address,
       });
     } catch (err) {
+      console.log(err);
       if (
         err.name == "SequelizeUniqueConstraintError" ||
         err.name == "SequelizeValidationError"
@@ -117,6 +125,39 @@ class Controller {
       } else {
         res.status(500).json(err);
       }
+    }
+  }
+
+  static async fetchUserList(req, res) {
+    try {
+      const listUser = await User.findAll({
+        where: {
+          role: "Admin",
+        },
+        attributes: {
+          exclude: ["password"],
+        },
+        order: ["id"],
+      });
+
+      res.status(200).json(listUser);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  static async fetchMotherProfileList(req, res) {
+    try {
+      const listMother = await MotherProfile.findAll({
+        attributes: {
+          exclude: ["password"],
+        },
+        order: ["id"],
+      });
+
+      res.status(200).json(listMother);
+    } catch (err) {
+      res.status(500).json(err);
     }
   }
 
@@ -130,11 +171,49 @@ class Controller {
         attributes: {
           exclude: ["password"],
         },
+        // include: [
+        //   {
+        //     model: Pregnancy,
+        //     include: [PregnancyData, BabyData],
+        //   },
+        // ],
+
+        include: [
+          {
+            model: Pregnancy,
+          },
+        ],
       };
 
       options.where = { UserId: UserId };
       const motherList = await MotherProfile.findAll(options);
-      console.log(motherList);
+      // console.log(motherList);
+      res.status(200).json(motherList);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  static async fetchOneMotherProfile(req, res) {
+    try {
+      // const UserId = req.query.UserId
+      const UserId = req.user.id;
+      const MotherId = req.params.id;
+      let options = {
+        order: ["id"],
+        attributes: {
+          exclude: ["password"],
+        },
+        include: [
+          {
+            model: Pregnancy,
+            include: [PregnancyData, BabyData],
+          },
+        ],
+      };
+
+      options.where = { UserId: UserId, id: MotherId };
+      const motherList = await MotherProfile.findAll(options);
       res.status(200).json(motherList);
     } catch (err) {
       res.status(500).json(err);
@@ -150,6 +229,31 @@ class Controller {
         sudahLahir,
       });
       res.status(200).json(createdPregnancy);
+    } catch (err) {
+      if (
+        err.name == "SequelizeUniqueConstraintError" ||
+        err.name == "SequelizeValidationError"
+      ) {
+        res.status(400).json({ message: err.errors[0].message });
+      } else {
+        res.status(500).json(err);
+      }
+    }
+  }
+
+  static async createPregnancyData(req, res) {
+    try {
+      const { PregnancyId, beratAwal, beratBulanan } = req.body;
+      const tanggalDicatat = new Date();
+
+      const createdPregnancyData = await PregnancyData.create({
+        PregnancyId,
+        beratAwal,
+        beratBulanan,
+        tanggalDicatat,
+      });
+
+      res.status(200).json(createdPregnancyData);
     } catch (err) {
       if (
         err.name == "SequelizeUniqueConstraintError" ||
@@ -280,27 +384,221 @@ class Controller {
         where: {
           id,
         },
-        include: [PregnancyData, { model: MotherProfile, include: User }],
-        // MotherProfile,
+        include: [
+          PregnancyData,
+          BabyData,
+          {
+            model: MotherProfile,
+            attributes: { exclude: ["password"] },
+            include: { model: User, attributes: { exclude: ["password"] } },
+          },
+        ],
+      });
+      const [selisihBulananHamil, selisihBulananBayi] = selisihCalculator(data);
+      res.status(200).json({
+        selisihBulananHamil,
+        selisihBulananBayi,
+        data,
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  static async babyWeightCategories(req, res, next) {
+    try {
+      let motherCount = 0;
+      const babiesWeight = [];
+      const categoriesPerRT = [];
+      let options = {
+        order: ["id"],
+        attributes: {
+          exclude: ["password"],
+        },
+        include: [
+          {
+            model: MotherProfile,
+            include: { model: Pregnancy, include: [PregnancyData, BabyData] },
+          },
+        ],
+      };
+      const users = await User.findAll(options);
+      users.forEach((user) => {
+        if (user.noRT === 99) {
+          return;
+        }
+        const motherList = user.MotherProfiles;
+        const babiesDalamSatuRTWeight = [];
+        motherList.forEach((mother) => {
+          mother.Pregnancies.forEach((pregnancy) => {
+            if (pregnancy.sudahLahir) {
+              const [_, selisihBulananBayi] = selisihCalculator(pregnancy);
+              babiesWeight.push(selisihBulananBayi);
+              babiesDalamSatuRTWeight.push(selisihBulananBayi);
+            } else {
+              motherCount++;
+            }
+          });
+        });
+        const categoriesDalamRT = babiesWeightConverter(
+          babiesDalamSatuRTWeight
+        );
+        categoriesPerRT.push({
+          noRT: user.noRT,
+          categories: categoriesDalamRT,
+        });
       });
 
-      //   console.log(data.PregnancyDatum.beratBulanan);
-      const beratBulananArr = data.PregnancyDatum.beratBulanan.split(",");
-      //   console.log(beratBulananArr);
-      const tempSelisihArr = [];
-
-      tempSelisihArr.push(beratBulananArr[0] - data.PregnancyDatum.beratAwal);
-
-      for (let i = 0; i < beratBulananArr.length - 1; i++) {
-        tempSelisihArr.push(beratBulananArr[i + 1] - beratBulananArr[i]);
-      }
-
-      // console.log(tempSelisihArr);
-      //   data.PregnancyDatum.selisihBulanan = tempSelisihArr;
-      //   console.log(data);
-
-      res.status(200).json({ data, selisihBulanan: tempSelisihArr });
+      const statistic = calculateStatistics(categoriesPerRT);
+      const categories = babiesWeightConverter(babiesWeight);
+      res.status(200).json({
+        categories,
+        ibuBelumMelahirkan: motherCount,
+        statistic,
+      });
     } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  static async babyWeightCategoriesByRT(req, res, next) {
+    try {
+      let noRT = req.params.noRT;
+      let motherCount = 0;
+      let options = {
+        order: ["id"],
+        attributes: {
+          exclude: ["password"],
+        },
+        where: { noRT },
+        include: [
+          {
+            model: MotherProfile,
+            include: { model: Pregnancy, include: [PregnancyData, BabyData] },
+          },
+        ],
+      };
+      const user = await User.findOne(options);
+      const motherList = user.MotherProfiles;
+      const babiesWeight = [];
+      motherList.forEach((mother) => {
+        mother.Pregnancies.forEach((pregnancy) => {
+          if (pregnancy.sudahLahir) {
+            const [_, selisihBulananBayi] = selisihCalculator(pregnancy);
+            babiesWeight.push(selisihBulananBayi);
+          } else {
+            motherCount++;
+          }
+        });
+      });
+      const categories = babiesWeightConverter(babiesWeight);
+      res.status(200).json({ categories, ibuBelumMelahirkan: motherCount });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  static async getAllRTStatus(req, res, next) {
+    try {
+      const babiesWeight = [];
+      const categoriesPerRT = [];
+      let options = {
+        order: ["id"],
+        attributes: {
+          exclude: ["password"],
+        },
+        include: [
+          {
+            model: MotherProfile,
+            include: { model: Pregnancy, include: [PregnancyData, BabyData] },
+          },
+        ],
+      };
+      const users = await User.findAll(options);
+      users.forEach((user) => {
+        if (user.noRT === 99) {
+          return;
+        }
+        const motherList = user.MotherProfiles;
+        const babiesDalamSatuRTWeight = [];
+        motherList.forEach((mother) => {
+          mother.Pregnancies.forEach((pregnancy) => {
+            if (pregnancy.sudahLahir) {
+              const [_, selisihBulananBayi] = selisihCalculator(pregnancy);
+              babiesWeight.push(selisihBulananBayi);
+              babiesDalamSatuRTWeight.push(selisihBulananBayi);
+            }
+          });
+        });
+        const categoriesDalamRT = babiesWeightConverter(
+          babiesDalamSatuRTWeight
+        );
+        categoriesPerRT.push({
+          noRT: user.noRT,
+          categories: categoriesDalamRT,
+        });
+      });
+
+      const RTList = [];
+      categoriesPerRT.forEach((rt) => {
+        if (rt.categories.kurang > 0 && rt.categories.kurang <= 5) {
+          rt.status = "Warning";
+          RTList.push({ noRT: rt.noRT, status: rt.status });
+        } else if (rt.categories.kurang > 5) {
+          rt.status = "Critical";
+          RTList.push({ noRT: rt.noRT, status: rt.status });
+        }
+      });
+
+      res.status(200).json(RTList);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+  static async fetchMotherProfileByNIK(req, res) {
+    // res.send("masok");
+    try {
+      const { nik } = req.body;
+      if (!nik) {
+        throw new Error({ message: "NIK is required!" });
+      }
+      const data = await MotherProfile.findOne({
+        where: {
+          NIK: nik,
+        },
+        include: [Pregnancy],
+      });
+
+      res.status(200).json(data);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  }
+
+  static async fetchMotherPregnancyByNIK(req, res) {
+    // res.send("masok");
+    try {
+      const { nik } = req.body;
+      if (!nik) {
+        throw new Error({ message: "You must include a NIK" });
+      }
+      const data = await MotherProfile.findOne({
+        where: {
+          NIK: nik,
+        },
+      });
+
+      const pregnancy = await Pregnancy.findAll({
+        where: {
+          MotherProfileId: data.id,
+        },
+        include: [PregnancyData],
+      });
+
+      res.status(200).json(pregnancy);
+    } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   }

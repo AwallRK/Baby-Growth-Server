@@ -47,14 +47,4 @@ router.post("/registerBabyData", Controller.createBabyData); // create pregnancy
 router.put("/babyData/:babyDataId", Controller.updateBabyData); // update pregnancydata
 // router.post("/inputBabyData", Controller.inputBabyData);
 
-router.get("/category", UserController.fetchCategory);
-router.post("/category", UserController.addCategory);
-router.get("/category/:id/article", UserController.fetchArticleBasedOnCategory);
-router.post("/category/:id/article", UserController.addArticlesBasedOnCategory);
-// router.get("/article/:id", UserController.fetchArticle);
-router.post("/nik", Controller.fetchMotherProfileByNIK);
-router.post("/pregnancy", Controller.fetchMotherPregnancyByNIK);
-
-module.exports = router;
-
 module.exports = router;
