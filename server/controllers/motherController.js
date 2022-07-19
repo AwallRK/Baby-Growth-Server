@@ -23,7 +23,7 @@ class MotherController {
   static async login(req, res) {
     try {
       const { NIK, password } = req.body;
-
+      console.log(NIK);
       if (!NIK) {
         throw { name: "NIKRequired" };
       }

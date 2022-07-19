@@ -12,7 +12,7 @@ const userNotExist = {
 };
 
 const validToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiTklLIjoiMjIyNzIzNDQwMDAyIiwiaWF0IjoxNjU4MjE0NDUxfQ.KbaKj0_NMULoYBHqB0x9yA1BV6yyWLYhZiv-MQ_41Ec";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiTklLIjoiMjIyMjIzMjQ0MjkxMTEiLCJpYXQiOjE2NTgyMjYyNTN9.iB-Bwycc-Ek4quKKgZMJ7OrsGa-t4NNyZPrdbOz_Vfw";
 
 describe("Mother Routes Test", () => {
   test("200 Login - should return access token", (done) => {
