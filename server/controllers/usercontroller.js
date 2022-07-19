@@ -56,6 +56,21 @@ class UserController {
       res.status(500).json(err);
     }
   }
+
+  static async fetchArticleBasedOnCategoryMonth(req, res) {
+    // res.send("masok");
+    try {
+      const { id } = req.params;
+      const category = await Category.findOne({where:{
+        name:"Bulan "+id
+      },include:[Article]});
+
+      res.status(200).json(category);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
   static async addArticlesBasedOnCategory(req, res) {
     try {
       const { id } = req.params;

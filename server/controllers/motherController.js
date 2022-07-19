@@ -22,9 +22,9 @@ class MotherController {
 
   static async login(req, res) {
     try {
-      const { NIK, password } = req.body;
-
-      if (!NIK) {
+      const { nik, password } = req.body;
+      console.log(req.body);
+      if (!nik) {
         throw { name: "NIKRequired" };
       }
       if (!password) {
@@ -32,7 +32,7 @@ class MotherController {
       }
 
       const foundMotherProfile = await MotherProfile.findOne({
-        where: { NIK },
+        where: { NIK:nik },
       });
 
       if (!foundMotherProfile) {
@@ -47,7 +47,7 @@ class MotherController {
 
       const payload = {
         id: foundMotherProfile.id,
-        NIK: foundMotherProfile.NIK,
+        NIK: foundMotherProfile.NIK
       };
       console.log(payload);
 
@@ -57,6 +57,7 @@ class MotherController {
         access_token,
         NIK: foundMotherProfile.NIK,
         name: foundMotherProfile.name,
+        address: foundMotherProfile.address
       });
     } catch (err) {
       if (err.name == "PasswordRequired") {
@@ -68,6 +69,52 @@ class MotherController {
       } else {
         res.status(500).json(err);
       }
+    }
+  }
+  static async fetchMotherProfileByNIK(req, res) {
+    // res.send("masok");
+    try {
+      const { NIK } = req.user;
+      if (!NIK) {
+        throw new Error({ message: "NIK is required!" });
+      }
+      const data = await MotherProfile.findOne({
+        where: {
+          NIK,
+        },
+      });
+
+      res.status(200).json(data);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  }
+
+  static async fetchMotherPregnancyByNIK(req, res) {
+    // res.send("masok");
+    try {
+      const { NIK } = req.user;
+      if (!NIK) {
+        throw new Error({ message: "You must include a NIK" });
+      }
+      const data = await MotherProfile.findOne({
+        where: {
+          NIK,
+        },
+      });
+
+      const pregnancy = await Pregnancy.findAll({
+        where: {
+          MotherProfileId: data.id,
+        },
+        include: [PregnancyData,BabyData],
+      });
+
+      res.status(200).json(pregnancy);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
     }
   }
 }
