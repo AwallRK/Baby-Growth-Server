@@ -9,7 +9,11 @@ motherRouter.post("/login", MotherController.login);
 motherRouter.get("/category", UserController.fetchCategory);
 motherRouter.post("/category", UserController.addCategory);
 motherRouter.get("/category/:id/article", UserController.fetchArticleBasedOnCategory);
+
 motherRouter.post("/category/:id/article", UserController.addArticlesBasedOnCategory);
+
+motherRouter.get("/categoryMonth/:id", UserController.fetchArticleBasedOnCategoryMonth);
+motherRouter.post("/categoryMonth/:id", UserController.addArticleBasedOnCategoryMonth);
 
 motherRouter.use(motherAuthentication);
 

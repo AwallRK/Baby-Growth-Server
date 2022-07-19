@@ -62,11 +62,27 @@ class UserController {
     try {
       const { id } = req.params;
       const category = await Category.findOne({where:{
-        name:"Bulan "+id
+        names:"Bulan "+id
       },include:[Article]});
 
       res.status(200).json(category);
     } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  static async addArticleBasedOnCategoryMonth(req, res) {
+    // res.send("masok");
+    try {
+      const { id } = req.params;
+      const { name, text, imageUrl } = req.body;
+      const category = await Category.findOne({where:{
+        names:"Bulan "+id
+      }});
+      const article = await Article.create({names:name,text,imageUrl,CategoryId:category.id,UserId:1})
+      res.status(201).json(article);
+    } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   }
