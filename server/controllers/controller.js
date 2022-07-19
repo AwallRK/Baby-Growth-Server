@@ -484,7 +484,7 @@ class Controller {
       if (err.name == "NotFound") {
         res.status(404).json({ message: "Baby data not found" });
       } else {
-        res.status(500).json(err);
+        res.status(500).json(err); 
       }
     }
   }
