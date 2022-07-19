@@ -78,18 +78,30 @@ class UserController {
     // res.send("masok");
     try {
       const { id } = req.params;
+      if(!id){
+        throw {name :"Bad Request"}
+      }
       const { name, text, imageUrl } = req.body;
+      if(!name){
+        throw {name: "name is required"}
+      }
+      if(!text){
+        throw {name: "name is required"}
+      }
+      if(!imageUrl){
+        throw {name: "name is required"}
+      }
       const category = await Category.findOne({
         where: {
           names: "Bulan " + id,
         },
       });
       const article = await Article.create({
-        names: name,
+        name: name,
         text,
         imageUrl,
         CategoryId: category.id,
-        UserId: 1,
+        IdUser: 1,
       });
       res.status(201).json(article);
     } catch (err) {
@@ -101,7 +113,19 @@ class UserController {
   static async addArticlesBasedOnCategory(req, res) {
     try {
       const { id } = req.params;
+      if(!id){
+        throw {name :"Bad Request"}
+      }
       const { name, text, imageUrl } = req.body;
+      if(!name){
+        throw {name: "name is required"}
+      }
+      if(!text){
+        throw {name: "name is required"}
+      }
+      if(!imageUrl){
+        throw {name: "name is required"}
+      }
       const data = await Article.create({
         name,
         text,
@@ -110,7 +134,7 @@ class UserController {
         IdUser: 1,
       });
 
-      res.status(200).json(data);
+      res.status(201).json(data);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -120,6 +144,12 @@ class UserController {
 
     try {
       let { name, imageUrl } = req.body;
+      if(!name){
+        throw {name: "name is Required"}
+      }
+      if(!imageUrl){
+        throw {name: "imageUrl is Required"}
+      }
 
       const category = await Category.create({ names: name, imageUrl });
       res.status(201).json(category);

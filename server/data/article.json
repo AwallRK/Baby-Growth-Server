@@ -1,0 +1,6 @@
+[
+    { "name": "testsatu", "text": "lorem ipsum dom", "imageUrl": "https://picsum.photos/200", "CategoryId": 1, "IdUser": 1 },
+    { "name": "tesdua", "text": "lorem ipsum dom", "imageUrl": "https://picsum.photos/200" , "CategoryId": 1, "IdUser": 1},
+    { "name": "testiga", "text": "lorem ipsum dom", "imageUrl": "https://picsum.photos/200" , "CategoryId": 1, "IdUser": 1}
+  ]
+  

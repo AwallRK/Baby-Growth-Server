@@ -12,6 +12,8 @@ const {
   Pregnancy,
   PregnancyData,
   BabyData,
+  Category,
+  Article,
 } = require("../models");
 const { hashPassword } = require("../helpers/bcrypt");
 
@@ -66,6 +68,8 @@ beforeAll(async () => {
     await Pregnancy.bulkCreate(pregnancies);
     await PregnancyData.bulkCreate(pregnancyData);
     await BabyData.bulkCreate(babyData);
+    await Category.bulkCreate(require("../data/category.json"));
+    await Article.bulkCreate(require("../data/article.json"))
 
     access_token = signToken({
       id: 99,
@@ -84,10 +88,26 @@ const userNotExist = {
   NIK: "2131",
   password: "12345",
 };
-
+const newCategory = {
+  name: "test4",
+  imageUrl: "https://picsum.photos/200",
+};
+const errCategory = {
+  imageUrl: "https://picsum.photos/200",
+};
+const newArticle = {
+  name: "test2",
+  text: "impsum lorem",
+  imageUrl: "https://picsum.photos/200"
+}
+const errArticle = {
+  text: "impsum lorem",
+  imageUrl: "https://picsum.photos/200"
+}
 const validToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiTklLIjoiMjIyMjIzMjQ0MjkxMTEiLCJpYXQiOjE2NTgyMjYyNTN9.iB-Bwycc-Ek4quKKgZMJ7OrsGa-t4NNyZPrdbOz_Vfw";
 // post /mother/login (done)
+const tokenMother = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiTklLIjoiMjIyMjI0NDQwMDAwIiwiaWF0IjoxNjU4MjU4MTYyfQ.XmMHG2vjwzl2dy8mTvfaWBobTFjyDIIAs1wmI78ln6U"
 
 describe("Mother Routes Test", () => {
   test("200 Login - should return access token", (done) => {
@@ -128,7 +148,6 @@ describe("Mother Routes Test", () => {
       .end((err, res) => {
         if (err) return done(err);
         const { body, status } = res;
-
         expect(status).toBe(400);
         expect(body).toHaveProperty("message", expect.any(String));
         return done();
@@ -153,12 +172,151 @@ describe("Mother Routes Test", () => {
 });
 
 // get /mother/category
+describe("Get Category test", () => {
+  test("Get All Category", (done) => {
+    request(app)
+      .get("/mother/category")
+      .end(function (err, res) {
+        expect(res.status).toBe(200);
+        expect(res.body[0]).toHaveProperty("names");
+        expect(res.body[0]).toHaveProperty("imageUrl");
+        done();
+      });
+  });
+});
+
 // post /mother/category
+describe("Post Category", () => {
+  test("201 Success Create new Category", (done) => {
+    request(app)
+      .post("/mother/category")
+      .send(newCategory)
+      .end((err, res) => {
+        if (err) return done(err);
+        const { body, status } = res;
+        expect(status).toBe(201);
+        expect(res.body).toHaveProperty("names");
+        expect(res.body).toHaveProperty("imageUrl");
+        done();
+      });
+  
+  });
+  test("500 error when Create new Category", (done) => {
+    request(app)
+      .post("/mother/category")
+      .send(errCategory)
+      .end((err, res) => {
+        if (err) return done(err);
+        const { body, status } = res;
+        expect(status).toBe(500);
+        expect(res.body).toHaveProperty("name");
+        done();
+      });
+  });
+});
 // get /mother/category/:id/article
+describe("Get Article test", () => {
+  test("Get All Article", (done) => {
+    request(app)
+      .get("/mother/category/1/article")
+      .end(function (err, res) {
+        expect(res.status).toBe(200);
+        expect(res.body[0]).toHaveProperty("name");
+        expect(res.body[0]).toHaveProperty("imageUrl");
+        done();
+      });
+  });
+});
 // post /mother/category/:id/article
+describe("Post Article", () => {
+  test("201 Success Create new Article", (done) => {
+    request(app)
+      .post("/mother/category/1/article")
+      .send(newArticle)
+      .end((err, res) => {
+        if (err) return done(err);
+        const { body, status } = res;
+        expect(status).toBe(201);
+        expect(res.body).toHaveProperty("name");
+        expect(res.body).toHaveProperty("imageUrl");
+        done();
+      });
+  
+  });
+  test("500 error when Create new Article", (done) => {
+    request(app)
+      .post("/mother/category/1/article")
+      .send(errArticle)
+      .end((err, res) => {
+        if (err) return done(err);
+        const { body, status } = res;
+        expect(status).toBe(500);
+        expect(res.body).toHaveProperty("name");
+        done();
+      });
+  });
+});
 // get /mother/categoryMonth/:id
+describe("Get Article test", () => {
+  test("Get All Article with mounth pregnancy", (done) => {
+    request(app)
+      .get("/mother/categoryMonth/1")
+      .end(function (err, res) {
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveProperty("names");
+        expect(res.body).toHaveProperty("imageUrl");
+        expect(res.body).toHaveProperty("Articles");
+        done();
+      });
+  });
+});
 // post /mother/categoryMonth/:id
+describe("Post Article", () => {
+  test("201 Success Create new article with mounth pregnancy", (done) => {
+    request(app)
+      .post("/mother/categoryMonth/1")
+      .send(newArticle)
+      .end((err, res) => {
+        if (err) return done(err);
+        const { body, status } = res;
+        expect(status).toBe(201);
+        expect(res.body).toHaveProperty("name");
+        expect(res.body).toHaveProperty("imageUrl");
+        done();
+      });
+  
+  });
+  test("500 error when Create new article with mounth pregnancy", (done) => {
+    request(app)
+      .post("/mother/categoryMonth/1")
+      .send(errArticle)
+      .end((err, res) => {
+        if (err) return done(err);
+        const { body, status } = res;
+        expect(status).toBe(500);
+        expect(res.body).toHaveProperty("name");
+        done();
+      });
+  });
+});
 // get /mother/pregnancy
+describe("Get Mother Pregnancy test", () => {
+  test("Get detail mother pregnancy", (done) => {
+    request(app)
+      .get("/mother/pregnancy")
+      .send({nik: "222224440000"})
+      .set("access_token", tokenMother)
+      .end(function (err, res) {
+        expect(res.status).toBe(200);
+        console.log(res.body)
+        expect(res.body[0]).toHaveProperty("name");
+        expect(res.body[0]).toHaveProperty("sudahLahir");
+        expect(res.body[0]).toHaveProperty("PregnancyDatum");
+        done();
+      });
+  });
+});
+
 
 afterAll(async () => {
   await User.destroy({
@@ -186,6 +344,18 @@ afterAll(async () => {
     restartIdentity: true,
   });
   await BabyData.destroy({
+    where: {},
+    cascade: true,
+    truncate: true,
+    restartIdentity: true,
+  });
+  await Category.destroy({
+    where: {},
+    cascade: true,
+    truncate: true,
+    restartIdentity: true,
+  });
+  await Article.destroy({
     where: {},
     cascade: true,
     truncate: true,
