@@ -32,8 +32,20 @@ router.get("/RTStatus", Controller.getAllRTStatus); // untuk pie chart
 //
 
 router.post("/registerPregnancy", Controller.createPregnancy);
-router.post("/registerPregnancyData", Controller.createPregnancyData);
-router.post("/inputBabyData", Controller.inputBabyData);
+
+// form pregnancy data
+router.get(
+  "/pregnancyData/:pregnancyDataId",
+  Controller.fetchPregnancyDataDetail
+);
+router.post("/registerPregnancyData", Controller.createPregnancyData); // create pregnancydata
+router.put("/pregnancyData/:pregnancyDataId", Controller.updatePregnancyData); // update pregnancydata
+
+// form baby data
+router.get("/babyData/:babyDataId", Controller.fetchBabyDataDetail);
+router.post("/registerBabyData", Controller.createBabyData); // create pregnancydata
+router.put("/babyData/:babyDataId", Controller.updateBabyData); // update pregnancydata
+// router.post("/inputBabyData", Controller.inputBabyData);
 
 router.get("/category", UserController.fetchCategory);
 router.post("/category", UserController.addCategory);
