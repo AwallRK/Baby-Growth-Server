@@ -2,7 +2,7 @@
   "name": "raymondtes",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "www/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,6 +19,8 @@
     "sequelize": "^6.21.3"
   },
   "devDependencies": {
-    "sequelize-cli": "^6.4.1"
+    "jest": "^28.1.3",
+    "sequelize-cli": "^6.4.1",
+    "supertest": "^6.2.4"
   }
 }

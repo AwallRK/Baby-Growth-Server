@@ -49,6 +49,7 @@ class Controller {
       const access_token = signToken(payload);
       res.status(200).json({ access_token, role: foundUser.role });
     } catch (err) {
+      console.log(err);
       if (err.name == "PasswordRequired") {
         res.status(400).json({ message: "Password is required" });
       } else if (err.name == "EmailRequired") {
@@ -81,6 +82,7 @@ class Controller {
         noRT: createdUser.noRT,
       });
     } catch (err) {
+      console.log(err)
       if (
         err.name == "SequelizeUniqueConstraintError" ||
         err.name == "SequelizeValidationError"
@@ -95,14 +97,16 @@ class Controller {
   static async registerMotherProfile(req, res) {
     try {
       const UserId = req.user.id;
-      const { name, NIK, password, address } = req.body;
-
+      const { name, NIK, password, address, latitude, longitude } = req.body;
+      console.log(req.body);
       const createdMotherProfile = await MotherProfile.create({
         UserId,
         name,
         NIK,
         password: hashPassword(password),
         address,
+        latitude,
+        longitude,
       });
 
       res.status(201).json({
@@ -112,6 +116,7 @@ class Controller {
         address: createdMotherProfile.address,
       });
     } catch (err) {
+      console.log(err)
       if (
         err.name == "SequelizeUniqueConstraintError" ||
         err.name == "SequelizeValidationError"
