@@ -49,6 +49,7 @@ module.exports = (sequelize, DataTypes) => {
       noRT: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        // unique: true,
         validate: {
           notEmpty: true,
           notNull: true,

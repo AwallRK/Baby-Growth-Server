@@ -82,7 +82,7 @@ class Controller {
         noRT: createdUser.noRT,
       });
     } catch (err) {
-      console.log(err)
+      console.log(err);
       if (
         err.name == "SequelizeUniqueConstraintError" ||
         err.name == "SequelizeValidationError"
@@ -116,7 +116,7 @@ class Controller {
         address: createdMotherProfile.address,
       });
     } catch (err) {
-      console.log(err)
+      console.log(err);
       if (
         err.name == "SequelizeUniqueConstraintError" ||
         err.name == "SequelizeValidationError"
@@ -188,7 +188,7 @@ class Controller {
     try {
       // const UserId = req.query.UserId
       const UserId = req.user.id;
-
+      console.log(UserId);
       let options = {
         order: ["id"],
         attributes: {
@@ -201,11 +201,11 @@ class Controller {
         //   },
         // ],
 
-        include: [
-          {
-            model: Pregnancy,
-          },
-        ],
+        // include: [
+        //   {
+        //     model: Pregnancy,
+        //   },
+        // ],
       };
 
       options.where = { UserId: UserId };
@@ -264,6 +264,31 @@ class Controller {
     }
   }
 
+  static async fetchPregnancyDataDetail(req, res) {
+    try {
+      // console.log("masok");
+      const { pregnancyDataId } = req.params;
+      // console.log(pregnancyDataId);
+      const foundPregnancyData = await PregnancyData.findOne({
+        where: {
+          id: pregnancyDataId,
+        },
+      });
+      if (!foundPregnancyData) {
+        // console.log("a");
+        throw { name: "NotFound" };
+      }
+
+      res.status(200).json(foundPregnancyData);
+    } catch (err) {
+      if (err.name == "NotFound") {
+        res.status(404).json({ message: "Data not found" });
+      } else {
+        res.status(500).json(err);
+      }
+    }
+  }
+
   static async createPregnancyData(req, res) {
     try {
       const { PregnancyId, beratAwal, beratBulanan } = req.body;
@@ -289,37 +314,139 @@ class Controller {
     }
   }
 
-  static async inputPregnancyData(req, res) {
+  static async updatePregnancyData(req, res) {
+    try {
+      const { pregnancyDataId } = req.params;
+      const {
+        // PregnancyId,
+        beratAwal,
+        beratBulanan,
+      } = req.body;
+
+      const updatedPregnancyData = await PregnancyData.update(
+        {
+          // PregnancyId,
+          beratAwal,
+          beratBulanan,
+        },
+        { where: { id: pregnancyDataId }, returning: true }
+      );
+      if (updatedPregnancyData[0] < 1) {
+        throw { name: "NotFound" };
+      }
+      res.status(200).json({ message: "Pregnancy data edited successfully" });
+    } catch (err) {
+      if (err.name == "NotFound") {
+        res.status(404).json({ message: "Pregnancy data not found" });
+      } else {
+        res.status(500).json(err);
+      }
+    }
+  }
+
+  // static async inputPregnancyData(req, res) {
+  //   try {
+  //     const { PregnancyId, beratAwal, beratBulanan } = req.body;
+  //     const tanggalDicatat = new Date();
+  //     let updatedOrCreatedPregnancyData = {};
+  //     const foundPregnancy = await PregnancyData.findOne({
+  //       where: {
+  //         PregnancyId,
+  //       },
+  //     });
+  //     if (foundPregnancy) {
+  //       const foundId = foundPregnancy.id;
+  //       const updatedData = await PregnancyData.update(
+  //         {
+  //           beratAwal,
+  //           beratBulanan,
+  //           tanggalDicatat,
+  //         },
+  //         { where: { id: foundId }, returning: true }
+  //       );
+  //       updatedOrCreatedPregnancyData = updatedData[1][0];
+  //     } else {
+  //       updatedOrCreatedPregnancyData = await PregnancyData.create({
+  //         PregnancyId,
+  //         beratAwal,
+  //         beratBulanan,
+  //         tanggalDicatat,
+  //       });
+  //     }
+
+  //     res.status(200).json(updatedOrCreatedPregnancyData);
+  //   } catch (err) {
+  //     if (
+  //       err.name == "SequelizeUniqueConstraintError" ||
+  //       err.name == "SequelizeValidationError"
+  //     ) {
+  //       res.status(400).json({ message: err.errors[0].message });
+  //     } else {
+  //       res.status(500).json(err);
+  //     }
+  //   }
+  //   // try {
+  //   //   const { PregnancyId, beratAwal, beratBulanan } = req.body;
+  //   //   const tanggalDicatat = new Date();
+
+  //   //   const createdPregnancyData = await PregnancyData.create({
+  //   //     PregnancyId,
+  //   //     beratAwal,
+  //   //     beratBulanan,
+  //   //     tanggalDicatat,
+  //   //   });
+
+  //   //   res.status(200).json(createdPregnancyData);
+  //   // } catch (err) {
+  //   //   if (
+  //   //     err.name == "SequelizeUniqueConstraintError" ||
+  //   //     err.name == "SequelizeValidationError"
+  //   //   ) {
+  //   //     res.status(400).json({ message: err.errors[0].message });
+  //   //   } else {
+  //   //     res.status(500).json(err);
+  //   //   }
+  //   // }
+  // }
+
+  static async fetchBabyDataDetail(req, res) {
+    try {
+      // console.log("masok");
+      const { babyDataId } = req.params;
+      // console.log(pregnancyDataId);
+      const foundPregnancyData = await BabyData.findOne({
+        where: {
+          id: babyDataId,
+        },
+      });
+      if (!foundPregnancyData) {
+        // console.log("a");
+        throw { name: "NotFound" };
+      }
+
+      res.status(200).json(foundPregnancyData);
+    } catch (err) {
+      if (err.name == "NotFound") {
+        res.status(404).json({ message: "Data not found" });
+      } else {
+        res.status(500).json(err);
+      }
+    }
+  }
+
+  static async createBabyData(req, res) {
     try {
       const { PregnancyId, beratAwal, beratBulanan } = req.body;
       const tanggalDicatat = new Date();
-      let updatedOrCreatedPregnancyData = {};
-      const foundPregnancy = await PregnancyData.findOne({
-        where: {
-          PregnancyId,
-        },
-      });
-      if (foundPregnancy) {
-        const foundId = foundPregnancy.id;
-        const updatedData = await PregnancyData.update(
-          {
-            beratAwal,
-            beratBulanan,
-            tanggalDicatat,
-          },
-          { where: { id: foundId }, returning: true }
-        );
-        updatedOrCreatedPregnancyData = updatedData[1][0];
-      } else {
-        updatedOrCreatedPregnancyData = await PregnancyData.create({
-          PregnancyId,
-          beratAwal,
-          beratBulanan,
-          tanggalDicatat,
-        });
-      }
 
-      res.status(200).json(updatedOrCreatedPregnancyData);
+      const createdBabyData = await BabyData.create({
+        PregnancyId,
+        beratAwal,
+        beratBulanan,
+        tanggalDicatat,
+      });
+
+      res.status(200).json(createdBabyData);
     } catch (err) {
       if (
         err.name == "SequelizeUniqueConstraintError" ||
@@ -330,72 +457,80 @@ class Controller {
         res.status(500).json(err);
       }
     }
-    // try {
-    //   const { PregnancyId, beratAwal, beratBulanan } = req.body;
-    //   const tanggalDicatat = new Date();
-
-    //   const createdPregnancyData = await PregnancyData.create({
-    //     PregnancyId,
-    //     beratAwal,
-    //     beratBulanan,
-    //     tanggalDicatat,
-    //   });
-
-    //   res.status(200).json(createdPregnancyData);
-    // } catch (err) {
-    //   if (
-    //     err.name == "SequelizeUniqueConstraintError" ||
-    //     err.name == "SequelizeValidationError"
-    //   ) {
-    //     res.status(400).json({ message: err.errors[0].message });
-    //   } else {
-    //     res.status(500).json(err);
-    //   }
-    // }
   }
 
-  static async inputBabyData(req, res) {
+  static async updateBabyData(req, res) {
     try {
-      const { PregnancyId, beratAwal, beratBulanan } = req.body;
-      const tanggalDicatat = new Date();
-      let updatedOrCreatedBabyData = {};
-      const foundBaby = await BabyData.findOne({
-        where: {
-          PregnancyId,
-        },
-      });
-      if (foundBaby) {
-        const foundId = foundBaby.id;
-        const updatedData = await BabyData.update(
-          {
-            beratAwal,
-            beratBulanan,
-            tanggalDicatat,
-          },
-          { where: { id: foundId }, returning: true }
-        );
-        updatedOrCreatedBabyData = updatedData[1][0];
-      } else {
-        updatedOrCreatedBabyData = await BabyData.create({
-          PregnancyId,
+      const { babyDataId } = req.params;
+      const {
+        // PregnancyId,
+        beratAwal,
+        beratBulanan,
+      } = req.body;
+
+      const updatedBabyData = await BabyData.update(
+        {
+          //  PregnancyId,
           beratAwal,
           beratBulanan,
-          tanggalDicatat,
-        });
+        },
+        { where: { id: babyDataId }, returning: true }
+      );
+      if (updatedBabyData[0] < 1) {
+        throw { name: "NotFound" };
       }
-
-      res.status(200).json(updatedOrCreatedBabyData);
+      res.status(200).json({ message: "Baby data edited successfully" });
     } catch (err) {
-      if (
-        err.name == "SequelizeUniqueConstraintError" ||
-        err.name == "SequelizeValidationError"
-      ) {
-        res.status(400).json({ message: err.errors[0].message });
+      if (err.name == "NotFound") {
+        res.status(404).json({ message: "Baby data not found" });
       } else {
         res.status(500).json(err);
       }
     }
   }
+
+  // static async inputBabyData(req, res) {
+  //   try {
+  //     const { PregnancyId, beratAwal, beratBulanan } = req.body;
+  //     const tanggalDicatat = new Date();
+  //     let updatedOrCreatedBabyData = {};
+  //     const foundBaby = await BabyData.findOne({
+  //       where: {
+  //         PregnancyId,
+  //       },
+  //     });
+  //     if (foundBaby) {
+  //       const foundId = foundBaby.id;
+  //       const updatedData = await BabyData.update(
+  //         {
+  //           beratAwal,
+  //           beratBulanan,
+  //           tanggalDicatat,
+  //         },
+  //         { where: { id: foundId }, returning: true }
+  //       );
+  //       updatedOrCreatedBabyData = updatedData[1][0];
+  //     } else {
+  //       updatedOrCreatedBabyData = await BabyData.create({
+  //         PregnancyId,
+  //         beratAwal,
+  //         beratBulanan,
+  //         tanggalDicatat,
+  //       });
+  //     }
+
+  //     res.status(200).json(updatedOrCreatedBabyData);
+  //   } catch (err) {
+  //     if (
+  //       err.name == "SequelizeUniqueConstraintError" ||
+  //       err.name == "SequelizeValidationError"
+  //     ) {
+  //       res.status(400).json({ message: err.errors[0].message });
+  //     } else {
+  //       res.status(500).json(err);
+  //     }
+  //   }
+  // }
   static async fetchPregnancyData(req, res) {
     // res.send("masok");
     try {
