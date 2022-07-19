@@ -263,7 +263,7 @@ class Controller {
         name,
         sudahLahir,
       });
-      res.status(200).json(createdPregnancy);
+      res.status(201).json(createdPregnancy);
     } catch (err) {
       if (
         err.name == "SequelizeUniqueConstraintError" ||
@@ -313,7 +313,7 @@ class Controller {
         tanggalDicatat,
       });
 
-      res.status(200).json(createdPregnancyData);
+      res.status(201).json(createdPregnancyData);
     } catch (err) {
       if (
         err.name == "SequelizeUniqueConstraintError" ||
@@ -458,7 +458,7 @@ class Controller {
         tanggalDicatat,
       });
 
-      res.status(200).json(createdBabyData);
+      res.status(201).json(createdBabyData);
     } catch (err) {
       if (
         err.name == "SequelizeUniqueConstraintError" ||

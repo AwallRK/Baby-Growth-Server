@@ -62,22 +62,19 @@ beforeAll(async () => {
       restartIdentity: true,
     });
 
-    console.log(mothers);
     await User.bulkCreate(users);
     await MotherProfile.bulkCreate(mothers);
     await Pregnancy.bulkCreate(pregnancies);
     await PregnancyData.bulkCreate(pregnancyData);
     await BabyData.bulkCreate(babyData);
     await Category.bulkCreate(require("../data/category.json"));
-    await Article.bulkCreate(require("../data/article.json"))
+    await Article.bulkCreate(require("../data/article.json"));
 
     access_token = signToken({
       id: 99,
       role: "SuperAdmin",
     });
-  } catch (err) {
-    console.log(err, `before all error!`);
-  }
+  } catch (err) {}
 });
 
 const user1 = {
@@ -98,16 +95,17 @@ const errCategory = {
 const newArticle = {
   name: "test2",
   text: "impsum lorem",
-  imageUrl: "https://picsum.photos/200"
-}
+  imageUrl: "https://picsum.photos/200",
+};
 const errArticle = {
   text: "impsum lorem",
-  imageUrl: "https://picsum.photos/200"
-}
+  imageUrl: "https://picsum.photos/200",
+};
 const validToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiTklLIjoiMjIyMjIzMjQ0MjkxMTEiLCJpYXQiOjE2NTgyMjYyNTN9.iB-Bwycc-Ek4quKKgZMJ7OrsGa-t4NNyZPrdbOz_Vfw";
 // post /mother/login (done)
-const tokenMother = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiTklLIjoiMjIyMjI0NDQwMDAwIiwiaWF0IjoxNjU4MjU4MTYyfQ.XmMHG2vjwzl2dy8mTvfaWBobTFjyDIIAs1wmI78ln6U"
+const tokenMother =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiTklLIjoiMjIyMjI0NDQwMDAwIiwiaWF0IjoxNjU4MjU4MTYyfQ.XmMHG2vjwzl2dy8mTvfaWBobTFjyDIIAs1wmI78ln6U";
 
 describe("Mother Routes Test", () => {
   test("200 Login - should return access token", (done) => {
@@ -199,7 +197,6 @@ describe("Post Category", () => {
         expect(res.body).toHaveProperty("imageUrl");
         done();
       });
-  
   });
   test("500 error when Create new Category", (done) => {
     request(app)
@@ -241,7 +238,6 @@ describe("Post Article", () => {
         expect(res.body).toHaveProperty("imageUrl");
         done();
       });
-  
   });
   test("500 error when Create new Article", (done) => {
     request(app)
@@ -284,7 +280,6 @@ describe("Post Article", () => {
         expect(res.body).toHaveProperty("imageUrl");
         done();
       });
-  
   });
   test("500 error when Create new article with mounth pregnancy", (done) => {
     request(app)
@@ -304,11 +299,10 @@ describe("Get Mother Pregnancy test", () => {
   test("Get detail mother pregnancy", (done) => {
     request(app)
       .get("/mother/pregnancy")
-      .send({nik: "222224440000"})
+      .send({ nik: "222224440000" })
       .set("access_token", tokenMother)
       .end(function (err, res) {
         expect(res.status).toBe(200);
-        console.log(res.body)
         expect(res.body[0]).toHaveProperty("name");
         expect(res.body[0]).toHaveProperty("sudahLahir");
         expect(res.body[0]).toHaveProperty("PregnancyDatum");
@@ -316,7 +310,6 @@ describe("Get Mother Pregnancy test", () => {
       });
   });
 });
-
 
 afterAll(async () => {
   await User.destroy({

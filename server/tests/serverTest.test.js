@@ -73,9 +73,7 @@ beforeAll(async () => {
       id: 2,
       role: "admin",
     });
-  } catch (err) {
-    console.log(err, `before all error!`);
-  }
+  } catch (err) {}
 });
 // post /login (done)
 describe("Test the root path", () => {
@@ -170,7 +168,6 @@ describe("Tests the register mother path", () => {
         latitude: 0,
         longitude: 0,
       });
-    console.log(response.body);
     expect(response.statusCode).toBe(201);
     expect(response.body).toEqual({
       id: expect.any(Number),
@@ -273,7 +270,7 @@ describe("Tests list mother profiles per RT path", () => {
     );
   });
   test("Returns unauthorized if access token not provided", async () => {
-    const response = await request(app).get("/listMotherProfile");
+    const response = await request(app).get("/listMotherProfile/1");
     expect(response.statusCode).toBe(401);
     expect(response.body).toEqual({ message: "Invalid token" });
   });
@@ -317,7 +314,7 @@ describe("Tests list mother profiles created by user path", () => {
     );
   });
   test("Returns unauthorized if access token not provided", async () => {
-    const response = await request(app).get("/listMotherProfile");
+    const response = await request(app).get("/listMotherProfile/1");
     expect(response.statusCode).toBe(401);
     expect(response.body).toEqual({ message: "Invalid token" });
   });
@@ -359,7 +356,7 @@ describe("Get a mother profile", () => {
     );
   });
   test("Returns unauthorized if access token not provided", async () => {
-    const response = await request(app).get("/listMotherProfile");
+    const response = await request(app).get("/listMotherProfile/1");
     expect(response.statusCode).toBe(401);
     expect(response.body).toEqual({ message: "Invalid token" });
   });
@@ -387,7 +384,7 @@ describe("Get detail kehamilan berdasarkan id Ibu", () => {
     expect(response.body.selisihBulananHamil).toEqual(expect.any(Array));
   });
   test("Returns unauthorized if access token not provided", async () => {
-    const response = await request(app).get("/listMotherProfile");
+    const response = await request(app).get("/detailpregnancy/1");
     expect(response.statusCode).toBe(401);
     expect(response.body).toEqual({ message: "Invalid token" });
   });
@@ -424,7 +421,7 @@ describe("Get berat bayi dan statistics", () => {
     });
   });
   test("Returns unauthorized if access token not provided", async () => {
-    const response = await request(app).get("/listMotherProfile");
+    const response = await request(app).get("/babyWeigthCategories");
     expect(response.statusCode).toBe(401);
     expect(response.body).toEqual({ message: "Invalid token" });
   });
@@ -447,7 +444,7 @@ describe("Get berat bayi dan statistics untuk satu RT", () => {
     });
   });
   test("Returns unauthorized if access token not provided", async () => {
-    const response = await request(app).get("/listMotherProfile");
+    const response = await request(app).get("/babyWeigthCategories/1");
     expect(response.statusCode).toBe(401);
     expect(response.body).toEqual({ message: "Invalid token" });
   });
@@ -467,18 +464,216 @@ describe("Get status RT yang berresiko", () => {
     );
   });
   test("Returns unauthorized if access token not provided", async () => {
-    const response = await request(app).get("/listMotherProfile");
+    const response = await request(app).get("/RTStatus");
     expect(response.statusCode).toBe(401);
     expect(response.body).toEqual({ message: "Invalid token" });
   });
 });
 // post /registerPregnancy
+describe("Tests the register pregnancy path", () => {
+  test("Returns new pregnancy details and status for created", async () => {
+    const response = await request(app)
+      .post("/registerPregnancy")
+      .set({ access_token })
+      .send({
+        MotherProfileId: 1,
+        name: "Kehamilan Ketiga Bu Sutijah",
+        sudahLahir: true,
+      });
+    expect(response.statusCode).toBe(201);
+    expect(response.body).toEqual({
+      id: expect.any(Number),
+      createdAt: expect.any(String),
+      updatedAt: expect.any(String),
+      MotherProfileId: 1,
+      name: "Kehamilan Ketiga Bu Sutijah",
+      sudahLahir: true,
+    });
+  });
+  test("Register returns appropriate response for an empty request", async () => {
+    const response = await request(app)
+      .post("/registerPregnancy")
+      .set({ access_token });
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toEqual({
+      message: "Pregnancy.MotherProfileId cannot be null",
+    });
+  });
+});
+
 // get /pregnancyData/:pregnancyDataId
+describe("Get detail kehamilan berdasarkan id Kehamilan", () => {
+  test("Returns pregnancy data for pregnancy with ID 1 and status for ok", async () => {
+    const response = await request(app)
+      .get("/pregnancyData/1")
+      .set({ access_token: RT_access_token });
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        id: 1,
+        PregnancyId: expect.any(Number),
+        beratAwal: expect.any(Number),
+        beratBulanan: expect.any(String),
+        tanggalDicatat: expect.any(String),
+        createdAt: expect.any(String),
+        updatedAt: expect.any(String),
+      })
+    );
+  });
+  test("Returns unauthorized if access token not provided", async () => {
+    const response = await request(app).get("/pregnancyData/1");
+    expect(response.statusCode).toBe(401);
+    expect(response.body).toEqual({ message: "Invalid token" });
+  });
+});
+
 // post /registerPregnancyData
+describe("Tests the register pregnancy data path", () => {
+  test("Returns new pregnancy data details and status for created", async () => {
+    const response = await request(app)
+      .post("/registerPregnancyData")
+      .set({ access_token })
+      .send({
+        PregnancyId: 25,
+        beratAwal: 55,
+        beratBulanan: "55.8, 56.2, 57.2",
+        tanggalDicatat: new Date(),
+      });
+    expect(response.statusCode).toBe(201);
+    expect(response.body).toEqual({
+      id: 25,
+      PregnancyId: 25,
+      beratAwal: 55,
+      beratBulanan: "55.8, 56.2, 57.2",
+      tanggalDicatat: expect.any(String),
+      updatedAt: expect.any(String),
+      createdAt: expect.any(String),
+    });
+  });
+  test("Register returns appropriate response for an empty request", async () => {
+    const response = await request(app)
+      .post("/registerPregnancyData")
+      .set({ access_token });
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toEqual({ message: "beratAwal is required" });
+  });
+});
+
 // put /pregnancyData/:pregnancyDataId
+describe("Tests the update pregnancy data path", () => {
+  test("Update data details and sends status ok", async () => {
+    const response = await request(app)
+      .put("/pregnancyData/24")
+      .set({ access_token })
+      .send({
+        beratAwal: 55,
+        beratBulanan: "55.8, 56.2, 57.2, 57.9",
+        tanggalDicatat: new Date(),
+      });
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({
+      message: "Pregnancy data edited successfully",
+    });
+  });
+});
+
 // get /babyData/:babyDataId
+describe("Get detail bayi berdasarkan id Kehamilan", () => {
+  test("Returns baby data for pregnancy with ID 1 and status for ok", async () => {
+    const response = await request(app)
+      .get("/babyData/1")
+      .set({ access_token: RT_access_token });
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        id: 1,
+        PregnancyId: expect.any(Number),
+        beratAwal: expect.any(Number),
+        beratBulanan: expect.any(String),
+        tanggalDicatat: expect.any(String),
+        createdAt: expect.any(String),
+        updatedAt: expect.any(String),
+      })
+    );
+  });
+  test("Returns unauthorized if access token not provided", async () => {
+    const response = await request(app).get("/babyData/1");
+    expect(response.statusCode).toBe(401);
+    expect(response.body).toEqual({ message: "Invalid token" });
+  });
+});
+
 // post /registerBabyData
+describe("Tests the register baby data path", () => {
+  test("Returns new baby data details and status for created", async () => {
+    const response = await request(app)
+      .post("/registerBabyData")
+      .set({ access_token })
+      .send({
+        PregnancyId: 25,
+        beratAwal: 3,
+        beratBulanan: "3.8,4.2",
+        tanggalDicatat: new Date(),
+      });
+    expect(response.statusCode).toBe(201);
+    expect(response.body).toEqual({
+      id: expect.any(Number),
+      PregnancyId: 25,
+      beratAwal: 3,
+      beratBulanan: "3.8,4.2",
+      tanggalDicatat: expect.any(String),
+      updatedAt: expect.any(String),
+      createdAt: expect.any(String),
+    });
+  });
+  test("Returns new baby data details and status for created if array length = 4", async () => {
+    const response = await request(app)
+      .post("/registerBabyData")
+      .set({ access_token })
+      .send({
+        PregnancyId: 26,
+        beratAwal: 3,
+        beratBulanan: "3.8,4.2,4.8,5.5",
+        tanggalDicatat: new Date(),
+      });
+    expect(response.statusCode).toBe(201);
+    expect(response.body).toEqual({
+      id: expect.any(Number),
+      PregnancyId: 26,
+      beratAwal: 3,
+      beratBulanan: "3.8,4.2,4.8,5.5",
+      tanggalDicatat: expect.any(String),
+      updatedAt: expect.any(String),
+      createdAt: expect.any(String),
+    });
+  });
+
+  test("Register returns appropriate response for an empty request", async () => {
+    const response = await request(app)
+      .post("/registerBabyData")
+      .set({ access_token });
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toEqual({ message: "beratAwal is required" });
+  });
+});
+
 // put /babyData/:babyDataId
+describe("Tests the update baby data path", () => {
+  test("Updates baby data and sends status ok", async () => {
+    const response = await request(app)
+      .put("/babyData/20")
+      .set({ access_token })
+      .send({
+        beratAwal: 55,
+        beratBulanan: "55.8, 56.2, 57.2, 57.9",
+        tanggalDicatat: new Date(),
+      });
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({
+      message: "Baby data edited successfully",
+    });
+  });
+});
 
 afterAll(async () => {
   await User.destroy({
