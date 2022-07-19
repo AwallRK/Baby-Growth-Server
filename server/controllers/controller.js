@@ -188,7 +188,7 @@ class Controller {
     try {
       // const UserId = req.query.UserId
       const UserId = req.user.id;
-
+      console.log(UserId);
       let options = {
         order: ["id"],
         attributes: {
@@ -201,11 +201,11 @@ class Controller {
         //   },
         // ],
 
-        include: [
-          {
-            model: Pregnancy,
-          },
-        ],
+        // include: [
+        //   {
+        //     model: Pregnancy,
+        //   },
+        // ],
       };
 
       options.where = { UserId: UserId };
