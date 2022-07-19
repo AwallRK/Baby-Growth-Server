@@ -66,7 +66,12 @@ class Controller {
     try {
       const role = "Admin";
       const { username, password, email, noRT } = req.body;
-
+      if (!password) {
+        throw {
+          name: "Inappropriate Input!",
+          message: "Password cannot be blank",
+        };
+      }
       const createdUser = await User.create({
         username,
         password: hashPassword(password),
@@ -82,12 +87,13 @@ class Controller {
         noRT: createdUser.noRT,
       });
     } catch (err) {
-      console.log(err);
       if (
         err.name == "SequelizeUniqueConstraintError" ||
         err.name == "SequelizeValidationError"
       ) {
         res.status(400).json({ message: err.errors[0].message });
+      } else if (err.name === "Inappropriate Input!") {
+        res.status(400).json({ message: err.message });
       } else {
         res.status(500).json(err);
       }
@@ -98,7 +104,12 @@ class Controller {
     try {
       const UserId = req.user.id;
       const { name, NIK, password, address, latitude, longitude } = req.body;
-      console.log(req.body);
+      if (!password) {
+        throw {
+          name: "Inappropriate Input!",
+          message: "Password cannot be blank",
+        };
+      }
       const createdMotherProfile = await MotherProfile.create({
         UserId,
         name,
@@ -116,12 +127,13 @@ class Controller {
         address: createdMotherProfile.address,
       });
     } catch (err) {
-      console.log(err);
       if (
         err.name == "SequelizeUniqueConstraintError" ||
         err.name == "SequelizeValidationError"
       ) {
         res.status(400).json({ message: err.errors[0].message });
+      } else if (err.name === "Inappropriate Input!") {
+        res.status(400).json({ message: err.message });
       } else {
         res.status(500).json(err);
       }
