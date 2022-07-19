@@ -1,9 +1,83 @@
 const request = require("supertest");
 const app = require("../app");
-const { User } = require("../models");
+const users = require("../data/users.json");
+const mothers = require("../data/mothers.json");
+const pregnancies = require("../data/pregnancies.json");
+const pregnancyData = require("../data/pregnancyData.json");
+const babyData = require("../data/babyData.json");
+const { signToken } = require("../helpers/jwt");
+const {
+  User,
+  MotherProfile,
+  Pregnancy,
+  PregnancyData,
+  BabyData,
+} = require("../models");
+const { hashPassword } = require("../helpers/bcrypt");
+
+let access_token = "";
+beforeAll(async () => {
+  try {
+    users.forEach((user) => {
+      user.password = hashPassword(user.password);
+      user.createdAt = new Date();
+      user.updatedAt = new Date();
+    });
+    mothers.forEach((mother) => {
+      mother.password = hashPassword(mother.password);
+      mother.createdAt = new Date();
+      mother.updatedAt = new Date();
+    });
+
+    await User.destroy({
+      where: {},
+      cascade: true,
+      truncate: true,
+      restartIdentity: true,
+    });
+    await MotherProfile.destroy({
+      where: {},
+      cascade: true,
+      truncate: true,
+      restartIdentity: true,
+    });
+    await Pregnancy.destroy({
+      where: {},
+      cascade: true,
+      truncate: true,
+      restartIdentity: true,
+    });
+    await PregnancyData.destroy({
+      where: {},
+      cascade: true,
+      truncate: true,
+      restartIdentity: true,
+    });
+    await BabyData.destroy({
+      where: {},
+      cascade: true,
+      truncate: true,
+      restartIdentity: true,
+    });
+
+    console.log(mothers);
+    await User.bulkCreate(users);
+    await MotherProfile.bulkCreate(mothers);
+    await Pregnancy.bulkCreate(pregnancies);
+    await PregnancyData.bulkCreate(pregnancyData);
+    await BabyData.bulkCreate(babyData);
+
+    access_token = signToken({
+      id: 99,
+      role: "SuperAdmin",
+    });
+  } catch (err) {
+    console.log(err, `before all error!`);
+  }
+});
 
 const user1 = {
-  NIK: "222723440002",
+  NIK: "222224440000",
   password: "12345",
 };
 const userNotExist = {
@@ -13,6 +87,7 @@ const userNotExist = {
 
 const validToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiTklLIjoiMjIyMjIzMjQ0MjkxMTEiLCJpYXQiOjE2NTgyMjYyNTN9.iB-Bwycc-Ek4quKKgZMJ7OrsGa-t4NNyZPrdbOz_Vfw";
+// post /mother/login (done)
 
 describe("Mother Routes Test", () => {
   test("200 Login - should return access token", (done) => {
@@ -75,4 +150,45 @@ describe("Mother Routes Test", () => {
   //       });
   //   });
   // });
+});
+
+// get /mother/category
+// post /mother/category
+// get /mother/category/:id/article
+// post /mother/category/:id/article
+// get /mother/categoryMonth/:id
+// post /mother/categoryMonth/:id
+// get /mother/pregnancy
+
+afterAll(async () => {
+  await User.destroy({
+    where: {},
+    cascade: true,
+    truncate: true,
+    restartIdentity: true,
+  });
+  await MotherProfile.destroy({
+    where: {},
+    cascade: true,
+    truncate: true,
+    restartIdentity: true,
+  });
+  await Pregnancy.destroy({
+    where: {},
+    cascade: true,
+    truncate: true,
+    restartIdentity: true,
+  });
+  await PregnancyData.destroy({
+    where: {},
+    cascade: true,
+    truncate: true,
+    restartIdentity: true,
+  });
+  await BabyData.destroy({
+    where: {},
+    cascade: true,
+    truncate: true,
+    restartIdentity: true,
+  });
 });
