@@ -3,11 +3,11 @@ const app = require("../app");
 const { User } = require("../models");
 
 const user1 = {
-  nik: "222723440002",
+  NIK: "222723440002",
   password: "12345",
 };
 const userNotExist = {
-  nik: "2131",
+  NIK: "2131",
   password: "12345",
 };
 
@@ -17,7 +17,7 @@ const validToken =
 describe("Mother Routes Test", () => {
   test("200 Login - should return access token", (done) => {
     request(app)
-      .post("/mother/login")
+      .post("mother/login")
       .send(user1)
       .end((err, res) => {
         if (err) return done(err);
@@ -34,7 +34,7 @@ describe("Mother Routes Test", () => {
 
   test("401 Login - should return error", (done) => {
     request(app)
-      .post("/mother/login")
+      .post("mother/login")
       .send(user1)
       .end((err, res) => {
         if (err) return done(err);
@@ -48,7 +48,7 @@ describe("Mother Routes Test", () => {
 
   test("400 Login - should return error", (done) => {
     request(app)
-      .post("/mother/login")
+      .post("mother/login")
       .send({ nik: user1.nik })
       .end((err, res) => {
         if (err) return done(err);
