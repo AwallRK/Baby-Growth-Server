@@ -4,7 +4,7 @@
   "description": "",
   "main": "www/server.js",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "npx jest --forceExit --verbose --detectOpenHandles --runInBand --coverage"
   },
   "keywords": [],
   "author": "",
