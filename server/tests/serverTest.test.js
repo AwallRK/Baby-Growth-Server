@@ -111,7 +111,7 @@ describe("Tests the login path", () => {
     expect(response.statusCode).toBe(400);
     expect(response.body).toEqual({ message: "Password is required" });
   });
-  test("Returns appropriate response if creditentials don't match", async () => {
+  test("Returns appropriate response if credentials don't match", async () => {
     const response = await request(app).post("/login").send({
       email: "superadmin@mail.com",
       password: "test",
