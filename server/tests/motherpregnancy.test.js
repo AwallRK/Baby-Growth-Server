@@ -17,7 +17,7 @@ const validToken =
 describe("Mother Routes Test", () => {
   test("200 Login - should return access token", (done) => {
     request(app)
-      .post("mother/login")
+      .post("/mother/login")
       .send(user1)
       .end((err, res) => {
         if (err) return done(err);
@@ -25,7 +25,7 @@ describe("Mother Routes Test", () => {
 
         expect(status).toBe(200);
         expect(body).toHaveProperty("access_token", expect.any(String));
-        expect(body).toHaveProperty("NIK", user1.nik);
+        expect(body).toHaveProperty("NIK", user1.NIK);
         expect(body).toHaveProperty("name");
         expect(body).toHaveProperty("address");
         return done();
@@ -34,8 +34,8 @@ describe("Mother Routes Test", () => {
 
   test("401 Login - should return error", (done) => {
     request(app)
-      .post("mother/login")
-      .send(user1)
+      .post("/mother/login")
+      .send(userNotExist)
       .end((err, res) => {
         if (err) return done(err);
         const { body, status } = res;
@@ -48,8 +48,8 @@ describe("Mother Routes Test", () => {
 
   test("400 Login - should return error", (done) => {
     request(app)
-      .post("mother/login")
-      .send({ nik: user1.nik })
+      .post("/mother/login")
+      .send({ NIK: user1.NIK })
       .end((err, res) => {
         if (err) return done(err);
         const { body, status } = res;
