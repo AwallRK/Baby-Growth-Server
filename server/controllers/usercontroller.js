@@ -12,7 +12,9 @@ class UserController {
         },
         include: [Category],
       });
-
+      if(!data){
+        throw{name: "NotFound"}
+      }
       res.status(200).json(data);
     } catch (err) {
       next(err);
@@ -23,7 +25,7 @@ class UserController {
     // res.send("masok");
     try {
       const data = await Category.findAll();
-
+      
       res.status(200).json(data);
     } catch (err) {
       next(err);
@@ -34,13 +36,14 @@ class UserController {
     // res.send("masok");
     try {
       const { id } = req.params;
-
       const data = await Article.findAll({
         where: {
           CategoryId: id,
         },
       });
-
+      if(data.length === 0){
+        throw{name: "NotFound"}
+      }
       res.status(200).json(data);
     } catch (err) {
       next(err);
@@ -57,7 +60,9 @@ class UserController {
         },
         include: [Article],
       });
-
+      if(!category){
+        throw{name: "NotFound"}
+      }
       res.status(200).json(category);
     } catch (err) {
       next(err);
@@ -73,13 +78,13 @@ class UserController {
       }
       const { name, text, imageUrl } = req.body;
       if (!name) {
-        throw { name: "name is required" };
+        throw { name: "Inappropriate Input!" };
       }
       if (!text) {
-        throw { name: "name is required" };
+        throw { name: "Inappropriate Input!" };
       }
       if (!imageUrl) {
-        throw { name: "name is required" };
+        throw { name: "Inappropriate Input!" };
       }
       const category = await Category.findOne({
         where: {

@@ -85,6 +85,10 @@ const userNotExist = {
   NIK: "2131",
   password: "12345",
 };
+const wrongpassword = {
+  NIK: "222224440000",
+  password: "2515141",
+};
 const newCategory = {
   name: "test4",
   imageUrl: "https://picsum.photos/200",
@@ -100,6 +104,14 @@ const newArticle = {
 const errArticle = {
   text: "impsum lorem",
   imageUrl: "https://picsum.photos/200",
+};
+const errArticle2 = {
+  name: "impsum lorem",
+  imageUrl: "https://picsum.photos/200",
+};
+const errArticle3 = {
+  name: "impsum lorem",
+  text: "https://picsum.photos/200",
 };
 const validToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiTklLIjoiMjIyMjIzMjQ0MjkxMTEiLCJpYXQiOjE2NTgyMjYyNTN9.iB-Bwycc-Ek4quKKgZMJ7OrsGa-t4NNyZPrdbOz_Vfw";
@@ -146,7 +158,31 @@ describe("Mother Routes Test", () => {
       .end((err, res) => {
         if (err) return done(err);
         const { body, status } = res;
-        expect(status).toBe(400);
+        expect(status).toBe(401);
+        expect(body).toHaveProperty("message", expect.any(String));
+        return done();
+      });
+  });
+  test("400 Login - should return error req nik", (done) => {
+    request(app)
+      .post("/mother/login")
+      .send({ password: user1.password })
+      .end((err, res) => {
+        if (err) return done(err);
+        const { body, status } = res;
+        expect(status).toBe(401);
+        expect(body).toHaveProperty("message", expect.any(String));
+        return done();
+      });
+  });
+  test("400 Login - should return error wrong password", (done) => {
+    request(app)
+      .post("/mother/login")
+      .send(wrongpassword)
+      .end((err, res) => {
+        if (err) return done(err);
+        const { body, status } = res;
+        expect(status).toBe(401);
         expect(body).toHaveProperty("message", expect.any(String));
         return done();
       });
@@ -223,6 +259,30 @@ describe("Get Article test", () => {
         done();
       });
   });
+  test("500 Error get Article", (done) => {
+    request(app)
+      .get("/mother/category/''/article")
+      .set("access_token", tokenMother)
+      .end((err, res) => {
+        if (err) return done(err);
+        const { body, status } = res;
+        expect(status).toBe(500);
+        expect(body).toHaveProperty("name", expect.any(String));
+        return done();
+      });
+  });
+  test("404 Error get Article", (done) => {
+    request(app)
+      .get("/mother/category/99/article")
+      .set("access_token", tokenMother)
+      .end((err, res) => {
+        if (err) return done(err);
+        const { body, status } = res;
+        expect(status).toBe(404);
+        expect(body).toHaveProperty("message", expect.any(String));
+        return done();
+      });
+  });
 });
 
 describe("Get one article test", () => {
@@ -235,6 +295,18 @@ describe("Get one article test", () => {
         expect(res.body).toHaveProperty("name");
         expect(res.body).toHaveProperty("imageUrl");
         done();
+      });
+  });
+  test("401 Error get Article", (done) => {
+    request(app)
+      .get("/mother/article/99")
+      .set("access_token", tokenMother)
+      .end((err, res) => {
+        if (err) return done(err);
+        const { body, status } = res;
+        expect(status).toBe(404);
+        expect(body).toHaveProperty("message", expect.any(String));
+        return done();
       });
   });
 });
@@ -254,10 +326,34 @@ describe("Post Article", () => {
         done();
       });
   });
-  test("500 error when Create new Article", (done) => {
+  test("500 error when Create new Article req name", (done) => {
     request(app)
       .post("/mother/category/1/article")
       .send(errArticle)
+      .end((err, res) => {
+        if (err) return done(err);
+        const { body, status } = res;
+        expect(status).toBe(500);
+        expect(res.body).toHaveProperty("name");
+        done();
+      });
+  });
+  test("500 error when Create new Article req title", (done) => {
+    request(app)
+      .post("/mother/category/1/article")
+      .send(errArticle2)
+      .end((err, res) => {
+        if (err) return done(err);
+        const { body, status } = res;
+        expect(status).toBe(500);
+        expect(res.body).toHaveProperty("name");
+        done();
+      });
+  });
+  test("500 error when Create new Article req imageUrl", (done) => {
+    request(app)
+      .post("/mother/category/1/article")
+      .send(errArticle3)
       .end((err, res) => {
         if (err) return done(err);
         const { body, status } = res;
@@ -278,6 +374,18 @@ describe("Get Article test", () => {
         expect(res.body).toHaveProperty("imageUrl");
         expect(res.body).toHaveProperty("Articles");
         done();
+      });
+  });
+  test("404 Error get Article", (done) => {
+    request(app)
+      .get("/mother/categoryMonth/99")
+      .set("access_token", tokenMother)
+      .end((err, res) => {
+        if (err) return done(err);
+        const { body, status } = res;
+        expect(status).toBe(404);
+        expect(body).toHaveProperty("message", expect.any(String));
+        return done();
       });
   });
 });
@@ -334,14 +442,35 @@ describe("Get Mother Pregnancy test", () => {
         done();
       });
   });
+  test("return not found when theres no nik", (done) => {
+    request(app)
+      .get("/mother/nik")
+      .send({ nik: "1" })
+      .set("access_token", tokenMother)
+      .end(function (err, res) {
+        expect(res.status).toBe(404);
+        expect(res.body).toHaveProperty("message", expect.any(String));
+        done();
+      });
 });
-
+test("return not found when theres no nik", (done) => {
+  request(app)
+    .get("/mother/nik")
+    .send({})
+    .set("access_token", tokenMother)
+    .end(function (err, res) {
+      expect(res.status).toBe(404);
+      expect(res.body).toHaveProperty("message", expect.any(String));
+      done();
+    });
+});
+})
 // get /mother/pregnancy
 describe("Get Mother Pregnancy test", () => {
   test("Get detail mother pregnancy", (done) => {
     request(app)
       .get("/mother/pregnancy")
-      .send({ nik: "222224440000" })
+      .send({ nik: "222723440002" })
       .set("access_token", tokenMother)
       .end(function (err, res) {
         expect(res.status).toBe(200);
@@ -354,13 +483,35 @@ describe("Get Mother Pregnancy test", () => {
   test("Returns unauthorized if access token inappropriate", (done) => {
     request(app)
       .get("/mother/pregnancy")
-      .send({ nik: "222224440000" })
+      .send({ nik: "222723440002" })
       .set("access_token", { payload: "swsnjswjjn" })
       .end(function (err, res) {
         expect(res.status).toBe(401);
         done();
       });
   });
+  test("return not found when theres no nik", (done) => {
+    request(app)
+      .get("/mother/pregnancy")
+      .send({ nik: "1" })
+      .set("access_token", tokenMother)
+      .end(function (err, res) {
+        expect(res.status).toBe(404);
+        expect(res.body).toHaveProperty("message", expect.any(String));
+        done();
+      });
+});
+test("return not found when theres no nik", (done) => {
+  request(app)
+    .get("/mother/pregnancy")
+    .send({})
+    .set("access_token", tokenMother)
+    .end(function (err, res) {
+      expect(res.status).toBe(404);
+      expect(res.body).toHaveProperty("message", expect.any(String));
+      done();
+    });
+});
 });
 
 afterAll(async () => {
