@@ -22,9 +22,9 @@ class MotherController {
 
   static async login(req, res) {
     try {
-      const { nik, password } = req.body;
+      const { NIK, password } = req.body;
       console.log(req.body);
-      if (!nik) {
+      if (!NIK) {
         throw { name: "NIKRequired" };
       }
       if (!password) {
@@ -32,7 +32,7 @@ class MotherController {
       }
 
       const foundMotherProfile = await MotherProfile.findOne({
-        where: { NIK:nik },
+        where: { NIK:NIK },
       });
 
       if (!foundMotherProfile) {
