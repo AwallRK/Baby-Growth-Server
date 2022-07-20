@@ -23,7 +23,7 @@ class MotherController {
       }
 
       const foundMotherProfile = await MotherProfile.findOne({
-        where: { NIK },
+        where: { NIK:NIK },
       });
 
       if (!foundMotherProfile) {
@@ -38,7 +38,7 @@ class MotherController {
 
       const payload = {
         id: foundMotherProfile.id,
-        NIK: foundMotherProfile.NIK,
+        NIK: foundMotherProfile.NIK
       };
       console.log(payload);
 
@@ -54,6 +54,36 @@ class MotherController {
       next(err);
     }
   }
+  static async changePassword(req, res, next) {
+    try {
+      const { password,newPassword } = req.body;
+      const {id}=req.user;
+      if (!password) {
+        throw { name: "PasswordRequired" };
+      }
+      if (!newPassword) {
+        throw { name: "PasswordRequired" };
+      }
+      if (newPassword=="") {
+        throw { name: "PasswordRequired" };
+      }
+      console.log(password,newPassword);
+      const foundMotherProfile = await MotherProfile.findByPk(id);
+      const isMatched = comparePassword(password, foundMotherProfile.password);
+
+      if (!isMatched) {
+        throw { name: "InvalidLogin" };
+      }
+
+      foundMotherProfile.password=hashPassword(newPassword);
+      await foundMotherProfile.save();
+      
+      res.status(204).json({message:"Password has been updated"});
+    } catch (err) {
+      next(err);
+    }
+  }
+
   static async fetchMotherProfileByNIK(req, res, next) {
     // res.send("masok");
     try {
@@ -65,7 +95,6 @@ class MotherController {
         where: {
           NIK: nik,
         },
-        include: [Pregnancy],
       });
       if(!data){
         throw{name: "NotFound"}
@@ -79,23 +108,13 @@ class MotherController {
   static async fetchMotherPregnancyByNIK(req, res, next) {
     // res.send("masok");
     try {
-      const { nik } = req.body;
-      if (!nik) {
-        throw { name: "NotFound" };
-      }
-      const data = await MotherProfile.findOne({
-        where: {
-          NIK: nik,
-        },
-      });
-      if(!data){
-        throw{name: "NotFound"}
-      }
+      
+      const { id } = req.user;
       const pregnancy = await Pregnancy.findAll({
         where: {
-          MotherProfileId: data.id,
+          MotherProfileId: id,
         },
-        include: [PregnancyData],
+        include: [PregnancyData,BabyData],
       });
 
       res.status(200).json(pregnancy);

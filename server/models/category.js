@@ -8,13 +8,21 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      this.hasMany(models.Article);
       // define association here
       this.hasMany(models.Article);
     }
   }
   Category.init(
     {
-      names: DataTypes.STRING,
+      names: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+          notNull: true,
+        },
+      },
       imageUrl: DataTypes.TEXT,
     },
     {

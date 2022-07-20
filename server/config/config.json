@@ -2,14 +2,14 @@
 {
   "development": {
     "username": "postgres",
-    "password": "postgres",
-    "database": "babygrowthtes1",
+    "password": "super",
+    "database": "babygrowthtes",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
-    "password": "postgres",
+    "password": "super",
     "database": "babygrowthTEST",
     "host": "127.0.0.1",
     "dialect": "postgres"
