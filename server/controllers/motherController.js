@@ -12,18 +12,9 @@ const {
 } = require("../models");
 
 class MotherController {
-  static async tes(req, res) {
-    try {
-      res.send("hello world");
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  }
-
-  static async login(req, res) {
+  static async login(req, res, next) {
     try {
       const { NIK, password } = req.body;
-      console.log(NIK);
       if (!NIK) {
         throw { name: "NIKRequired" };
       }
@@ -60,18 +51,10 @@ class MotherController {
         address: foundMotherProfile.address,
       });
     } catch (err) {
-      if (err.name == "PasswordRequired") {
-        res.status(400).json({ message: "Password is required" });
-      } else if (err.name == "NIKRequired") {
-        res.status(400).json({ message: "NIK is required" });
-      } else if (err.name == "InvalidLogin") {
-        res.status(401).json({ message: "Invalid email/password" });
-      } else {
-        res.status(500).json(err);
-      }
+      next(err);
     }
   }
-  static async fetchMotherProfileByNIK(req, res) {
+  static async fetchMotherProfileByNIK(req, res, next) {
     // res.send("masok");
     try {
       const { nik } = req.body;
@@ -86,12 +69,11 @@ class MotherController {
 
       res.status(200).json(data);
     } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
+      next(err);
     }
   }
 
-  static async fetchMotherPregnancyByNIK(req, res) {
+  static async fetchMotherPregnancyByNIK(req, res, next) {
     // res.send("masok");
     try {
       const { NIK } = req.user;
@@ -113,8 +95,7 @@ class MotherController {
 
       res.status(200).json(pregnancy);
     } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
+      next(err);
     }
   }
 }
