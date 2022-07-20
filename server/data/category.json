@@ -1,5 +1,16 @@
 [
+  { "names": "Bulan 0", "imageUrl": "https://picsum.photos/200" },
   { "names": "Bulan 1", "imageUrl": "https://picsum.photos/200" },
   { "names": "Bulan 2", "imageUrl": "https://picsum.photos/200" },
-  { "names": "Bulan 3", "imageUrl": "https://picsum.photos/200" }
+  { "names": "Bulan 3", "imageUrl": "https://picsum.photos/200" },
+  { "names": "Bulan 4", "imageUrl": "https://picsum.photos/200" },
+  { "names": "Bulan 5", "imageUrl": "https://picsum.photos/200" },
+  { "names": "Bulan 6", "imageUrl": "https://picsum.photos/200" },
+  { "names": "Bulan 7", "imageUrl": "https://picsum.photos/200" },
+  { "names": "Bulan 8", "imageUrl": "https://picsum.photos/200" },
+  { "names": "Bulan 9", "imageUrl": "https://picsum.photos/200" },
+  { "names": "Bulan 10", "imageUrl": "https://picsum.photos/200" },
+  { "names": "Bulan 11", "imageUrl": "https://picsum.photos/200" },
+  { "names": "Bulan 12", "imageUrl": "https://picsum.photos/200" },
+  { "names": "Bulan 13", "imageUrl": "https://picsum.photos/200" }
 ]
