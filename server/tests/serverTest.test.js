@@ -95,10 +95,13 @@ describe("Tests the login path", () => {
       email: "superadmin@mail.com",
       password: "12345",
     });
+    console.log(response.body);
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual({
       access_token: expect.any(String),
       role: "SuperAdmin",
+      id: 1,
+      username: "SuperAdmin",
     });
   });
   test("Returns appropriate response for an empty request", async () => {

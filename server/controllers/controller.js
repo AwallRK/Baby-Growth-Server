@@ -43,11 +43,13 @@ class Controller {
         id: foundUser.id,
         role: foundUser.role,
       };
-
-      console.log(payload);
-
       const access_token = signToken(payload);
-      res.status(200).json({ access_token, role: foundUser.role });
+      res.status(200).json({
+        access_token,
+        role: foundUser.role,
+        id: foundUser.id,
+        username: foundUser.username,
+      });
     } catch (err) {
       next(err);
     }
@@ -149,9 +151,6 @@ class Controller {
   static async fetchMotherProfileByNoRT(req, res, next) {
     try {
       const { noRT } = req.params;
-      console.log("masok");
-      console.log(noRT);
-
       const foundUser = await User.findOne({
         where: { noRT },
         attributes: { exclude: ["password"] },
@@ -173,7 +172,6 @@ class Controller {
     try {
       // const UserId = req.query.UserId
       const UserId = req.user.id;
-      console.log(UserId);
       let options = {
         order: ["id"],
         attributes: {
@@ -195,7 +193,6 @@ class Controller {
 
       options.where = { UserId: UserId };
       const motherList = await MotherProfile.findAll(options);
-      // console.log(motherList);
       res.status(200).json(motherList);
     } catch (err) {
       next(err);
