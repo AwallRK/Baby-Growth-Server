@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1658331495253" clover="3.2.0">
-  <project timestamp="1658331495253" name="All files">
+<coverage generated="1658333111651" clover="3.2.0">
+  <project timestamp="1658333111651" name="All files">
     <metrics statements="602" coveredstatements="576" conditionals="199" coveredconditionals="174" methods="75" coveredmethods="75" elements="876" coveredelements="825" complexity="0" loc="602" ncloc="602" packages="6" files="26" classes="26"/>
     <package name="server">
       <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <file name="app.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\app.js">
+      <file name="app.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\app.js">
         <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -24,7 +24,7 @@
     </package>
     <package name="server.controllers">
       <metrics statements="311" coveredstatements="298" conditionals="82" coveredconditionals="76" methods="39" coveredmethods="39"/>
-      <file name="controller.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\controllers\controller.js">
+      <file name="controller.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\controllers\controller.js">
         <metrics statements="191" coveredstatements="182" conditionals="38" coveredconditionals="36" methods="28" coveredmethods="28"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -218,7 +218,7 @@
         <line num="657" count="0" type="stmt"/>
         <line num="662" count="2" type="stmt"/>
       </file>
-      <file name="motherController.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\controllers\motherController.js">
+      <file name="motherController.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\controllers\motherController.js">
         <metrics statements="55" coveredstatements="55" conditionals="18" coveredconditionals="18" methods="4" coveredmethods="4"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -276,7 +276,7 @@
         <line num="119" count="1" type="stmt"/>
         <line num="124" count="2" type="stmt"/>
       </file>
-      <file name="usercontroller.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\controllers\usercontroller.js">
+      <file name="usercontroller.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\controllers\usercontroller.js">
         <metrics statements="65" coveredstatements="61" conditionals="26" coveredconditionals="22" methods="7" coveredmethods="7"/>
         <line num="1" count="2" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
@@ -347,7 +347,7 @@
     </package>
     <package name="server.helpers">
       <metrics statements="90" coveredstatements="83" conditionals="66" coveredconditionals="55" methods="8" coveredmethods="8"/>
-      <file name="babyWeight.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\helpers\babyWeight.js">
+      <file name="babyWeight.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\helpers\babyWeight.js">
         <metrics statements="43" coveredstatements="37" conditionals="42" coveredconditionals="36" methods="1" coveredmethods="1"/>
         <line num="2" count="18" type="stmt"/>
         <line num="8" count="18" type="stmt"/>
@@ -393,21 +393,21 @@
         <line num="62" count="18" type="stmt"/>
         <line num="65" count="2" type="stmt"/>
       </file>
-      <file name="bcrypt.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\helpers\bcrypt.js">
+      <file name="bcrypt.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\helpers\bcrypt.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="2" type="stmt"/>
         <line num="4" count="45" type="stmt"/>
         <line num="8" count="6" type="stmt"/>
         <line num="11" count="2" type="stmt"/>
       </file>
-      <file name="jwt.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\helpers\jwt.js">
+      <file name="jwt.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\helpers\jwt.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="2" type="stmt"/>
         <line num="4" count="7" type="stmt"/>
         <line num="8" count="50" type="stmt"/>
         <line num="11" count="2" type="stmt"/>
       </file>
-      <file name="selisihCalculator.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\helpers\selisihCalculator.js">
+      <file name="selisihCalculator.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\helpers\selisihCalculator.js">
         <metrics statements="18" coveredstatements="18" conditionals="12" coveredconditionals="8" methods="1" coveredmethods="1"/>
         <line num="2" count="46" type="stmt"/>
         <line num="4" count="46" type="cond" truecount="1" falsecount="1"/>
@@ -428,7 +428,7 @@
         <line num="43" count="46" type="stmt"/>
         <line num="46" count="2" type="stmt"/>
       </file>
-      <file name="statisticCalculator.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\helpers\statisticCalculator.js">
+      <file name="statisticCalculator.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\helpers\statisticCalculator.js">
         <metrics statements="21" coveredstatements="20" conditionals="12" coveredconditionals="11" methods="2" coveredmethods="2"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -455,7 +455,7 @@
     </package>
     <package name="server.middlewares">
       <metrics statements="70" coveredstatements="66" conditionals="40" coveredconditionals="36" methods="5" coveredmethods="5"/>
-      <file name="authentication.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\middlewares\authentication.js">
+      <file name="authentication.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\middlewares\authentication.js">
         <metrics statements="18" coveredstatements="17" conditionals="8" coveredconditionals="7" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -476,7 +476,7 @@
         <line num="35" count="1" type="stmt"/>
         <line num="40" count="2" type="stmt"/>
       </file>
-      <file name="authorizationAdmin.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\middlewares\authorizationAdmin.js">
+      <file name="authorizationAdmin.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\middlewares\authorizationAdmin.js">
         <metrics statements="10" coveredstatements="9" conditionals="6" coveredconditionals="5" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
@@ -489,7 +489,7 @@
         <line num="13" count="0" type="stmt"/>
         <line num="18" count="2" type="stmt"/>
       </file>
-      <file name="authorizationSuperAdmin.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\middlewares\authorizationSuperAdmin.js">
+      <file name="authorizationSuperAdmin.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\middlewares\authorizationSuperAdmin.js">
         <metrics statements="10" coveredstatements="9" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="4" type="stmt"/>
@@ -502,7 +502,7 @@
         <line num="13" count="0" type="stmt"/>
         <line num="18" count="2" type="stmt"/>
       </file>
-      <file name="errorHandler.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\middlewares\errorHandler.js">
+      <file name="errorHandler.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\middlewares\errorHandler.js">
         <metrics statements="14" coveredstatements="14" conditionals="14" coveredconditionals="14" methods="1" coveredmethods="1"/>
         <line num="2" count="36" type="cond" truecount="2" falsecount="0"/>
         <line num="3" count="4" type="stmt"/>
@@ -519,7 +519,7 @@
         <line num="18" count="9" type="stmt"/>
         <line num="22" count="2" type="stmt"/>
       </file>
-      <file name="motherAuthentication.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\middlewares\motherAuthentication.js">
+      <file name="motherAuthentication.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\middlewares\motherAuthentication.js">
         <metrics statements="18" coveredstatements="17" conditionals="8" coveredconditionals="7" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -543,7 +543,7 @@
     </package>
     <package name="server.models">
       <metrics statements="70" coveredstatements="68" conditionals="11" coveredconditionals="7" methods="22" coveredmethods="22"/>
-      <file name="article.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\article.js">
+      <file name="article.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\models\article.js">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="4" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
@@ -551,7 +551,7 @@
         <line num="18" count="2" type="stmt"/>
         <line num="49" count="2" type="stmt"/>
       </file>
-      <file name="babydata.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\babydata.js">
+      <file name="babydata.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\models\babydata.js">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -559,7 +559,7 @@
         <line num="15" count="2" type="stmt"/>
         <line num="36" count="2" type="stmt"/>
       </file>
-      <file name="category.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\category.js">
+      <file name="category.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\models\category.js">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -568,7 +568,7 @@
         <line num="16" count="2" type="stmt"/>
         <line num="33" count="2" type="stmt"/>
       </file>
-      <file name="index.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\index.js">
+      <file name="index.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\models\index.js">
         <metrics statements="20" coveredstatements="19" conditionals="9" coveredconditionals="6" methods="3" coveredmethods="3"/>
         <line num="3" count="2" type="stmt"/>
         <line num="4" count="2" type="stmt"/>
@@ -591,7 +591,7 @@
         <line num="35" count="2" type="stmt"/>
         <line num="37" count="2" type="stmt"/>
       </file>
-      <file name="motherprofile.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\motherprofile.js">
+      <file name="motherprofile.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\models\motherprofile.js">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -600,14 +600,14 @@
         <line num="16" count="2" type="stmt"/>
         <line num="53" count="2" type="stmt"/>
       </file>
-      <file name="needcheck.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\needcheck.js">
+      <file name="needcheck.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\models\needcheck.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="4" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
         <line num="16" count="2" type="stmt"/>
         <line num="24" count="2" type="stmt"/>
       </file>
-      <file name="pregnancy.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\pregnancy.js">
+      <file name="pregnancy.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\models\pregnancy.js">
         <metrics statements="10" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -620,7 +620,7 @@
         <line num="37" count="1" type="stmt"/>
         <line num="43" count="2" type="stmt"/>
       </file>
-      <file name="pregnancydata.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\pregnancydata.js">
+      <file name="pregnancydata.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\models\pregnancydata.js">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -628,14 +628,14 @@
         <line num="15" count="2" type="stmt"/>
         <line num="34" count="2" type="stmt"/>
       </file>
-      <file name="rt.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\rt.js">
+      <file name="rt.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\models\rt.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="4" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
         <line num="16" count="2" type="stmt"/>
         <line num="22" count="2" type="stmt"/>
       </file>
-      <file name="user.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\user.js">
+      <file name="user.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\models\user.js">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -646,7 +646,7 @@
     </package>
     <package name="server.routes">
       <metrics statements="47" coveredstatements="47" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="index.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\routes\index.js">
+      <file name="index.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\routes\index.js">
         <metrics statements="29" coveredstatements="29" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -678,7 +678,7 @@
         <line num="47" count="2" type="stmt"/>
         <line num="50" count="2" type="stmt"/>
       </file>
-      <file name="routerMother.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\routes\routerMother.js">
+      <file name="routerMother.js" path="C:\Users\USER\Desktop\Hacktiv8\Baby-Growth-Server\server\routes\routerMother.js">
         <metrics statements="18" coveredstatements="18" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
