@@ -29,9 +29,7 @@ motherRouter.post(
 
 motherRouter.use(motherAuthentication);
 
-motherRouter.get("/tes", MotherController.tes);
-
-// router.get("/article/:id", UserController.fetchArticle);
+motherRouter.get("/article/:id", UserController.fetchArticle);
 motherRouter.get("/nik", MotherController.fetchMotherProfileByNIK); //Old login without password
 motherRouter.get("/pregnancy", MotherController.fetchMotherPregnancyByNIK);
 

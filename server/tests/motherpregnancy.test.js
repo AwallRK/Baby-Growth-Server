@@ -224,6 +224,21 @@ describe("Get Article test", () => {
       });
   });
 });
+
+describe("Get one article test", () => {
+  test("Get One Article by ID", (done) => {
+    request(app)
+      .get("/mother/article/1")
+      .set("access_token", tokenMother)
+      .end(function (err, res) {
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveProperty("name");
+        expect(res.body).toHaveProperty("imageUrl");
+        done();
+      });
+  });
+});
+
 // post /mother/category/:id/article
 describe("Post Article", () => {
   test("201 Success Create new Article", (done) => {
@@ -294,6 +309,33 @@ describe("Post Article", () => {
       });
   });
 });
+// get /mother/nik
+describe("Get Mother Pregnancy test", () => {
+  test("Get detail mother profile", (done) => {
+    request(app)
+      .get("/mother/nik")
+      .send({ nik: "222224440000" })
+      .set("access_token", tokenMother)
+      .end(function (err, res) {
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveProperty("NIK");
+        expect(res.body).toHaveProperty("name");
+        expect(res.body).toHaveProperty("Pregnancies");
+        done();
+      });
+  });
+  test("Returns forbidden if access token inappropriate", (done) => {
+    request(app)
+      .get("/mother/pregnancy")
+      .send({ nik: "222224440000" })
+      .set("access_token", { payload: "swsnjswjjn" })
+      .end(function (err, res) {
+        expect(res.status).toBe(401);
+        done();
+      });
+  });
+});
+
 // get /mother/pregnancy
 describe("Get Mother Pregnancy test", () => {
   test("Get detail mother pregnancy", (done) => {
@@ -306,6 +348,16 @@ describe("Get Mother Pregnancy test", () => {
         expect(res.body[0]).toHaveProperty("name");
         expect(res.body[0]).toHaveProperty("sudahLahir");
         expect(res.body[0]).toHaveProperty("PregnancyDatum");
+        done();
+      });
+  });
+  test("Returns unauthorized if access token inappropriate", (done) => {
+    request(app)
+      .get("/mother/pregnancy")
+      .send({ nik: "222224440000" })
+      .set("access_token", { payload: "swsnjswjjn" })
+      .end(function (err, res) {
+        expect(res.status).toBe(401);
         done();
       });
   });
