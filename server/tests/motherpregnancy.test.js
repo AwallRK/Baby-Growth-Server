@@ -77,8 +77,8 @@ beforeAll(async () => {
   } catch (err) {}
 });
 beforeEach(() => {
-  jest.restoreAllMocks()
-})
+  jest.restoreAllMocks();
+});
 const user1 = {
   NIK: "222224440000",
   password: "12345",
@@ -123,10 +123,10 @@ const validToken =
 // post /mother/login (done)
 const tokenMother =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiTklLIjoiMjIyMjI0NDQwMDAwIiwiaWF0IjoxNjU4MjU4MTYyfQ.XmMHG2vjwzl2dy8mTvfaWBobTFjyDIIAs1wmI78ln6U";
-const password="12345";
-const newPassword="123456";
+const password = "12345";
+const newPassword = "123456";
 const momAccess_token = signToken({
-  id: 100
+  id: 100,
 });
 describe("Mother Routes Test", () => {
   test("200 Login - should return access token", (done) => {
@@ -226,19 +226,19 @@ describe("Get Category test", () => {
         done();
       });
   });
-  test("error 500 get all category", async()=>{
-    jest.spyOn(Category, 'findAll').mockRejectedValue('Error')
+  test("error 500 get all category", async () => {
+    jest.spyOn(Category, "findAll").mockRejectedValue("Error");
     return request(app)
-    .get("/mother/category")
-    .then((res) => {
-      expect(res.status).toBe(500)
+      .get("/mother/category")
+      .then((res) => {
+        expect(res.status).toBe(500);
 
-      expect(res.body.err).toBe('Error')
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  })
+        expect(res.body.err).toBe("Error");
+      })
+      .catch((err) => {
+        // console.log(err)
+      });
+  });
 });
 
 // post /mother/category
@@ -503,19 +503,19 @@ describe("Get Mother Pregnancy test", () => {
         expect(res.body).toHaveProperty("message", expect.any(String));
         done();
       });
+  });
+  test("return not found when theres no nik", (done) => {
+    request(app)
+      .get("/mother/nik")
+      .send({})
+      .set("access_token", tokenMother)
+      .end(function (err, res) {
+        expect(res.status).toBe(404);
+        expect(res.body).toHaveProperty("message", expect.any(String));
+        done();
+      });
+  });
 });
-test("return not found when theres no nik", (done) => {
-  request(app)
-    .get("/mother/nik")
-    .send({})
-    .set("access_token", tokenMother)
-    .end(function (err, res) {
-      expect(res.status).toBe(404);
-      expect(res.body).toHaveProperty("message", expect.any(String));
-      done();
-    });
-});
-})
 // get /mother/pregnancy
 describe("Get Mother Pregnancy test", () => {
   test("Get detail mother pregnancy", (done) => {
@@ -541,32 +541,31 @@ describe("Get Mother Pregnancy test", () => {
   });
 });
 
-
-describe("Test error get detail pregnancy", () =>{
+describe("Test error get detail pregnancy", () => {
   beforeEach(() => {
-    jest.restoreAllMocks()
-  })
-  test("error 500 get detail pregnancy", async()=>{
-    jest.spyOn(Pregnancy, 'findAll').mockRejectedValue('Error')
+    jest.restoreAllMocks();
+  });
+  test("error 500 get detail pregnancy", async () => {
+    jest.spyOn(Pregnancy, "findAll").mockRejectedValue("Error");
     return request(app)
-    .get("/mother/pregnancy")
-    .set("access_token", tokenMother)
-    .then((res) => {
-      expect(res.status).toBe(500)
+      .get("/mother/pregnancy")
+      .set("access_token", tokenMother)
+      .then((res) => {
+        expect(res.status).toBe(500);
 
-      expect(res.body.err).toBe('Error')
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  })
-})
+        expect(res.body.err).toBe("Error");
+      })
+      .catch((err) => {
+        // console.log(err);
+      });
+  });
+});
 //change password mother/password
 describe("Post Mother Change Password test", () => {
   test("Changing password correctly", (done) => {
     request(app)
       .post("/mother/password")
-      .send({password,newPassword})
+      .send({ password, newPassword })
       .set("access_token", tokenMother)
       .end(function (err, res) {
         expect(res.status).toBe(204);
@@ -585,7 +584,7 @@ describe("Post Mother Change Password test", () => {
   test("Changing password with missing params", (done) => {
     request(app)
       .post("/mother/password")
-      .send({newPassword})
+      .send({ newPassword })
       .set("access_token", tokenMother)
       .end(function (err, res) {
         expect(res.status).toBe(400);
@@ -596,7 +595,7 @@ describe("Post Mother Change Password test", () => {
   test("Changing password with missing params", (done) => {
     request(app)
       .post("/mother/password")
-      .send({password, newPassword: ""})
+      .send({ password, newPassword: "" })
       .set("access_token", tokenMother)
       .end(function (err, res) {
         expect(res.status).toBe(400);
@@ -607,7 +606,7 @@ describe("Post Mother Change Password test", () => {
   test("Changing password with missing params", (done) => {
     request(app)
       .post("/mother/password")
-      .send({password})
+      .send({ password })
       .set("access_token", tokenMother)
       .end(function (err, res) {
         expect(res.status).toBe(400);
@@ -618,7 +617,7 @@ describe("Post Mother Change Password test", () => {
   test("Changing password with wrong params", (done) => {
     request(app)
       .post("/mother/password")
-      .send({password,newPassword})
+      .send({ password, newPassword })
       .set("access_token", tokenMother)
       .end(function (err, res) {
         expect(res.status).toBe(401);

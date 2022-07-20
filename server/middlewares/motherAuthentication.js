@@ -25,7 +25,6 @@ const motherAuthentication = async (req, res, next) => {
       id: payload.id,
       NIK: payload.NIK,
     };
-    console.log(req.user);
     // console.log(payload.id);
     next();
   } catch (err) {

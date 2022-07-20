@@ -23,7 +23,7 @@ class MotherController {
       }
 
       const foundMotherProfile = await MotherProfile.findOne({
-        where: { NIK:NIK },
+        where: { NIK: NIK },
       });
 
       if (!foundMotherProfile) {
@@ -38,9 +38,8 @@ class MotherController {
 
       const payload = {
         id: foundMotherProfile.id,
-        NIK: foundMotherProfile.NIK
+        NIK: foundMotherProfile.NIK,
       };
-      console.log(payload);
 
       const access_token = signToken(payload);
 
@@ -56,15 +55,14 @@ class MotherController {
   }
   static async changePassword(req, res, next) {
     try {
-      const { password,newPassword } = req.body;
-      const {id}=req.user;
+      const { password, newPassword } = req.body;
+      const { id } = req.user;
       if (!password) {
         throw { name: "PasswordRequired" };
       }
       if (!newPassword) {
         throw { name: "PasswordRequired" };
       }
-      console.log(password,newPassword);
       const foundMotherProfile = await MotherProfile.findByPk(id);
       const isMatched = comparePassword(password, foundMotherProfile.password);
 
@@ -72,9 +70,9 @@ class MotherController {
         throw { name: "InvalidLogin" };
       }
 
-      foundMotherProfile.password=hashPassword(newPassword);
+      foundMotherProfile.password = hashPassword(newPassword);
       await foundMotherProfile.save();
-      const message = "Password has been update"
+      const message = "Password has been update";
       res.status(204).json(message);
     } catch (err) {
       next(err);
@@ -93,8 +91,8 @@ class MotherController {
           NIK: nik,
         },
       });
-      if(!data){
-        throw{name: "NotFound"}
+      if (!data) {
+        throw { name: "NotFound" };
       }
       res.status(200).json(data);
     } catch (err) {
@@ -105,13 +103,12 @@ class MotherController {
   static async fetchMotherPregnancyByNIK(req, res, next) {
     // res.send("masok");
     try {
-      
       const { id } = req.user;
       const pregnancy = await Pregnancy.findAll({
         where: {
           MotherProfileId: id,
         },
-        include: [PregnancyData,BabyData],
+        include: [PregnancyData, BabyData],
       });
 
       res.status(200).json(pregnancy);

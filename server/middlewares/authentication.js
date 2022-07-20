@@ -25,7 +25,6 @@ const authentication = async (req, res, next) => {
       id: payload.id,
       role: payload.role,
     };
-    console.log(req.user);
     // console.log(payload.id);
     next();
   } catch (err) {

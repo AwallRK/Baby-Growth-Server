@@ -98,7 +98,6 @@ describe("Tests the login path", () => {
       email: "superadmin@mail.com",
       password: "12345",
     });
-    console.log(response.body);
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual({
       access_token: expect.any(String),
@@ -247,7 +246,7 @@ describe("Tests the list user path", () => {
         expect(res.body.err).toBe("Error");
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   });
 });
