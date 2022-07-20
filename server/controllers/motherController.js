@@ -16,10 +16,10 @@ class MotherController {
     try {
       const { NIK, password } = req.body;
       if (!NIK) {
-        throw { name: "NIKRequired" };
+        throw { name: "InvalidLogin" };
       }
       if (!password) {
-        throw { name: "PasswordRequired" };
+        throw { name: "InvalidLogin" };
       }
 
       const foundMotherProfile = await MotherProfile.findOne({
@@ -59,7 +59,7 @@ class MotherController {
     try {
       const { nik } = req.body;
       if (!nik) {
-        throw new Error({ message: "NIK is required!" });
+        throw { name: "NotFound" };
       }
       const data = await MotherProfile.findOne({
         where: {
@@ -67,7 +67,9 @@ class MotherController {
         },
         include: [Pregnancy],
       });
-
+      if(!data){
+        throw{name: "NotFound"}
+      }
       res.status(200).json(data);
     } catch (err) {
       next(err);
@@ -79,14 +81,16 @@ class MotherController {
     try {
       const { nik } = req.body;
       if (!nik) {
-        throw new Error({ message: "You must include a NIK" });
+        throw { name: "NotFound" };
       }
       const data = await MotherProfile.findOne({
         where: {
           NIK: nik,
         },
       });
-
+      if(!data){
+        throw{name: "NotFound"}
+      }
       const pregnancy = await Pregnancy.findAll({
         where: {
           MotherProfileId: data.id,
