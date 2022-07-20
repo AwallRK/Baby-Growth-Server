@@ -47,6 +47,4 @@ router.post("/registerBabyData", Controller.createBabyData); // create pregnancy
 router.put("/babyData/:babyDataId", Controller.updateBabyData); // update pregnancydata
 // router.post("/inputBabyData", Controller.inputBabyData);
 
-
-
 module.exports = router;

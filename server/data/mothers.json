@@ -5,8 +5,8 @@
     "password": "12345",
     "address": "Jl. Dua Ribu",
     "UserId": 2,
-    "latitude": 0,
-    "longitude": 0
+    "latitude": -5.794452,
+    "longitude": 106.484141
   },
   {
     "name": "Sutiyem",
@@ -14,8 +14,8 @@
     "password": "12345",
     "address": "Jl. Empat Ribu",
     "UserId": 3,
-    "latitude": 0,
-    "longitude": 0
+    "latitude": -5.798108,
+    "longitude": 106.49767
   },
   {
     "name": "Sutimoon",
@@ -23,8 +23,8 @@
     "password": "12345",
     "address": "Jl. Enam Ribu",
     "UserId": 2,
-    "latitude": 0,
-    "longitude": 0
+    "latitude": -5.857511,
+    "longitude": 106.619297
   },
   {
     "name": "Sundamin",
@@ -32,8 +32,8 @@
     "password": "12345",
     "address": "Jl. Sembilan Ribu",
     "UserId": 3,
-    "latitude": 0,
-    "longitude": 0
+    "latitude": -5.655742,
+    "longitude": 106.566803
   },
   {
     "name": "Suriri",
@@ -41,8 +41,8 @@
     "password": "12345",
     "address": "Jl. Sepuluh Ribu",
     "UserId": 4,
-    "latitude": 0,
-    "longitude": 0
+    "latitude": -5.653082,
+    "longitude": 106.580337
   },
   {
     "name": "Susumi",
@@ -50,8 +50,8 @@
     "password": "12345",
     "address": "Jl. Dua Ratus Ribu",
     "UserId": 5,
-    "latitude": 0,
-    "longitude": 0
+    "latitude": -6.035271,
+    "longitude": 106.746143
   },
   {
     "name": "Sumimi",
@@ -59,8 +59,8 @@
     "password": "12345",
     "address": "Jl. Tiga Ratus Ribu",
     "UserId": 6,
-    "latitude": 0,
-    "longitude": 0
+    "latitude": -5.97725674,
+    "longitude": 106.7072722
   },
   {
     "name": "Sumomo",
@@ -68,8 +68,8 @@
     "password": "12345",
     "address": "Jl. Empat Ratus Ribu",
     "UserId": 7,
-    "latitude": 0,
-    "longitude": 0
+    "latitude": -5.977657,
+    "longitude": 106.704941
   },
   {
     "name": "Sukiki",
@@ -77,8 +77,8 @@
     "password": "12345",
     "address": "Jl. Tujuh Ratus Ribu",
     "UserId": 7,
-    "latitude": 0,
-    "longitude": 0
+    "latitude": -5.979151,
+    "longitude": 106.70647
   },
   {
     "name": "Sunono",
@@ -86,8 +86,8 @@
     "password": "12345",
     "address": "Jl. Lima Ratus Ribu",
     "UserId": 8,
-    "latitude": 0,
-    "longitude": 0
+    "latitude": -5.857459,
+    "longitude": 106.619559
   },
   {
     "name": "Sunini",
@@ -95,8 +95,8 @@
     "password": "12345",
     "address": "Jl. Empat Puluh Ribu",
     "UserId": 8,
-    "latitude": 0,
-    "longitude": 0
+    "latitude": -5.856776,
+    "longitude": 106.621673
   },
   {
     "name": "Subibi",
@@ -104,7 +104,7 @@
     "password": "12345",
     "address": "Jl. Enam Puluh Ribu",
     "UserId": 8,
-    "latitude": 0,
-    "longitude": 0
+    "latitude": -5.822378,
+    "longitude": 106.554989
   }
 ]

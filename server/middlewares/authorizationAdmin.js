@@ -2,7 +2,7 @@ const authorizationAdmin = async (req, res, next) => {
   try {
     const { role } = req.user;
 
-    if (role !== "Admin") {
+    if (role !== "Admin" && role !== "SuperAdmin") {
       throw { name: "Forbidden" };
     }
     next();

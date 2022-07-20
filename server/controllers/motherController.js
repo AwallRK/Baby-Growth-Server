@@ -23,7 +23,7 @@ class MotherController {
   static async login(req, res) {
     try {
       const { NIK, password } = req.body;
-      console.log(req.body);
+      console.log(NIK);
       if (!NIK) {
         throw { name: "NIKRequired" };
       }
@@ -57,7 +57,7 @@ class MotherController {
         access_token,
         NIK: foundMotherProfile.NIK,
         name: foundMotherProfile.name,
-        address: foundMotherProfile.address
+        address: foundMotherProfile.address,
       });
     } catch (err) {
       if (err.name == "PasswordRequired") {
@@ -74,13 +74,13 @@ class MotherController {
   static async fetchMotherProfileByNIK(req, res) {
     // res.send("masok");
     try {
-      const { NIK } = req.user;
-      if (!NIK) {
+      const { nik } = req.body;
+      if (!nik) {
         throw new Error({ message: "NIK is required!" });
       }
       const data = await MotherProfile.findOne({
         where: {
-          NIK,
+          NIK: nik,
         },
       });
 
