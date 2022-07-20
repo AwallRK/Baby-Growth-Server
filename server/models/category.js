@@ -15,7 +15,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   Category.init(
     {
-      names: DataTypes.STRING,
+      names: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+          notNull: true,
+        },
+      },
       imageUrl: DataTypes.TEXT,
     },
     {

@@ -54,6 +54,41 @@ class MotherController {
       next(err);
     }
   }
+  static async changePassword(req, res, next) {
+    try {
+      const { password,newPassword } = req.body;
+      const {id}=req.user;
+      if (!password) {
+        throw { name: "PasswordRequired" };
+      }
+      if (!newPassword) {
+        throw { name: "PasswordRequired" };
+      }
+      if (newPassword=="") {
+        throw { name: "PasswordRequired" };
+      }
+      console.log(password,newPassword);
+      const foundMotherProfile = await MotherProfile.findByPk(id);
+
+      if (!foundMotherProfile) {
+        throw { name: "InvalidLogin" };
+      }
+
+      const isMatched = comparePassword(password, foundMotherProfile.password);
+
+      if (!isMatched) {
+        throw { name: "InvalidLogin" };
+      }
+
+      foundMotherProfile.password=hashPassword(newPassword);
+      await foundMotherProfile.save();
+      
+      res.status(204).json({message:"Password has been updated"});
+    } catch (err) {
+      next(err);
+    }
+  }
+
   static async fetchMotherProfileByNIK(req, res, next) {
     // res.send("masok");
     try {

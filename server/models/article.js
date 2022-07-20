@@ -16,10 +16,31 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Article.init({
-    name: DataTypes.STRING,
-    text: DataTypes.TEXT,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        notNull: true,
+      },
+    },
+    text: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        notNull: true,
+      },
+    },
     imageUrl: DataTypes.TEXT,
-    CategoryId: DataTypes.INTEGER,
+    CategoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        notNull: true,
+      },
+    },
     IdUser: DataTypes.INTEGER
   }, {
     sequelize,
