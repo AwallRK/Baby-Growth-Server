@@ -76,7 +76,9 @@ beforeAll(async () => {
     });
   } catch (err) {}
 });
-
+beforeEach(() => {
+  jest.restoreAllMocks()
+})
 const user1 = {
   NIK: "222224440000",
   password: "12345",
@@ -95,6 +97,9 @@ const newCategory = {
 };
 const errCategory = {
   imageUrl: "https://picsum.photos/200",
+};
+const errCategory2 = {
+  name: "test4",
 };
 const newArticle = {
   name: "test2",
@@ -120,6 +125,9 @@ const tokenMother =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiTklLIjoiMjIyMjI0NDQwMDAwIiwiaWF0IjoxNjU4MjU4MTYyfQ.XmMHG2vjwzl2dy8mTvfaWBobTFjyDIIAs1wmI78ln6U";
 const password="12345";
 const newPassword="123456";
+const momAccess_token = signToken({
+  id: 100
+});
 describe("Mother Routes Test", () => {
   test("200 Login - should return access token", (done) => {
     request(app)
@@ -218,6 +226,19 @@ describe("Get Category test", () => {
         done();
       });
   });
+  test("error 500 get all category", async()=>{
+    jest.spyOn(Category, 'findAll').mockRejectedValue('Error')
+    return request(app)
+    .get("/mother/category")
+    .then((res) => {
+      expect(res.status).toBe(500)
+
+      expect(res.body.err).toBe('Error')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  })
 });
 
 // post /mother/category
@@ -239,6 +260,18 @@ describe("Post Category", () => {
     request(app)
       .post("/mother/category")
       .send(errCategory)
+      .end((err, res) => {
+        if (err) return done(err);
+        const { body, status } = res;
+        expect(status).toBe(500);
+        expect(res.body).toHaveProperty("name");
+        done();
+      });
+  });
+  test("500 error when Create new Category", (done) => {
+    request(app)
+      .post("/mother/category")
+      .send(errCategory2)
       .end((err, res) => {
         if (err) return done(err);
         const { body, status } = res;
@@ -369,6 +402,7 @@ describe("Get Article test", () => {
   test("Get All Article with mounth pregnancy", (done) => {
     request(app)
       .get("/mother/categoryMonth/1")
+      .set("access_token", tokenMother)
       .end(function (err, res) {
         expect(res.status).toBe(200);
         expect(res.body).toHaveProperty("names");
@@ -405,15 +439,15 @@ describe("Post Article", () => {
         done();
       });
   });
-  test("500 error when Create new article with mounth pregnancy", (done) => {
+  test("400 error when Create new article with mounth pregnancy", (done) => {
     request(app)
       .post("/mother/categoryMonth/1")
       .send(errArticle)
       .end((err, res) => {
         if (err) return done(err);
         const { body, status } = res;
-        expect(status).toBe(500);
-        expect(res.body).toHaveProperty("name");
+        expect(status).toBe(400);
+        expect(res.body).toHaveProperty("message");
         done();
       });
   });
@@ -429,7 +463,7 @@ describe("Get Mother Pregnancy test", () => {
         expect(res.status).toBe(200);
         expect(res.body).toHaveProperty("NIK");
         expect(res.body).toHaveProperty("name");
-        expect(res.body).toHaveProperty("Pregnancies");
+        expect(res.body).toHaveProperty("address");
         done();
       });
   });
@@ -437,6 +471,23 @@ describe("Get Mother Pregnancy test", () => {
     request(app)
       .get("/mother/pregnancy")
       .set("access_token", { payload: "swsnjswjjn" })
+      .end(function (err, res) {
+        expect(res.status).toBe(401);
+        done();
+      });
+  });
+  test("Returns forbidden if no access token ", (done) => {
+    request(app)
+      .get("/mother/pregnancy")
+      .end(function (err, res) {
+        expect(res.status).toBe(401);
+        done();
+      });
+  });
+  test("Returns forbidden if no access token ", (done) => {
+    request(app)
+      .get("/mother/pregnancy")
+      .set("access_token", momAccess_token)
       .end(function (err, res) {
         expect(res.status).toBe(401);
         done();
@@ -489,6 +540,27 @@ describe("Get Mother Pregnancy test", () => {
       });
   });
 });
+
+
+describe("Test error get detail pregnancy", () =>{
+  beforeEach(() => {
+    jest.restoreAllMocks()
+  })
+  test("error 500 get detail pregnancy", async()=>{
+    jest.spyOn(Pregnancy, 'findAll').mockRejectedValue('Error')
+    return request(app)
+    .get("/mother/pregnancy")
+    .set("access_token", tokenMother)
+    .then((res) => {
+      expect(res.status).toBe(500)
+
+      expect(res.body.err).toBe('Error')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  })
+})
 //change password mother/password
 describe("Post Mother Change Password test", () => {
   test("Changing password correctly", (done) => {
@@ -498,7 +570,6 @@ describe("Post Mother Change Password test", () => {
       .set("access_token", tokenMother)
       .end(function (err, res) {
         expect(res.status).toBe(204);
-        expect(res.body[0]).toHaveProperty("message");
         done();
       });
   });
@@ -517,8 +588,19 @@ describe("Post Mother Change Password test", () => {
       .send({newPassword})
       .set("access_token", tokenMother)
       .end(function (err, res) {
-        expect(res.status).toBe(204);
-        expect(res.body[0]).toHaveProperty("message");
+        expect(res.status).toBe(400);
+        expect(res.body).toHaveProperty("message");
+        done();
+      });
+  });
+  test("Changing password with missing params", (done) => {
+    request(app)
+      .post("/mother/password")
+      .send({password, newPassword: ""})
+      .set("access_token", tokenMother)
+      .end(function (err, res) {
+        expect(res.status).toBe(400);
+        expect(res.body).toHaveProperty("message");
         done();
       });
   });
@@ -528,8 +610,8 @@ describe("Post Mother Change Password test", () => {
       .send({password})
       .set("access_token", tokenMother)
       .end(function (err, res) {
-        expect(res.status).toBe(204);
-        expect(res.body[0]).toHaveProperty("message");
+        expect(res.status).toBe(400);
+        expect(res.body).toHaveProperty("message");
         done();
       });
   });
@@ -539,8 +621,8 @@ describe("Post Mother Change Password test", () => {
       .send({password,newPassword})
       .set("access_token", tokenMother)
       .end(function (err, res) {
-        expect(res.status).toBe(204);
-        expect(res.body[0]).toHaveProperty("message");
+        expect(res.status).toBe(401);
+        expect(res.body).toHaveProperty("message");
         done();
       });
   });

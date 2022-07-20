@@ -81,6 +81,9 @@ beforeAll(async () => {
     });
   } catch (err) {}
 });
+beforeEach(() => {
+  jest.restoreAllMocks();
+});
 // post /login (done)
 describe("Test the root path", () => {
   test("It should response the GET method", async () => {
@@ -171,7 +174,7 @@ describe("Tests the register user path", () => {
       .post("/registerUser")
       .set({ access_token });
     expect(response.statusCode).toBe(400);
-    expect(response.body).toEqual({ message: "Password cannot be blank" });
+    expect(response.body).toEqual({ message: "Inappropriate Input!" });
   });
 });
 
@@ -209,7 +212,7 @@ describe("Tests the register mother path", () => {
       .post("/registerMotherProfile")
       .set({ access_token });
     expect(response.statusCode).toBe(400);
-    expect(response.body).toEqual({ message: "Password cannot be blank" });
+    expect(response.body).toEqual({ message: "Inappropriate Input!" });
   });
 });
 
@@ -232,6 +235,20 @@ describe("Tests the list user path", () => {
     const response = await request(app).get("/listUser");
     expect(response.statusCode).toBe(401);
     expect(response.body).toEqual({ message: "Invalid token" });
+  });
+  test("error 500 get all listuser", async () => {
+    jest.spyOn(User, "findAll").mockRejectedValue("Error");
+    return request(app)
+      .get("/listUser")
+      .set({ access_token })
+      .then((res) => {
+        expect(res.status).toBe(500);
+
+        expect(res.body.err).toBe("Error");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 });
 // get /listMotherProfile
@@ -257,6 +274,20 @@ describe("Tests the list mother profiles path", () => {
     const response = await request(app).get("/listMotherProfile");
     expect(response.statusCode).toBe(401);
     expect(response.body).toEqual({ message: "Invalid token" });
+  });
+  test("error 500 get all motherlist", async () => {
+    jest.spyOn(MotherProfile, "findAll").mockRejectedValue("Error");
+    return request(app)
+      .get("/listMotherProfile")
+      .set({ access_token })
+      .then((res) => {
+        expect(res.status).toBe(500);
+
+        expect(res.body.err).toBe("Error");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 });
 // get /listMotherProfile/:noRT
@@ -340,6 +371,14 @@ describe("Tests list mother profiles created by user path", () => {
         }),
       ])
     );
+  });
+  test("Returns mothers list for SuperAdmin and status for ok", async () => {
+    const response = await request(app)
+      .get("/motherProfile")
+      .set({ access_token });
+    expect(response.status).toBe(200);
+    expect(response.body[0]).toHaveProperty("name");
+    expect(response.body[0]).toHaveProperty("NIK");
   });
   test("Returns unauthorized if access token not provided", async () => {
     const response = await request(app).get("/listMotherProfile/1");
@@ -548,6 +587,13 @@ describe("Get detail kehamilan berdasarkan id Kehamilan", () => {
       })
     );
   });
+  test("error when cannot find pregnancy data", async () => {
+    const response = await request(app)
+      .get("/pregnancyData/99")
+      .set({ access_token: RT_access_token });
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({ message: "Data not found" });
+  });
   test("Returns unauthorized if access token not provided", async () => {
     const response = await request(app).get("/pregnancyData/1");
     expect(response.statusCode).toBe(401);
@@ -638,6 +684,13 @@ describe("Get detail bayi berdasarkan id Kehamilan", () => {
       })
     );
   });
+  test("error when cannot find baby data", async () => {
+    const response = await request(app)
+      .get("/babyData/99")
+      .set({ access_token: RT_access_token });
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({ message: "Data not found" });
+  });
   test("Returns unauthorized if access token not provided", async () => {
     const response = await request(app).get("/babyData/1");
     expect(response.statusCode).toBe(401);
@@ -714,6 +767,13 @@ describe("Tests the update baby data path", () => {
     expect(response.body).toEqual({
       message: "Baby data edited successfully",
     });
+  });
+  test("error when cannot find baby data", async () => {
+    const response = await request(app)
+      .put("/babyData/99")
+      .set({ access_token });
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({ message: "Data not found" });
   });
 });
 

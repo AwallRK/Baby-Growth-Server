@@ -156,13 +156,12 @@ class Controller {
         attributes: { exclude: ["password"] },
         include: { model: MotherProfile, include: Pregnancy },
       });
-
       let data = [];
       if (foundUser) {
         data = foundUser.MotherProfiles;
       }
 
-      res.status(200).json(data);
+     res.status(200).json(data);
     } catch (err) {
       next(err);
     }

@@ -106,5 +106,15 @@
     "UserId": 8,
     "latitude": -5.822378,
     "longitude": 106.554989
+  },
+  {
+    "name": "Sutoro",
+    "NIK": "2314151211",
+    "password": "12345",
+    "address": "Jl. Enam Puluh Ribu",
+    "UserId": 8,
+    "latitude": -5.822378,
+    "longitude": 106.554989
   }
+
 ]
