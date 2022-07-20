@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">4.76% </span>
+                <span class="strong">95.23% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/21</span>
+                <span class='fraction'>20/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>11/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">4.76% </span>
+                <span class="strong">95.23% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/21</span>
+                <span class='fraction'>20/21</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -94,62 +94,62 @@
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">function <span class="fstat-no" title="function not covered" >calculateStatistics(</span>categoriesPerRT) {
-  const giziKurangTerbanyak = <span class="cstat-no" title="statement not covered" >{ noRT: [], jumlah: 0 };</span>
-  const giziBerlebihTerbanyak = <span class="cstat-no" title="statement not covered" >{ noRT: [], jumlah: 0 };</span>
-  const giziCukupTerbanyak = <span class="cstat-no" title="statement not covered" >{ noRT: [], jumlah: 0 };</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">function calculateStatistics(categoriesPerRT) {
+  const giziKurangTerbanyak = { noRT: [], jumlah: 0 };
+  const giziBerlebihTerbanyak = { noRT: [], jumlah: 0 };
+  const giziCukupTerbanyak = { noRT: [], jumlah: 0 };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  categoriesPerRT.forEach(<span class="fstat-no" title="function not covered" >(r</span>t) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    if (rt.categories.kurang &gt; giziKurangTerbanyak.jumlah) {</span>
-<span class="cstat-no" title="statement not covered" >      giziKurangTerbanyak.noRT = [rt.noRT];</span>
-<span class="cstat-no" title="statement not covered" >      giziKurangTerbanyak.jumlah = rt.categories.kurang;</span>
-    } else <span class="cstat-no" title="statement not covered" >if (rt.categories.kurang === giziKurangTerbanyak.jumlah) {</span>
-<span class="cstat-no" title="statement not covered" >      giziKurangTerbanyak.noRT.push(rt.noRT);</span>
+  categoriesPerRT.forEach((rt) =&gt; {
+    if (rt.categories.kurang &gt; giziKurangTerbanyak.jumlah) {
+      giziKurangTerbanyak.noRT = [rt.noRT];
+      giziKurangTerbanyak.jumlah = rt.categories.kurang;
+    } else if (rt.categories.kurang === giziKurangTerbanyak.jumlah) {
+      giziKurangTerbanyak.noRT.push(rt.noRT);
     }
-<span class="cstat-no" title="statement not covered" >    if (rt.categories.cukup &gt; giziCukupTerbanyak.jumlah) {</span>
-<span class="cstat-no" title="statement not covered" >      giziCukupTerbanyak.noRT = [rt.noRT];</span>
-<span class="cstat-no" title="statement not covered" >      giziCukupTerbanyak.jumlah = rt.categories.cukup;</span>
-    } else <span class="cstat-no" title="statement not covered" >if (rt.categories.cukup === giziCukupTerbanyak.jumlah) {</span>
+    if (rt.categories.cukup &gt; giziCukupTerbanyak.jumlah) {
+      giziCukupTerbanyak.noRT = [rt.noRT];
+      giziCukupTerbanyak.jumlah = rt.categories.cukup;
+    } else <span class="missing-if-branch" title="if path not taken" >I</span>if (rt.categories.cukup === giziCukupTerbanyak.jumlah) {
 <span class="cstat-no" title="statement not covered" >      giziCukupTerbanyak.noRT.push(rt.noRT);</span>
     }
-<span class="cstat-no" title="statement not covered" >    if (rt.categories.berlebih &gt; giziBerlebihTerbanyak.jumlah) {</span>
-<span class="cstat-no" title="statement not covered" >      giziBerlebihTerbanyak.noRT = [rt.noRT];</span>
-<span class="cstat-no" title="statement not covered" >      giziBerlebihTerbanyak.jumlah = rt.categories.berlebih;</span>
-    } else <span class="cstat-no" title="statement not covered" >if (rt.categories.berlebih === giziBerlebihTerbanyak.jumlah) {</span>
-<span class="cstat-no" title="statement not covered" >      giziBerlebihTerbanyak.noRT.push(rt.noRT);</span>
+    if (rt.categories.berlebih &gt; giziBerlebihTerbanyak.jumlah) {
+      giziBerlebihTerbanyak.noRT = [rt.noRT];
+      giziBerlebihTerbanyak.jumlah = rt.categories.berlebih;
+    } else if (rt.categories.berlebih === giziBerlebihTerbanyak.jumlah) {
+      giziBerlebihTerbanyak.noRT.push(rt.noRT);
     }
   });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return { giziKurangTerbanyak, giziBerlebihTerbanyak, giziCukupTerbanyak };</span>
+  return { giziKurangTerbanyak, giziBerlebihTerbanyak, giziCukupTerbanyak };
 }
 &nbsp;
 module.exports = { calculateStatistics };
@@ -160,7 +160,7 @@ module.exports = { calculateStatistics };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-07-19T07:36:53.439Z
+                at 2022-07-20T10:16:49.230Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -69,11 +69,6 @@ class MotherController {
       }
       console.log(password,newPassword);
       const foundMotherProfile = await MotherProfile.findByPk(id);
-
-      if (!foundMotherProfile) {
-        throw { name: "InvalidLogin" };
-      }
-
       const isMatched = comparePassword(password, foundMotherProfile.password);
 
       if (!isMatched) {
@@ -114,21 +109,10 @@ class MotherController {
     // res.send("masok");
     try {
       
-      const { NIK } = req.user;
-      if (!NIK) {
-        throw { name: "NotFound" };
-      }
-      const data = await MotherProfile.findOne({
-        where: {
-          NIK,
-        },
-      });
-      if(!data){
-        throw{name: "NotFound"}
-      }
+      const { id } = req.user;
       const pregnancy = await Pregnancy.findAll({
         where: {
-          MotherProfileId: data.id,
+          MotherProfileId: id,
         },
         include: [PregnancyData,BabyData],
       });

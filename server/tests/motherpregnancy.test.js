@@ -118,7 +118,8 @@ const validToken =
 // post /mother/login (done)
 const tokenMother =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiTklLIjoiMjIyMjI0NDQwMDAwIiwiaWF0IjoxNjU4MjU4MTYyfQ.XmMHG2vjwzl2dy8mTvfaWBobTFjyDIIAs1wmI78ln6U";
-
+const password="12345";
+const newPassword="123456";
 describe("Mother Routes Test", () => {
   test("200 Login - should return access token", (done) => {
     request(app)
@@ -435,7 +436,6 @@ describe("Get Mother Pregnancy test", () => {
   test("Returns forbidden if access token inappropriate", (done) => {
     request(app)
       .get("/mother/pregnancy")
-      .send({ nik: "222224440000" })
       .set("access_token", { payload: "swsnjswjjn" })
       .end(function (err, res) {
         expect(res.status).toBe(401);
@@ -470,7 +470,6 @@ describe("Get Mother Pregnancy test", () => {
   test("Get detail mother pregnancy", (done) => {
     request(app)
       .get("/mother/pregnancy")
-      .send({ nik: "222723440002" })
       .set("access_token", tokenMother)
       .end(function (err, res) {
         expect(res.status).toBe(200);
@@ -483,35 +482,68 @@ describe("Get Mother Pregnancy test", () => {
   test("Returns unauthorized if access token inappropriate", (done) => {
     request(app)
       .get("/mother/pregnancy")
-      .send({ nik: "222723440002" })
       .set("access_token", { payload: "swsnjswjjn" })
       .end(function (err, res) {
         expect(res.status).toBe(401);
         done();
       });
   });
-  test("return not found when theres no nik", (done) => {
+});
+//change password mother/password
+describe("Post Mother Change Password test", () => {
+  test("Changing password correctly", (done) => {
     request(app)
-      .get("/mother/pregnancy")
-      .send({ nik: "1" })
+      .post("/mother/password")
+      .send({password,newPassword})
       .set("access_token", tokenMother)
       .end(function (err, res) {
-        expect(res.status).toBe(404);
-        expect(res.body).toHaveProperty("message", expect.any(String));
+        expect(res.status).toBe(204);
+        expect(res.body[0]).toHaveProperty("message");
         done();
       });
-});
-test("return not found when theres no nik", (done) => {
-  request(app)
-    .get("/mother/pregnancy")
-    .send({})
-    .set("access_token", tokenMother)
-    .end(function (err, res) {
-      expect(res.status).toBe(404);
-      expect(res.body).toHaveProperty("message", expect.any(String));
-      done();
-    });
-});
+  });
+  test("Returns unauthorized if access token inappropriate", (done) => {
+    request(app)
+      .get("/mother/password")
+      .set("access_token", { payload: "swsnjswjjn" })
+      .end(function (err, res) {
+        expect(res.status).toBe(401);
+        done();
+      });
+  });
+  test("Changing password with missing params", (done) => {
+    request(app)
+      .post("/mother/password")
+      .send({newPassword})
+      .set("access_token", tokenMother)
+      .end(function (err, res) {
+        expect(res.status).toBe(204);
+        expect(res.body[0]).toHaveProperty("message");
+        done();
+      });
+  });
+  test("Changing password with missing params", (done) => {
+    request(app)
+      .post("/mother/password")
+      .send({password})
+      .set("access_token", tokenMother)
+      .end(function (err, res) {
+        expect(res.status).toBe(204);
+        expect(res.body[0]).toHaveProperty("message");
+        done();
+      });
+  });
+  test("Changing password with wrong params", (done) => {
+    request(app)
+      .post("/mother/password")
+      .send({password,newPassword})
+      .set("access_token", tokenMother)
+      .end(function (err, res) {
+        expect(res.status).toBe(204);
+        expect(res.body[0]).toHaveProperty("message");
+        done();
+      });
+  });
 });
 
 afterAll(async () => {
