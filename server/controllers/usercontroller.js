@@ -1,17 +1,7 @@
-const {
-  User,
-  MotherProfile,
-  Pregnancy,
-  PregnancyData,
-  BabyData,
-  RT,
-  Article,
-  Category,
-  NeedCheck,
-} = require("../models");
+const { Article, Category } = require("../models");
 
 class UserController {
-  static async fetchArticle(req, res) {
+  static async fetchArticle(req, res, next) {
     // res.send("masok");
     try {
       const { id } = req.params;
@@ -25,22 +15,22 @@ class UserController {
 
       res.status(200).json(data);
     } catch (err) {
-      res.status(500).json(err);
+      next(err);
     }
   }
 
-  static async fetchCategory(req, res) {
+  static async fetchCategory(req, res, next) {
     // res.send("masok");
     try {
       const data = await Category.findAll();
 
       res.status(200).json(data);
     } catch (err) {
-      res.status(500).json(err);
+      next(err);
     }
   }
 
-  static async fetchArticleBasedOnCategory(req, res) {
+  static async fetchArticleBasedOnCategory(req, res, next) {
     // res.send("masok");
     try {
       const { id } = req.params;
@@ -53,11 +43,11 @@ class UserController {
 
       res.status(200).json(data);
     } catch (err) {
-      res.status(500).json(err);
+      next(err);
     }
   }
 
-  static async fetchArticleBasedOnCategoryMonth(req, res) {
+  static async fetchArticleBasedOnCategoryMonth(req, res, next) {
     // res.send("masok");
     try {
       const { id } = req.params;
@@ -70,26 +60,26 @@ class UserController {
 
       res.status(200).json(category);
     } catch (err) {
-      res.status(500).json(err);
+      next(err);
     }
   }
 
-  static async addArticleBasedOnCategoryMonth(req, res) {
+  static async addArticleBasedOnCategoryMonth(req, res, next) {
     // res.send("masok");
     try {
       const { id } = req.params;
-      if(!id){
-        throw {name :"Bad Request"}
+      if (!id) {
+        throw { name: "Bad Request" };
       }
       const { name, text, imageUrl } = req.body;
-      if(!name){
-        throw {name: "name is required"}
+      if (!name) {
+        throw { name: "name is required" };
       }
-      if(!text){
-        throw {name: "name is required"}
+      if (!text) {
+        throw { name: "name is required" };
       }
-      if(!imageUrl){
-        throw {name: "name is required"}
+      if (!imageUrl) {
+        throw { name: "name is required" };
       }
       const category = await Category.findOne({
         where: {
@@ -105,26 +95,25 @@ class UserController {
       });
       res.status(201).json(article);
     } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
+      next(err);
     }
   }
 
-  static async addArticlesBasedOnCategory(req, res) {
+  static async addArticlesBasedOnCategory(req, res, next) {
     try {
       const { id } = req.params;
-      if(!id){
-        throw {name :"Bad Request"}
+      if (!id) {
+        throw { name: "Bad Request" };
       }
       const { name, text, imageUrl } = req.body;
-      if(!name){
-        throw {name: "name is required"}
+      if (!name) {
+        throw { name: "name is required" };
       }
-      if(!text){
-        throw {name: "name is required"}
+      if (!text) {
+        throw { name: "name is required" };
       }
-      if(!imageUrl){
-        throw {name: "name is required"}
+      if (!imageUrl) {
+        throw { name: "name is required" };
       }
       const data = await Article.create({
         name,
@@ -136,25 +125,25 @@ class UserController {
 
       res.status(201).json(data);
     } catch (err) {
-      res.status(500).json(err);
+      next(err);
     }
   }
-  static async addCategory(req, res) {
+  static async addCategory(req, res, next) {
     // res.send("masok");
 
     try {
       let { name, imageUrl } = req.body;
-      if(!name){
-        throw {name: "name is Required"}
+      if (!name) {
+        throw { name: "name is Required" };
       }
-      if(!imageUrl){
-        throw {name: "imageUrl is Required"}
+      if (!imageUrl) {
+        throw { name: "imageUrl is Required" };
       }
 
       const category = await Category.create({ names: name, imageUrl });
       res.status(201).json(category);
     } catch (err) {
-      res.status(500).json(err);
+      next(err);
     }
   }
 }

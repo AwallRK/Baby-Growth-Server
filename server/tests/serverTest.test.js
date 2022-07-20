@@ -4,7 +4,7 @@ const users = require("../data/users.json");
 const mothers = require("../data/mothers.json");
 const pregnancies = require("../data/pregnancies.json");
 const pregnancyData = require("../data/pregnancyData.json");
-const babyData = require("../data/babyData.json");
+const babyData = require("../data/testData/babyData.json");
 const { signToken } = require("../helpers/jwt");
 const {
   User,
@@ -17,6 +17,8 @@ const { hashPassword } = require("../helpers/bcrypt");
 
 let access_token = "";
 let RT_access_token = "";
+let Ibu_access_token = "";
+
 beforeAll(async () => {
   try {
     users.forEach((user) => {
@@ -72,6 +74,10 @@ beforeAll(async () => {
     RT_access_token = signToken({
       id: 2,
       role: "admin",
+    });
+    Ibu_access_token = signToken({
+      id: 3,
+      role: "ibu",
     });
   } catch (err) {}
 });
@@ -144,6 +150,19 @@ describe("Tests the register user path", () => {
       noRT: 95,
     });
   });
+  test("Register user returns forbidden for not superadmin", async () => {
+    const response = await request(app)
+      .post("/registerUser")
+      .set({ access_token: RT_access_token });
+    expect(response.statusCode).toBe(403);
+  });
+  test("Register user returns forbidden for not admin", async () => {
+    const response = await request(app)
+      .post("/registerUser")
+      .set({ access_token: Ibu_access_token });
+    expect(response.statusCode).toBe(403);
+  });
+
   test("Register returns appropriate response for an empty request", async () => {
     const response = await request(app)
       .post("/registerUser")
@@ -175,6 +194,12 @@ describe("Tests the register mother path", () => {
       NIK: "222312389137892891028",
       address: "Jalan lima ratus",
     });
+  });
+  test("Register mother returns forbidden for not admin", async () => {
+    const response = await request(app)
+      .post("/registerMotherProfile")
+      .set({ access_token: Ibu_access_token });
+    expect(response.statusCode).toBe(403);
   });
   test("Register mother returns appropriate response for an empty request", async () => {
     const response = await request(app)
@@ -574,6 +599,20 @@ describe("Tests the update pregnancy data path", () => {
     expect(response.body).toEqual({
       message: "Pregnancy data edited successfully",
     });
+  });
+  test("Returns not found", async () => {
+    const response = await request(app)
+      .put("/pregnancyData/99")
+      .set({ access_token })
+      .send({
+        beratAwal: 55,
+        beratBulanan: "55.8, 56.2, 57.2, 57.9",
+        tanggalDicatat: new Date(),
+      });
+    expect(response.statusCode).toBe(404);
+    // expect(response.body).toEqual({
+    //   message: "Pregnancy data edited successfully",
+    // });
   });
 });
 

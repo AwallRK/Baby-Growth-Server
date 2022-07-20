@@ -12,7 +12,7 @@ const {
 } = require("../models");
 
 class Controller {
-  static async loginUser(req, res) {
+  static async loginUser(req, res, next) {
     try {
       const { email, password } = req.body;
 
@@ -49,20 +49,11 @@ class Controller {
       const access_token = signToken(payload);
       res.status(200).json({ access_token, role: foundUser.role });
     } catch (err) {
-      console.log(err);
-      if (err.name == "PasswordRequired") {
-        res.status(400).json({ message: "Password is required" });
-      } else if (err.name == "EmailRequired") {
-        res.status(400).json({ message: "Email is required" });
-      } else if (err.name == "InvalidLogin") {
-        res.status(401).json({ message: "Invalid email/password" });
-      } else {
-        res.status(500).json(err);
-      }
+      next(err);
     }
   }
 
-  static async registerUser(req, res) {
+  static async registerUser(req, res, next) {
     try {
       const role = "Admin";
       const { username, password, email, noRT } = req.body;
@@ -87,20 +78,11 @@ class Controller {
         noRT: createdUser.noRT,
       });
     } catch (err) {
-      if (
-        err.name == "SequelizeUniqueConstraintError" ||
-        err.name == "SequelizeValidationError"
-      ) {
-        res.status(400).json({ message: err.errors[0].message });
-      } else if (err.name === "Inappropriate Input!") {
-        res.status(400).json({ message: err.message });
-      } else {
-        res.status(500).json(err);
-      }
+      next(err);
     }
   }
 
-  static async registerMotherProfile(req, res) {
+  static async registerMotherProfile(req, res, next) {
     try {
       const UserId = req.user.id;
       const { name, NIK, password, address, latitude, longitude } = req.body;
@@ -127,20 +109,11 @@ class Controller {
         address: createdMotherProfile.address,
       });
     } catch (err) {
-      if (
-        err.name == "SequelizeUniqueConstraintError" ||
-        err.name == "SequelizeValidationError"
-      ) {
-        res.status(400).json({ message: err.errors[0].message });
-      } else if (err.name === "Inappropriate Input!") {
-        res.status(400).json({ message: err.message });
-      } else {
-        res.status(500).json(err);
-      }
+      next(err);
     }
   }
 
-  static async fetchUserList(req, res) {
+  static async fetchUserList(req, res, next) {
     try {
       const listUser = await User.findAll({
         where: {
@@ -154,11 +127,11 @@ class Controller {
 
       res.status(200).json(listUser);
     } catch (err) {
-      res.status(500).json(err);
+      next(err);
     }
   }
 
-  static async fetchMotherProfileList(req, res) {
+  static async fetchMotherProfileList(req, res, next) {
     try {
       const listMother = await MotherProfile.findAll({
         attributes: {
@@ -169,11 +142,11 @@ class Controller {
 
       res.status(200).json(listMother);
     } catch (err) {
-      res.status(500).json(err);
+      next(err);
     }
   }
 
-  static async fetchMotherProfileByNoRT(req, res) {
+  static async fetchMotherProfileByNoRT(req, res, next) {
     try {
       const { noRT } = req.params;
       console.log("masok");
@@ -192,11 +165,11 @@ class Controller {
 
       res.status(200).json(data);
     } catch (err) {
-      res.status(500).json(err);
+      next(err);
     }
   }
 
-  static async fetchMotherProfiles(req, res) {
+  static async fetchMotherProfiles(req, res, next) {
     try {
       // const UserId = req.query.UserId
       const UserId = req.user.id;
@@ -225,11 +198,11 @@ class Controller {
       // console.log(motherList);
       res.status(200).json(motherList);
     } catch (err) {
-      res.status(500).json(err);
+      next(err);
     }
   }
 
-  static async fetchOneMotherProfile(req, res) {
+  static async fetchOneMotherProfile(req, res, next) {
     try {
       // const UserId = req.query.UserId
       const UserId = req.user.id;
@@ -251,11 +224,11 @@ class Controller {
       const motherList = await MotherProfile.findAll(options);
       res.status(200).json(motherList);
     } catch (err) {
-      res.status(500).json(err);
+      next(err);
     }
   }
 
-  static async createPregnancy(req, res) {
+  static async createPregnancy(req, res, next) {
     try {
       const { MotherProfileId, name, sudahLahir } = req.body;
       const createdPregnancy = await Pregnancy.create({
@@ -265,18 +238,11 @@ class Controller {
       });
       res.status(201).json(createdPregnancy);
     } catch (err) {
-      if (
-        err.name == "SequelizeUniqueConstraintError" ||
-        err.name == "SequelizeValidationError"
-      ) {
-        res.status(400).json({ message: err.errors[0].message });
-      } else {
-        res.status(500).json(err);
-      }
+      next(err);
     }
   }
 
-  static async fetchPregnancyDataDetail(req, res) {
+  static async fetchPregnancyDataDetail(req, res, next) {
     try {
       // console.log("masok");
       const { pregnancyDataId } = req.params;
@@ -293,15 +259,11 @@ class Controller {
 
       res.status(200).json(foundPregnancyData);
     } catch (err) {
-      if (err.name == "NotFound") {
-        res.status(404).json({ message: "Data not found" });
-      } else {
-        res.status(500).json(err);
-      }
+      next(err);
     }
   }
 
-  static async createPregnancyData(req, res) {
+  static async createPregnancyData(req, res, next) {
     try {
       const { PregnancyId, beratAwal, beratBulanan } = req.body;
       const tanggalDicatat = new Date();
@@ -315,18 +277,11 @@ class Controller {
 
       res.status(201).json(createdPregnancyData);
     } catch (err) {
-      if (
-        err.name == "SequelizeUniqueConstraintError" ||
-        err.name == "SequelizeValidationError"
-      ) {
-        res.status(400).json({ message: err.errors[0].message });
-      } else {
-        res.status(500).json(err);
-      }
+      next(err);
     }
   }
 
-  static async updatePregnancyData(req, res) {
+  static async updatePregnancyData(req, res, next) {
     try {
       const { pregnancyDataId } = req.params;
       const {
@@ -348,15 +303,11 @@ class Controller {
       }
       res.status(200).json({ message: "Pregnancy data edited successfully" });
     } catch (err) {
-      if (err.name == "NotFound") {
-        res.status(404).json({ message: "Pregnancy data not found" });
-      } else {
-        res.status(500).json(err);
-      }
+      next(err);
     }
   }
 
-  // static async inputPregnancyData(req, res) {
+  // static async inputPregnancyData(req, res, next) {
   //   try {
   //     const { PregnancyId, beratAwal, beratBulanan } = req.body;
   //     const tanggalDicatat = new Date();
@@ -421,7 +372,7 @@ class Controller {
   //   // }
   // }
 
-  static async fetchBabyDataDetail(req, res) {
+  static async fetchBabyDataDetail(req, res, next) {
     try {
       // console.log("masok");
       const { babyDataId } = req.params;
@@ -438,15 +389,11 @@ class Controller {
 
       res.status(200).json(foundPregnancyData);
     } catch (err) {
-      if (err.name == "NotFound") {
-        res.status(404).json({ message: "Data not found" });
-      } else {
-        res.status(500).json(err);
-      }
+      next(err);
     }
   }
 
-  static async createBabyData(req, res) {
+  static async createBabyData(req, res, next) {
     try {
       const { PregnancyId, beratAwal, beratBulanan } = req.body;
       const tanggalDicatat = new Date();
@@ -460,18 +407,11 @@ class Controller {
 
       res.status(201).json(createdBabyData);
     } catch (err) {
-      if (
-        err.name == "SequelizeUniqueConstraintError" ||
-        err.name == "SequelizeValidationError"
-      ) {
-        res.status(400).json({ message: err.errors[0].message });
-      } else {
-        res.status(500).json(err);
-      }
+      next(err);
     }
   }
 
-  static async updateBabyData(req, res) {
+  static async updateBabyData(req, res, next) {
     try {
       const { babyDataId } = req.params;
       const {
@@ -493,15 +433,11 @@ class Controller {
       }
       res.status(200).json({ message: "Baby data edited successfully" });
     } catch (err) {
-      if (err.name == "NotFound") {
-        res.status(404).json({ message: "Baby data not found" });
-      } else {
-        res.status(500).json(err); 
-      }
+      next(err);
     }
   }
 
-  // static async inputBabyData(req, res) {
+  // static async inputBabyData(req, res, next) {
   //   try {
   //     const { PregnancyId, beratAwal, beratBulanan } = req.body;
   //     const tanggalDicatat = new Date();
@@ -543,7 +479,7 @@ class Controller {
   //     }
   //   }
   // }
-  static async fetchPregnancyData(req, res) {
+  static async fetchPregnancyData(req, res, next) {
     // res.send("masok");
     try {
       const { id } = req.params;
@@ -571,7 +507,7 @@ class Controller {
         data,
       });
     } catch (err) {
-      res.status(500).json(err);
+      next(err);
     }
   }
 
@@ -627,7 +563,7 @@ class Controller {
         statistic,
       });
     } catch (err) {
-      res.status(500).json(err);
+      next(err);
     }
   }
 
@@ -664,7 +600,7 @@ class Controller {
       const categories = babiesWeightConverter(babiesWeight);
       res.status(200).json({ categories, ibuBelumMelahirkan: motherCount });
     } catch (err) {
-      res.status(500).json(err);
+      next(err);
     }
   }
 
@@ -722,7 +658,7 @@ class Controller {
 
       res.status(200).json(RTList);
     } catch (err) {
-      res.status(500).json(err);
+      next(err);
     }
   }
 }
