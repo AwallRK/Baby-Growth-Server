@@ -13,7 +13,7 @@ function errorHandler(err, req, res, next) {
   ) {
     res.status(400).json({ message: err.errors[0].message });
   } else if (err.name === "Inappropriate Input!") {
-    res.status(400).json({ message: err.message });
+    res.status(400).json({ message: "Inappropriate Input!" });
   } else {
     res.status(500).json(err);
   }
