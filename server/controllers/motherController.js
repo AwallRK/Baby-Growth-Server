@@ -64,9 +64,6 @@ class MotherController {
       if (!newPassword) {
         throw { name: "PasswordRequired" };
       }
-      if (newPassword=="") {
-        throw { name: "PasswordRequired" };
-      }
       console.log(password,newPassword);
       const foundMotherProfile = await MotherProfile.findByPk(id);
       const isMatched = comparePassword(password, foundMotherProfile.password);
@@ -77,8 +74,8 @@ class MotherController {
 
       foundMotherProfile.password=hashPassword(newPassword);
       await foundMotherProfile.save();
-      
-      res.status(204).json({message:"Password has been updated"});
+      const message = "Password has been update"
+      res.status(204).json(message);
     } catch (err) {
       next(err);
     }

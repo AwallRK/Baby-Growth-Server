@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1658312209309" clover="3.2.0">
-  <project timestamp="1658312209309" name="All files">
-    <metrics statements="603" coveredstatements="557" conditionals="201" coveredconditionals="167" methods="75" coveredmethods="74" elements="879" coveredelements="798" complexity="0" loc="603" ncloc="603" packages="6" files="26" classes="26"/>
+<coverage generated="1658331495253" clover="3.2.0">
+  <project timestamp="1658331495253" name="All files">
+    <metrics statements="602" coveredstatements="576" conditionals="199" coveredconditionals="174" methods="75" coveredmethods="75" elements="876" coveredelements="825" complexity="0" loc="602" ncloc="602" packages="6" files="26" classes="26"/>
     <package name="server">
       <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <file name="app.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\app.js">
+      <file name="app.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\app.js">
         <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -23,9 +23,9 @@
       </file>
     </package>
     <package name="server.controllers">
-      <metrics statements="312" coveredstatements="282" conditionals="84" coveredconditionals="73" methods="39" coveredmethods="38"/>
-      <file name="controller.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\controllers\controller.js">
-        <metrics statements="191" coveredstatements="169" conditionals="38" coveredconditionals="33" methods="28" coveredmethods="27"/>
+      <metrics statements="311" coveredstatements="298" conditionals="82" coveredconditionals="76" methods="39" coveredmethods="39"/>
+      <file name="controller.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\controllers\controller.js">
+        <metrics statements="191" coveredstatements="182" conditionals="38" coveredconditionals="36" methods="28" coveredmethods="28"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -68,158 +68,158 @@
         <line num="120" count="1" type="stmt"/>
         <line num="130" count="1" type="stmt"/>
         <line num="132" count="0" type="stmt"/>
-        <line num="137" count="1" type="stmt"/>
-        <line num="138" count="1" type="stmt"/>
+        <line num="137" count="2" type="stmt"/>
+        <line num="138" count="2" type="stmt"/>
         <line num="145" count="1" type="stmt"/>
-        <line num="147" count="0" type="stmt"/>
+        <line num="147" count="1" type="stmt"/>
         <line num="152" count="2" type="stmt"/>
         <line num="153" count="2" type="stmt"/>
         <line num="154" count="2" type="stmt"/>
-        <line num="160" count="2" type="stmt"/>
-        <line num="161" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="162" count="2" type="stmt"/>
-        <line num="165" count="2" type="stmt"/>
-        <line num="167" count="0" type="stmt"/>
-        <line num="172" count="0" type="stmt"/>
-        <line num="174" count="0" type="stmt"/>
-        <line num="175" count="0" type="stmt"/>
-        <line num="194" count="0" type="stmt"/>
-        <line num="195" count="0" type="stmt"/>
-        <line num="196" count="0" type="stmt"/>
-        <line num="198" count="0" type="stmt"/>
-        <line num="203" count="1" type="stmt"/>
+        <line num="159" count="2" type="stmt"/>
+        <line num="160" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="161" count="2" type="stmt"/>
+        <line num="164" count="2" type="stmt"/>
+        <line num="166" count="0" type="stmt"/>
+        <line num="171" count="1" type="stmt"/>
+        <line num="173" count="1" type="stmt"/>
+        <line num="174" count="1" type="stmt"/>
+        <line num="193" count="1" type="stmt"/>
+        <line num="194" count="1" type="stmt"/>
+        <line num="195" count="1" type="stmt"/>
+        <line num="197" count="0" type="stmt"/>
+        <line num="202" count="1" type="stmt"/>
+        <line num="204" count="1" type="stmt"/>
         <line num="205" count="1" type="stmt"/>
         <line num="206" count="1" type="stmt"/>
-        <line num="207" count="1" type="stmt"/>
+        <line num="219" count="1" type="stmt"/>
         <line num="220" count="1" type="stmt"/>
         <line num="221" count="1" type="stmt"/>
-        <line num="222" count="1" type="stmt"/>
-        <line num="224" count="0" type="stmt"/>
+        <line num="223" count="0" type="stmt"/>
+        <line num="228" count="2" type="stmt"/>
         <line num="229" count="2" type="stmt"/>
         <line num="230" count="2" type="stmt"/>
-        <line num="231" count="2" type="stmt"/>
-        <line num="236" count="1" type="stmt"/>
-        <line num="238" count="1" type="stmt"/>
-        <line num="243" count="1" type="stmt"/>
-        <line num="245" count="1" type="stmt"/>
-        <line num="247" count="1" type="stmt"/>
-        <line num="252" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="254" count="0" type="stmt"/>
-        <line num="257" count="1" type="stmt"/>
-        <line num="259" count="0" type="stmt"/>
+        <line num="235" count="1" type="stmt"/>
+        <line num="237" count="1" type="stmt"/>
+        <line num="242" count="2" type="stmt"/>
+        <line num="244" count="2" type="stmt"/>
+        <line num="246" count="2" type="stmt"/>
+        <line num="251" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="253" count="1" type="stmt"/>
+        <line num="256" count="1" type="stmt"/>
+        <line num="258" count="1" type="stmt"/>
+        <line num="263" count="2" type="stmt"/>
         <line num="264" count="2" type="stmt"/>
         <line num="265" count="2" type="stmt"/>
-        <line num="266" count="2" type="stmt"/>
-        <line num="268" count="2" type="stmt"/>
-        <line num="275" count="1" type="stmt"/>
-        <line num="277" count="1" type="stmt"/>
+        <line num="267" count="2" type="stmt"/>
+        <line num="274" count="1" type="stmt"/>
+        <line num="276" count="1" type="stmt"/>
+        <line num="281" count="2" type="stmt"/>
         <line num="282" count="2" type="stmt"/>
-        <line num="283" count="2" type="stmt"/>
-        <line num="288" count="2" type="stmt"/>
-        <line num="290" count="2" type="stmt"/>
-        <line num="298" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="299" count="1" type="stmt"/>
-        <line num="301" count="1" type="stmt"/>
-        <line num="303" count="1" type="stmt"/>
-        <line num="373" count="1" type="stmt"/>
-        <line num="375" count="1" type="stmt"/>
-        <line num="377" count="1" type="stmt"/>
-        <line num="382" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="384" count="0" type="stmt"/>
-        <line num="387" count="1" type="stmt"/>
-        <line num="389" count="0" type="stmt"/>
+        <line num="287" count="2" type="stmt"/>
+        <line num="289" count="2" type="stmt"/>
+        <line num="297" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="298" count="1" type="stmt"/>
+        <line num="300" count="1" type="stmt"/>
+        <line num="302" count="1" type="stmt"/>
+        <line num="372" count="2" type="stmt"/>
+        <line num="374" count="2" type="stmt"/>
+        <line num="376" count="2" type="stmt"/>
+        <line num="381" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="383" count="1" type="stmt"/>
+        <line num="386" count="1" type="stmt"/>
+        <line num="388" count="1" type="stmt"/>
+        <line num="393" count="3" type="stmt"/>
         <line num="394" count="3" type="stmt"/>
         <line num="395" count="3" type="stmt"/>
-        <line num="396" count="3" type="stmt"/>
-        <line num="398" count="3" type="stmt"/>
-        <line num="405" count="2" type="stmt"/>
-        <line num="407" count="1" type="stmt"/>
-        <line num="412" count="1" type="stmt"/>
-        <line num="413" count="1" type="stmt"/>
-        <line num="418" count="1" type="stmt"/>
-        <line num="420" count="1" type="stmt"/>
-        <line num="428" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="429" count="0" type="stmt"/>
-        <line num="431" count="1" type="stmt"/>
-        <line num="433" count="0" type="stmt"/>
+        <line num="397" count="3" type="stmt"/>
+        <line num="404" count="2" type="stmt"/>
+        <line num="406" count="1" type="stmt"/>
+        <line num="411" count="2" type="stmt"/>
+        <line num="412" count="2" type="stmt"/>
+        <line num="417" count="2" type="stmt"/>
+        <line num="419" count="2" type="stmt"/>
+        <line num="427" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="428" count="1" type="stmt"/>
+        <line num="430" count="1" type="stmt"/>
+        <line num="432" count="1" type="stmt"/>
+        <line num="480" count="1" type="stmt"/>
         <line num="481" count="1" type="stmt"/>
-        <line num="482" count="1" type="stmt"/>
-        <line num="486" count="1" type="stmt"/>
+        <line num="485" count="1" type="stmt"/>
+        <line num="499" count="1" type="stmt"/>
         <line num="500" count="1" type="stmt"/>
-        <line num="501" count="1" type="stmt"/>
-        <line num="507" count="0" type="stmt"/>
+        <line num="506" count="0" type="stmt"/>
+        <line num="511" count="1" type="stmt"/>
         <line num="512" count="1" type="stmt"/>
         <line num="513" count="1" type="stmt"/>
         <line num="514" count="1" type="stmt"/>
         <line num="515" count="1" type="stmt"/>
-        <line num="516" count="1" type="stmt"/>
+        <line num="527" count="1" type="stmt"/>
         <line num="528" count="1" type="stmt"/>
-        <line num="529" count="1" type="stmt"/>
-        <line num="530" count="9" type="cond" truecount="2" falsecount="0"/>
-        <line num="531" count="1" type="stmt"/>
+        <line num="529" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="530" count="1" type="stmt"/>
+        <line num="532" count="8" type="stmt"/>
         <line num="533" count="8" type="stmt"/>
         <line num="534" count="8" type="stmt"/>
-        <line num="535" count="8" type="stmt"/>
-        <line num="536" count="12" type="stmt"/>
-        <line num="537" count="25" type="cond" truecount="2" falsecount="0"/>
+        <line num="535" count="13" type="stmt"/>
+        <line num="536" count="26" type="cond" truecount="2" falsecount="0"/>
+        <line num="537" count="21" type="stmt"/>
         <line num="538" count="21" type="stmt"/>
         <line num="539" count="21" type="stmt"/>
-        <line num="540" count="21" type="stmt"/>
-        <line num="542" count="4" type="stmt"/>
-        <line num="546" count="8" type="stmt"/>
-        <line num="549" count="8" type="stmt"/>
+        <line num="541" count="5" type="stmt"/>
+        <line num="545" count="8" type="stmt"/>
+        <line num="548" count="8" type="stmt"/>
+        <line num="554" count="1" type="stmt"/>
         <line num="555" count="1" type="stmt"/>
         <line num="556" count="1" type="stmt"/>
-        <line num="557" count="1" type="stmt"/>
-        <line num="563" count="0" type="stmt"/>
+        <line num="562" count="0" type="stmt"/>
+        <line num="567" count="1" type="stmt"/>
         <line num="568" count="1" type="stmt"/>
         <line num="569" count="1" type="stmt"/>
         <line num="570" count="1" type="stmt"/>
-        <line num="571" count="1" type="stmt"/>
+        <line num="583" count="1" type="stmt"/>
         <line num="584" count="1" type="stmt"/>
         <line num="585" count="1" type="stmt"/>
         <line num="586" count="1" type="stmt"/>
-        <line num="587" count="1" type="stmt"/>
-        <line num="588" count="2" type="stmt"/>
-        <line num="589" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="587" count="2" type="stmt"/>
+        <line num="588" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="589" count="3" type="stmt"/>
         <line num="590" count="3" type="stmt"/>
-        <line num="591" count="3" type="stmt"/>
-        <line num="593" count="1" type="stmt"/>
+        <line num="592" count="1" type="stmt"/>
+        <line num="596" count="1" type="stmt"/>
         <line num="597" count="1" type="stmt"/>
-        <line num="598" count="1" type="stmt"/>
-        <line num="600" count="0" type="stmt"/>
+        <line num="599" count="0" type="stmt"/>
+        <line num="604" count="1" type="stmt"/>
         <line num="605" count="1" type="stmt"/>
         <line num="606" count="1" type="stmt"/>
         <line num="607" count="1" type="stmt"/>
-        <line num="608" count="1" type="stmt"/>
+        <line num="619" count="1" type="stmt"/>
         <line num="620" count="1" type="stmt"/>
-        <line num="621" count="1" type="stmt"/>
-        <line num="622" count="9" type="cond" truecount="2" falsecount="0"/>
-        <line num="623" count="1" type="stmt"/>
+        <line num="621" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="622" count="1" type="stmt"/>
+        <line num="624" count="8" type="stmt"/>
         <line num="625" count="8" type="stmt"/>
         <line num="626" count="8" type="stmt"/>
-        <line num="627" count="8" type="stmt"/>
-        <line num="628" count="12" type="stmt"/>
-        <line num="629" count="25" type="cond" truecount="2" falsecount="0"/>
+        <line num="627" count="13" type="stmt"/>
+        <line num="628" count="26" type="cond" truecount="2" falsecount="0"/>
+        <line num="629" count="21" type="stmt"/>
         <line num="630" count="21" type="stmt"/>
         <line num="631" count="21" type="stmt"/>
-        <line num="632" count="21" type="stmt"/>
-        <line num="636" count="8" type="stmt"/>
-        <line num="639" count="8" type="stmt"/>
+        <line num="635" count="8" type="stmt"/>
+        <line num="638" count="8" type="stmt"/>
+        <line num="644" count="1" type="stmt"/>
         <line num="645" count="1" type="stmt"/>
-        <line num="646" count="1" type="stmt"/>
-        <line num="647" count="8" type="cond" truecount="4" falsecount="0"/>
+        <line num="646" count="8" type="cond" truecount="4" falsecount="0"/>
+        <line num="647" count="4" type="stmt"/>
         <line num="648" count="4" type="stmt"/>
-        <line num="649" count="4" type="stmt"/>
-        <line num="650" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="649" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="650" count="1" type="stmt"/>
         <line num="651" count="1" type="stmt"/>
-        <line num="652" count="1" type="stmt"/>
-        <line num="656" count="1" type="stmt"/>
-        <line num="658" count="0" type="stmt"/>
-        <line num="663" count="2" type="stmt"/>
+        <line num="655" count="1" type="stmt"/>
+        <line num="657" count="0" type="stmt"/>
+        <line num="662" count="2" type="stmt"/>
       </file>
-      <file name="motherController.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\controllers\motherController.js">
-        <metrics statements="56" coveredstatements="54" conditionals="20" coveredconditionals="19" methods="4" coveredmethods="4"/>
+      <file name="motherController.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\controllers\motherController.js">
+        <metrics statements="55" coveredstatements="55" conditionals="18" coveredconditionals="18" methods="4" coveredmethods="4"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -243,42 +243,41 @@
         <line num="45" count="1" type="stmt"/>
         <line num="47" count="1" type="stmt"/>
         <line num="54" count="4" type="stmt"/>
-        <line num="58" count="4" type="stmt"/>
-        <line num="59" count="4" type="stmt"/>
-        <line num="60" count="4" type="stmt"/>
-        <line num="61" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="58" count="5" type="stmt"/>
+        <line num="59" count="5" type="stmt"/>
+        <line num="60" count="5" type="stmt"/>
+        <line num="61" count="5" type="cond" truecount="2" falsecount="0"/>
         <line num="62" count="1" type="stmt"/>
-        <line num="64" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="65" count="1" type="stmt"/>
-        <line num="67" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="68" count="0" type="stmt"/>
-        <line num="70" count="2" type="stmt"/>
-        <line num="71" count="2" type="stmt"/>
-        <line num="72" count="2" type="stmt"/>
-        <line num="74" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="64" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="65" count="2" type="stmt"/>
+        <line num="67" count="2" type="stmt"/>
+        <line num="68" count="2" type="stmt"/>
+        <line num="69" count="2" type="stmt"/>
+        <line num="71" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="72" count="1" type="stmt"/>
         <line num="75" count="1" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
         <line num="78" count="1" type="stmt"/>
-        <line num="79" count="1" type="stmt"/>
-        <line num="81" count="1" type="stmt"/>
-        <line num="83" count="3" type="stmt"/>
-        <line num="89" count="3" type="stmt"/>
-        <line num="90" count="3" type="stmt"/>
-        <line num="91" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="92" count="1" type="stmt"/>
-        <line num="94" count="2" type="stmt"/>
-        <line num="99" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="100" count="1" type="stmt"/>
-        <line num="102" count="1" type="stmt"/>
-        <line num="104" count="2" type="stmt"/>
-        <line num="110" count="1" type="stmt"/>
-        <line num="112" count="1" type="stmt"/>
-        <line num="113" count="1" type="stmt"/>
-        <line num="120" count="1" type="stmt"/>
-        <line num="122" count="0" type="stmt"/>
-        <line num="127" count="2" type="stmt"/>
+        <line num="80" count="4" type="stmt"/>
+        <line num="86" count="3" type="stmt"/>
+        <line num="87" count="3" type="stmt"/>
+        <line num="88" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="89" count="1" type="stmt"/>
+        <line num="91" count="2" type="stmt"/>
+        <line num="96" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="97" count="1" type="stmt"/>
+        <line num="99" count="1" type="stmt"/>
+        <line num="101" count="2" type="stmt"/>
+        <line num="107" count="2" type="stmt"/>
+        <line num="109" count="2" type="stmt"/>
+        <line num="110" count="2" type="stmt"/>
+        <line num="117" count="1" type="stmt"/>
+        <line num="119" count="1" type="stmt"/>
+        <line num="124" count="2" type="stmt"/>
       </file>
-      <file name="usercontroller.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\controllers\usercontroller.js">
-        <metrics statements="65" coveredstatements="59" conditionals="26" coveredconditionals="21" methods="7" coveredmethods="7"/>
+      <file name="usercontroller.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\controllers\usercontroller.js">
+        <metrics statements="65" coveredstatements="61" conditionals="26" coveredconditionals="22" methods="7" coveredmethods="7"/>
         <line num="1" count="2" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
         <line num="7" count="2" type="stmt"/>
@@ -287,10 +286,10 @@
         <line num="16" count="1" type="stmt"/>
         <line num="18" count="1" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
         <line num="29" count="1" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
         <line num="37" count="3" type="stmt"/>
         <line num="38" count="3" type="stmt"/>
         <line num="39" count="3" type="stmt"/>
@@ -334,21 +333,21 @@
         <line num="123" count="1" type="stmt"/>
         <line num="131" count="1" type="stmt"/>
         <line num="133" count="3" type="stmt"/>
-        <line num="139" count="2" type="stmt"/>
-        <line num="140" count="2" type="stmt"/>
-        <line num="141" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="139" count="3" type="stmt"/>
+        <line num="140" count="3" type="stmt"/>
+        <line num="141" count="3" type="cond" truecount="2" falsecount="0"/>
         <line num="142" count="1" type="stmt"/>
-        <line num="144" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="145" count="0" type="stmt"/>
+        <line num="144" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="145" count="1" type="stmt"/>
         <line num="148" count="1" type="stmt"/>
         <line num="149" count="1" type="stmt"/>
-        <line num="151" count="1" type="stmt"/>
+        <line num="151" count="2" type="stmt"/>
         <line num="156" count="2" type="stmt"/>
       </file>
     </package>
     <package name="server.helpers">
       <metrics statements="90" coveredstatements="83" conditionals="66" coveredconditionals="55" methods="8" coveredmethods="8"/>
-      <file name="babyWeight.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\helpers\babyWeight.js">
+      <file name="babyWeight.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\helpers\babyWeight.js">
         <metrics statements="43" coveredstatements="37" conditionals="42" coveredconditionals="36" methods="1" coveredmethods="1"/>
         <line num="2" count="18" type="stmt"/>
         <line num="8" count="18" type="stmt"/>
@@ -394,21 +393,21 @@
         <line num="62" count="18" type="stmt"/>
         <line num="65" count="2" type="stmt"/>
       </file>
-      <file name="bcrypt.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\helpers\bcrypt.js">
+      <file name="bcrypt.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\helpers\bcrypt.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="2" type="stmt"/>
-        <line num="4" count="43" type="stmt"/>
+        <line num="4" count="45" type="stmt"/>
         <line num="8" count="6" type="stmt"/>
         <line num="11" count="2" type="stmt"/>
       </file>
-      <file name="jwt.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\helpers\jwt.js">
+      <file name="jwt.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\helpers\jwt.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="2" type="stmt"/>
-        <line num="4" count="6" type="stmt"/>
-        <line num="8" count="41" type="stmt"/>
+        <line num="4" count="7" type="stmt"/>
+        <line num="8" count="50" type="stmt"/>
         <line num="11" count="2" type="stmt"/>
       </file>
-      <file name="selisihCalculator.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\helpers\selisihCalculator.js">
+      <file name="selisihCalculator.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\helpers\selisihCalculator.js">
         <metrics statements="18" coveredstatements="18" conditionals="12" coveredconditionals="8" methods="1" coveredmethods="1"/>
         <line num="2" count="46" type="stmt"/>
         <line num="4" count="46" type="cond" truecount="1" falsecount="1"/>
@@ -429,7 +428,7 @@
         <line num="43" count="46" type="stmt"/>
         <line num="46" count="2" type="stmt"/>
       </file>
-      <file name="statisticCalculator.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\helpers\statisticCalculator.js">
+      <file name="statisticCalculator.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\helpers\statisticCalculator.js">
         <metrics statements="21" coveredstatements="20" conditionals="12" coveredconditionals="11" methods="2" coveredmethods="2"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -455,29 +454,29 @@
       </file>
     </package>
     <package name="server.middlewares">
-      <metrics statements="70" coveredstatements="63" conditionals="40" coveredconditionals="32" methods="5" coveredmethods="5"/>
-      <file name="authentication.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\middlewares\authentication.js">
-        <metrics statements="18" coveredstatements="16" conditionals="8" coveredconditionals="5" methods="1" coveredmethods="1"/>
+      <metrics statements="70" coveredstatements="66" conditionals="40" coveredconditionals="36" methods="5" coveredmethods="5"/>
+      <file name="authentication.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\middlewares\authentication.js">
+        <metrics statements="18" coveredstatements="17" conditionals="8" coveredconditionals="7" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
         <line num="4" count="2" type="stmt"/>
-        <line num="5" count="39" type="stmt"/>
-        <line num="6" count="39" type="stmt"/>
-        <line num="9" count="39" type="cond" truecount="2" falsecount="0"/>
+        <line num="5" count="45" type="stmt"/>
+        <line num="6" count="45" type="stmt"/>
+        <line num="9" count="45" type="cond" truecount="2" falsecount="0"/>
         <line num="10" count="11" type="stmt"/>
-        <line num="13" count="28" type="stmt"/>
-        <line num="15" count="28" type="stmt"/>
-        <line num="21" count="28" type="cond" truecount="1" falsecount="1"/>
+        <line num="13" count="34" type="stmt"/>
+        <line num="15" count="34" type="stmt"/>
+        <line num="21" count="33" type="cond" truecount="1" falsecount="1"/>
         <line num="22" count="0" type="stmt"/>
-        <line num="24" count="28" type="stmt"/>
-        <line num="28" count="28" type="stmt"/>
-        <line num="30" count="28" type="stmt"/>
-        <line num="32" count="11" type="cond" truecount="2" falsecount="2"/>
+        <line num="24" count="33" type="stmt"/>
+        <line num="28" count="33" type="stmt"/>
+        <line num="30" count="33" type="stmt"/>
+        <line num="32" count="12" type="cond" truecount="4" falsecount="0"/>
         <line num="33" count="11" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
         <line num="40" count="2" type="stmt"/>
       </file>
-      <file name="authorizationAdmin.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\middlewares\authorizationAdmin.js">
+      <file name="authorizationAdmin.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\middlewares\authorizationAdmin.js">
         <metrics statements="10" coveredstatements="9" conditionals="6" coveredconditionals="5" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
@@ -490,7 +489,7 @@
         <line num="13" count="0" type="stmt"/>
         <line num="18" count="2" type="stmt"/>
       </file>
-      <file name="authorizationSuperAdmin.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\middlewares\authorizationSuperAdmin.js">
+      <file name="authorizationSuperAdmin.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\middlewares\authorizationSuperAdmin.js">
         <metrics statements="10" coveredstatements="9" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="4" type="stmt"/>
@@ -503,48 +502,48 @@
         <line num="13" count="0" type="stmt"/>
         <line num="18" count="2" type="stmt"/>
       </file>
-      <file name="errorHandler.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\middlewares\errorHandler.js">
+      <file name="errorHandler.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\middlewares\errorHandler.js">
         <metrics statements="14" coveredstatements="14" conditionals="14" coveredconditionals="14" methods="1" coveredmethods="1"/>
-        <line num="2" count="28" type="cond" truecount="2" falsecount="0"/>
-        <line num="3" count="3" type="stmt"/>
-        <line num="4" count="25" type="cond" truecount="2" falsecount="0"/>
+        <line num="2" count="36" type="cond" truecount="2" falsecount="0"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="32" type="cond" truecount="2" falsecount="0"/>
         <line num="5" count="2" type="stmt"/>
-        <line num="6" count="23" type="cond" truecount="2" falsecount="0"/>
+        <line num="6" count="30" type="cond" truecount="2" falsecount="0"/>
         <line num="7" count="6" type="stmt"/>
-        <line num="8" count="17" type="cond" truecount="2" falsecount="0"/>
-        <line num="9" count="6" type="stmt"/>
-        <line num="10" count="11" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="24" type="cond" truecount="2" falsecount="0"/>
+        <line num="9" count="9" type="stmt"/>
+        <line num="10" count="15" type="cond" truecount="2" falsecount="0"/>
         <line num="14" count="3" type="stmt"/>
-        <line num="15" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="15" count="12" type="cond" truecount="2" falsecount="0"/>
         <line num="16" count="3" type="stmt"/>
-        <line num="18" count="5" type="stmt"/>
+        <line num="18" count="9" type="stmt"/>
         <line num="22" count="2" type="stmt"/>
       </file>
-      <file name="motherAuthentication.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\middlewares\motherAuthentication.js">
-        <metrics statements="18" coveredstatements="15" conditionals="8" coveredconditionals="5" methods="1" coveredmethods="1"/>
+      <file name="motherAuthentication.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\middlewares\motherAuthentication.js">
+        <metrics statements="18" coveredstatements="17" conditionals="8" coveredconditionals="7" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
         <line num="4" count="2" type="stmt"/>
-        <line num="5" count="13" type="stmt"/>
-        <line num="6" count="13" type="stmt"/>
-        <line num="9" count="13" type="cond" truecount="1" falsecount="1"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="13" count="13" type="stmt"/>
-        <line num="15" count="10" type="stmt"/>
-        <line num="21" count="10" type="cond" truecount="1" falsecount="1"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="24" count="10" type="stmt"/>
-        <line num="28" count="10" type="stmt"/>
-        <line num="30" count="10" type="stmt"/>
-        <line num="32" count="3" type="cond" truecount="3" falsecount="1"/>
-        <line num="33" count="3" type="stmt"/>
+        <line num="5" count="17" type="stmt"/>
+        <line num="6" count="17" type="stmt"/>
+        <line num="9" count="17" type="cond" truecount="2" falsecount="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="13" count="16" type="stmt"/>
+        <line num="15" count="13" type="stmt"/>
+        <line num="21" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="24" count="12" type="stmt"/>
+        <line num="28" count="12" type="stmt"/>
+        <line num="30" count="12" type="stmt"/>
+        <line num="32" count="5" type="cond" truecount="3" falsecount="1"/>
+        <line num="33" count="5" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
         <line num="40" count="2" type="stmt"/>
       </file>
     </package>
     <package name="server.models">
       <metrics statements="70" coveredstatements="68" conditionals="11" coveredconditionals="7" methods="22" coveredmethods="22"/>
-      <file name="article.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\models\article.js">
+      <file name="article.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\article.js">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="4" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
@@ -552,7 +551,7 @@
         <line num="18" count="2" type="stmt"/>
         <line num="49" count="2" type="stmt"/>
       </file>
-      <file name="babydata.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\models\babydata.js">
+      <file name="babydata.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\babydata.js">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -560,7 +559,7 @@
         <line num="15" count="2" type="stmt"/>
         <line num="36" count="2" type="stmt"/>
       </file>
-      <file name="category.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\models\category.js">
+      <file name="category.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\category.js">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -569,7 +568,7 @@
         <line num="16" count="2" type="stmt"/>
         <line num="33" count="2" type="stmt"/>
       </file>
-      <file name="index.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\models\index.js">
+      <file name="index.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\index.js">
         <metrics statements="20" coveredstatements="19" conditionals="9" coveredconditionals="6" methods="3" coveredmethods="3"/>
         <line num="3" count="2" type="stmt"/>
         <line num="4" count="2" type="stmt"/>
@@ -592,7 +591,7 @@
         <line num="35" count="2" type="stmt"/>
         <line num="37" count="2" type="stmt"/>
       </file>
-      <file name="motherprofile.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\models\motherprofile.js">
+      <file name="motherprofile.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\motherprofile.js">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -601,14 +600,14 @@
         <line num="16" count="2" type="stmt"/>
         <line num="53" count="2" type="stmt"/>
       </file>
-      <file name="needcheck.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\models\needcheck.js">
+      <file name="needcheck.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\needcheck.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="4" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
         <line num="16" count="2" type="stmt"/>
         <line num="24" count="2" type="stmt"/>
       </file>
-      <file name="pregnancy.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\models\pregnancy.js">
+      <file name="pregnancy.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\pregnancy.js">
         <metrics statements="10" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -621,7 +620,7 @@
         <line num="37" count="1" type="stmt"/>
         <line num="43" count="2" type="stmt"/>
       </file>
-      <file name="pregnancydata.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\models\pregnancydata.js">
+      <file name="pregnancydata.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\pregnancydata.js">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -629,14 +628,14 @@
         <line num="15" count="2" type="stmt"/>
         <line num="34" count="2" type="stmt"/>
       </file>
-      <file name="rt.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\models\rt.js">
+      <file name="rt.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\rt.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="4" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
         <line num="16" count="2" type="stmt"/>
         <line num="22" count="2" type="stmt"/>
       </file>
-      <file name="user.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\models\user.js">
+      <file name="user.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\models\user.js">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -647,7 +646,7 @@
     </package>
     <package name="server.routes">
       <metrics statements="47" coveredstatements="47" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="index.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\routes\index.js">
+      <file name="index.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\routes\index.js">
         <metrics statements="29" coveredstatements="29" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -679,7 +678,7 @@
         <line num="47" count="2" type="stmt"/>
         <line num="50" count="2" type="stmt"/>
       </file>
-      <file name="routerMother.js" path="C:\Users\steamiss\Documents\Bootcamp\dpp-11\livecodesim2\s1\week4\livecodesim\livecodelast\ip-server-instavue-repo\rmt24\week3\finalprojectbabygrowth\server\Baby-Growth-Server\server\routes\routerMother.js">
+      <file name="routerMother.js" path="D:\hacktiv8\phase 3\final project\Baby-Growth-Server\server\routes\routerMother.js">
         <metrics statements="18" coveredstatements="18" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
